@@ -1,0 +1,43 @@
+name: memory.store_fact
+mcp_tool_name: neomem_store_fact
+required_package: neo_memory_hub
+connector: high_level
+method: store_fact
+description: |
+  Store a single pre-extracted fact directly into memory.
+  Bypasses the LLM extraction pipeline — the fact string is stored as-is.
+  Use this when you already have a clean fact to remember, rather than
+  a full conversation exchange.
+  Returns: results (list of stored memory entries).
+execution_mode: mandatory
+hook_position: post
+input_schema:
+  type: object
+  properties:
+    fact:
+      type: string
+      description: "The fact to store (e.g. 'User prefers conservative investments')"
+    user_id:
+      type: string
+      description: "User identifier for memory isolation"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+    tenant_id:
+      type: string
+      description: "Tenant identifier (optional)"
+    investor_name:
+      type: string
+      description: "Investor/client name for entity-level scoping (optional)"
+    categories:
+      type: array
+      description: "Categories to tag the fact e.g. ['persona', 'episodic'] (optional)"
+  required:
+    - fact
+    - user_id
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: false
+  openWorldHint: true
+version: "0.3.0"

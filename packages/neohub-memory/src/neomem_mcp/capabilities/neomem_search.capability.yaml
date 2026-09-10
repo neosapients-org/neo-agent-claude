@@ -1,0 +1,49 @@
+name: memory.search
+mcp_tool_name: neomem_search
+required_package: neo_memory_hub
+connector: high_level
+method: search
+description: |
+  Perform a vector similarity search across stored memories.
+  Returns matching memories ranked by relevance score.
+  Use this when you need to look up specific information about a user,
+  find related memories, or check what is known before responding.
+  Returns: results (list of {id, memory, score, ...}).
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+      description: "Search query — natural language text to find similar memories"
+    user_id:
+      type: string
+      description: "User identifier for memory isolation"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+    tenant_id:
+      type: string
+      description: "Tenant identifier (optional)"
+    investor_name:
+      type: string
+      description: "Investor/client name for entity-level scoping (optional)"
+    categories:
+      type: array
+      description: "Filter by memory categories e.g. ['persona', 'preference'] (optional)"
+    limit:
+      type: integer
+      description: "Max results to return (optional, server default applies)"
+    threshold:
+      type: number
+      description: "Min cosine similarity threshold 0.0-1.0 (optional)"
+  required:
+    - query
+    - user_id
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: true
+version: "0.3.0"

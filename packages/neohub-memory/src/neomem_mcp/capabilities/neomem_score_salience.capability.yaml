@@ -1,0 +1,30 @@
+name: memory.score_salience
+mcp_tool_name: neomem_score_salience
+required_package: neo_memory_hub
+connector: scorer
+method: score_facts
+description: |
+  Score the salience (importance) of one or more facts using LLM-based
+  evaluation. Returns a score between 0.0 and 1.0 for each fact, with
+  reasoning explaining the score. Useful for previewing which facts
+  would pass the salience gate before storing.
+  Returns: list of scored facts with text, salience score, and reasoning.
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    facts:
+      type: array
+      description: "List of fact strings to score for salience"
+    context:
+      type: string
+      description: "Optional conversation context for more accurate scoring"
+  required:
+    - facts
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: true
+version: "0.3.0"

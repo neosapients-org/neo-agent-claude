@@ -1,0 +1,41 @@
+name: memory.get_all_scoped
+mcp_tool_name: neomem_get_all_scoped
+required_package: memory_utils
+connector: scoped
+method: get_all_scoped
+description: |
+  Retrieve all memories for an enterprise isolation scope. Applies full
+  IsolationScope filtering including tenant, user, agent, department,
+  and access tier. Requires the memory_utils package.
+  Returns: results (list of memories within the scope).
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    tenant_id:
+      type: string
+      description: "Tenant identifier (default: 'default')"
+    user_id:
+      type: string
+      description: "User identifier for scope filtering"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+    dept_id:
+      type: string
+      description: "Department identifier (optional)"
+    pool:
+      type: string
+      description: "Access tier: 'private', 'shared', or 'global' (default: 'private')"
+    limit:
+      type: integer
+      description: "Maximum number of memories to return (default: 100)"
+  required:
+    - user_id
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: true
+version: "0.3.0"

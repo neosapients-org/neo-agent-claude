@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ns_probe"
+version = "0.1.0"
+description = "Lightweight Observability SDK for Agents"
+# 3.10, not 3.9: the vendored source uses `X | Y` type syntax at runtime, which raises
+# on 3.9 at import time rather than failing a type check.
+requires-python = ">=3.10"
+authors = [{ name = "internal" }]
+
+# Core runtime deps (mirrors the original wheel's METADATA).
+dependencies = [
+    "orjson>=3.9.0",
+    "protobuf>=4.0.0",
+    "requests>=2.28.0",
+    "msgpack>=1.0.0",
+]
+
+[project.optional-dependencies]
+# PHI sanitization (presidio + spaCy) — only needed when NS_PROBE PHI redaction is enabled.
+phi = [
+    "presidio-analyzer>=2.2.0",
+    "presidio-anonymizer>=2.2.0",
+    "spacy>=3.6.0",
+    "cryptography>=42.0.0",
+    "boto3>=1.28.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+]
+# The OTel bridge is the only consumer of opentelemetry, and it imports lazily inside its
+# functions — `import ns_probe` works without this installed. Verified, because an eager
+# import here would stop the agent booting.
+otel = [
+    "opentelemetry-api>=1.20.0",
+    "opentelemetry-sdk>=1.20.0",
+]
+
+[project.scripts]
+ns-probe-run = "ns_probe.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ns_probe"]

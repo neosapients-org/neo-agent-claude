@@ -1,0 +1,35 @@
+name: memory.get_all
+mcp_tool_name: neomem_get_all
+required_package: neo_memory_hub
+connector: high_level
+method: get_all
+description: |
+  Retrieve all stored memories for a user. Returns the complete
+  list of memories with metadata, sorted by most recent. Use the
+  limit parameter to cap results for large memory stores.
+  Returns: results (list of memory objects).
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    user_id:
+      type: string
+      description: "User identifier whose memories to retrieve"
+    agent_id:
+      type: string
+      description: "Filter by agent identifier (optional)"
+    tenant_id:
+      type: string
+      description: "Filter by tenant identifier (optional)"
+    limit:
+      type: integer
+      description: "Maximum number of memories to return (default: 100)"
+  required:
+    - user_id
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

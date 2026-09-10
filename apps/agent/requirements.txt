@@ -1,0 +1,25 @@
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+langchain>=0.3.0
+# Both model providers ship, selected at runtime by LLM_PROVIDER (see app/llm.py).
+# openai is the default for now; anthropic takes over once that account has credits.
+# A LangChain *AWS* client is deliberately NOT used for Claude: it goes via boto3,
+# which ns_probe does not instrument, and every call would record zero tokens.
+langchain-openai>=0.2.0
+anthropic>=1.4.0
+langgraph>=0.2.0
+httpx>=0.25.0
+sse-starlette>=1.6.0
+
+# Direct data access (this variant only).
+# sqlglot parses model-written SQL before it reaches the database — the guard is
+# code, not a prompt instruction. asyncpg opens the read-only connection.
+sqlglot>=25.0.0
+asyncpg>=0.29.0
+
+# Observability. NOT optional in practice: main.py wraps the ns_probe import in
+# `except ImportError -> NS_PROBE_ENABLED = False`, so a missing install disables all
+# tracing SILENTLY — no error, no spans, and a cost dashboard that reads zero.
+-e ./packages/ns_probe

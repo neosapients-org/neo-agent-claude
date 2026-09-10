@@ -1,0 +1,98 @@
+# Neo Guardrail Hub - Output Rails Template
+# Colang 2.x flows for output validation
+
+import core
+import llm
+import rails
+
+# ==============================================================================
+# Self-Check Output Rail (Response Appropriateness)
+# ==============================================================================
+
+define flow self check output
+  """
+  Check if bot response is appropriate and safe.
+  Uses NeMo's self_check_output action which calls an LLM to evaluate the response.
+  """
+  $allowed = execute self_check_output
+  
+  if not $allowed
+    bot refuse to respond
+    stop
+
+# ==============================================================================
+# Fact Checking Rail
+# ==============================================================================
+
+define flow check facts
+  """
+  Verify factual accuracy of bot response against provided context.
+  Requires retrieval context to be available.
+  """
+  $factual = execute self_check_facts
+  
+  if not $factual
+    bot inform response may be inaccurate
+    stop
+
+# ==============================================================================
+# Hallucination Detection Rail
+# ==============================================================================
+
+define flow check hallucination
+  """
+  Detect potential hallucinations in bot response.
+  Compares response against available context and knowledge.
+  """
+  $hallucination = execute self_check_hallucination
+  
+  if $hallucination
+    bot inform response may contain errors
+    stop
+
+# ==============================================================================
+# Output Length Validation
+# ==============================================================================
+
+define flow check output length
+  """
+  Ensure bot response is within acceptable length limits.
+  Prevents excessively long responses.
+  """
+  $output_length = len($bot_message)
+  
+  if $output_length > 5000
+    bot inform response truncated
+    stop
+
+define bot inform response truncated
+  "My response was too long. Here's a shorter version."
+
+# ==============================================================================
+# PII Redaction (Output)
+# ==============================================================================
+
+define flow redact output pii
+  """
+  Redact personally identifiable information from bot responses.
+  Replaces PII with masked values.
+  """
+  $has_pii = execute detect_pii_output
+  
+  if $has_pii
+    $bot_message = execute redact_pii($bot_message)
+
+# ==============================================================================
+# Topic Blocking (Output)
+# ==============================================================================
+
+define flow check output topics
+  """
+  Ensure bot response doesn't discuss banned topics.
+  Configure banned topics in config.yml.
+  """
+  $has_banned_topic = execute check_banned_topics
+  
+  if $has_banned_topic
+    bot inform cannot discuss topic
+    stop

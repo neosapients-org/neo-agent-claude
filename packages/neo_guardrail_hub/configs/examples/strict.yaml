@@ -1,0 +1,62 @@
+# Example: Strict security configuration
+# Use this for high-security environments
+
+version: "1.0"
+
+default_timeout_ms: 3000
+default_action_on_fail: block
+execution_mode: parallel
+
+logging:
+  level: WARNING
+  json_format: true
+
+input:
+  enabled: true
+  guardrails:
+    - name: prompt_injection
+      enabled: true
+      provider: llm_guard
+      priority: 1
+      config:
+        threshold: 0.3  # Lower threshold = stricter
+        use_fallback: true
+      action_on_fail: block
+
+    - name: pii_detection
+      enabled: true
+      provider: llm_guard
+      priority: 2
+      config:
+        entity_types:
+          - CREDIT_CARD
+          - SSN
+          - EMAIL
+          - PHONE_NUMBER
+          - PERSON
+          - ADDRESS
+          - IP_ADDRESS
+        threshold: 0.3
+      action_on_fail: block
+
+context:
+  enabled: false
+  guardrails: []
+
+output:
+  enabled: true
+  guardrails:
+    - name: pii_redaction
+      enabled: true
+      provider: llm_guard
+      priority: 1
+      config:
+        entity_types:
+          - CREDIT_CARD
+          - SSN
+          - EMAIL
+          - PHONE_NUMBER
+          - PERSON
+          - ADDRESS
+        replacement_strategy: redact
+      action_on_fail: sanitize

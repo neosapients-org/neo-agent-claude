@@ -1,0 +1,477 @@
+# Default configuration for Neo Guardrail Hub
+# Copy this file to your project's configs/ directory and customize
+
+version: "1.0"
+enabled: true
+
+# Execution settings per layer
+execution:
+  input:
+    mode: parallel
+    timeout_ms: 120000  # 2 minutes - first run needs time to download models
+  context:
+    mode: sequential
+    timeout_ms: 120000
+  output:
+    mode: parallel
+    timeout_ms: 120000
+
+# Default behavior settings
+defaults:
+  on_fail: block
+  log_level: INFO
+
+# Guardrails configuration - unified structure for all providers
+guardrails:
+  # Input layer guardrails
+  input:
+    enabled: true
+    checks:
+      # NeMo Rails (LLM-based validation)
+      - type: nemo_self_check_input
+        enabled: false
+        provider: nemo
+        priority: 1
+        on_fail: block
+
+      # NeMo Jailbreak Detection Heuristics (perplexity-based, no LLM calls)
+      # Fast, cheap detection of GCG-style adversarial attacks using GPT-2 perplexity
+      - type: nemo_jailbreak_detection_heuristics
+        enabled: false
+        provider: nemo
+        priority: 0  # Run before LLM-based checks for efficiency
+        on_fail: block
+        config:
+          # Threshold for length per perplexity heuristic (detects long, garbled prompts)
+          length_per_perplexity_threshold: 89.79
+          # Threshold for prefix/suffix perplexity heuristic (detects adversarial suffixes)
+          prefix_suffix_perplexity_threshold: 1845.65
+          # Optional: Use external server for production (uncomment to use)
+          # server_endpoint: "http://0.0.0.0:1337/heuristics"
+
+      # LLM Guard checks (scanner-based)
+      - type: prompt_injection
+        enabled: false
+        provider: llm_guard
+        priority: 2
+        threshold: 0.5
+        on_fail: block
+
+      - type: pii_detection
+        enabled: true
+        provider: llm_guard
+        priority: 3
+        threshold: 0.5
+        on_fail: warn
+
+      # Phase 2 Input Guardrails (disabled by default)
+      - type: secret_detection
+        enabled: false
+        provider: llm_guard
+        priority: 4
+        threshold: 0.5
+        config:
+          redact_mode: partial  # partial, full, or hash
+        on_fail: block
+
+      - type: input_length
+        enabled: false
+        provider: llm_guard
+        priority: 5
+        config:
+          min_length: 10
+          max_length: 10000
+          count_mode: chars  # chars, words, or tokens
+        on_fail: block
+
+      - type: toxicity_input
+        enabled: false
+        provider: llm_guard
+        priority: 6
+        threshold: 0.5
+        config:
+          match_type: SENTENCE  # SENTENCE or FULL
+        on_fail: block
+
+      - type: ban_substrings_input
+        enabled: false
+        provider: llm_guard
+        priority: 7
+        config:
+          substrings: []  # Add substrings to ban
+          match_type: STR  # STR or WORD
+          case_sensitive: false
+          redact: false
+        on_fail: block
+
+      - type: harmful_content
+        enabled: false
+        provider: llm_guard
+        priority: 8
+        threshold: 0.5
+        config:
+          categories:
+            - violence
+            - hate_speech
+            - self_harm
+            - sexual
+            - dangerous_activities
+        on_fail: block
+
+      # Phase 3 Input Guardrails (Additional LLM Guard Scanners)
+      - type: ban_code_input
+        enabled: false
+        provider: llm_guard
+        priority: 9
+        threshold: 0.5
+        config:
+          use_onnx: true
+        on_fail: block
+
+      - type: ban_competitors_input
+        enabled: false
+        provider: llm_guard
+        priority: 10
+        threshold: 0.5
+        config:
+          competitors: []  # Add competitor names to block
+          redact: false
+          use_onnx: true
+        on_fail: block
+
+      - type: ban_topics_input
+        enabled: false
+        provider: llm_guard
+        priority: 11
+        threshold: 0.5
+        config:
+          topics: []  # Add topics to ban (e.g., politics, religion, violence)
+          use_onnx: true
+        on_fail: block
+
+      - type: code_detection_input
+        enabled: false
+        provider: llm_guard
+        priority: 12
+        threshold: 0.5
+        config:
+          languages: ["Python"]  # Languages to detect
+          is_blocked: true  # true = block listed languages, false = allow only listed
+          use_onnx: true
+        on_fail: block
+
+      - type: gibberish_input
+        enabled: false
+        provider: llm_guard
+        priority: 13
+        threshold: 0.5
+        config:
+          match_type: full  # full or sentence
+          use_onnx: true
+        on_fail: block
+
+      - type: invisible_text_input
+        enabled: false
+        provider: llm_guard
+        priority: 14
+        threshold: 0.0  # Any invisible text is flagged
+        on_fail: block
+
+      - type: language_input
+        enabled: false
+        provider: llm_guard
+        priority: 15
+        threshold: 0.5
+        config:
+          valid_languages: ["en"]  # ISO 639-1 language codes
+          match_type: full  # full or sentence
+          use_onnx: true
+        on_fail: block
+
+      - type: regex_input
+        enabled: false
+        provider: llm_guard
+        priority: 16
+        config:
+          patterns: []  # Add regex patterns to block/require
+          is_blocked: true  # true = block on match, false = require match
+          match_type: search  # search or full_match
+          redact: false
+        on_fail: block
+
+      - type: sentiment_input
+        enabled: false
+        provider: llm_guard
+        priority: 17
+        config:
+          threshold: -0.5  # Block very negative sentiment (-1 to 1 scale)
+        on_fail: warn
+
+  # Output layer guardrails
+  output:
+    enabled: false
+    checks:
+      # NeMo Rails (LLM-based validation)
+      - type: nemo_self_check_output
+        enabled: false
+        provider: nemo
+        priority: 1
+        on_fail: block
+
+      - type: nemo_self_check_facts
+        enabled: false
+        provider: nemo
+        priority: 2
+        on_fail: block
+
+      # Disabled: hallucination check not working as expected
+      # - type: nemo_self_check_hallucination
+      #   enabled: false
+      #   provider: nemo
+      #   priority: 3
+      #   on_fail: block
+
+      # LLM Guard checks (scanner-based)
+      - type: pii_redaction
+        enabled: true
+        provider: llm_guard
+        priority: 4
+        on_fail: sanitize
+
+      # Phase 2 Output Guardrails (disabled by default)
+      - type: no_refusal
+        enabled: false
+        provider: llm_guard
+        priority: 5
+        threshold: 0.5
+        config:
+          match_type: FULL  # FULL or SENTENCE
+        on_fail: warn
+
+      - type: relevance
+        enabled: false
+        provider: llm_guard
+        priority: 6
+        threshold: 0.5
+        on_fail: warn
+
+      - type: toxicity_output
+        enabled: false
+        provider: llm_guard
+        priority: 7
+        threshold: 0.5
+        config:
+          match_type: SENTENCE
+        on_fail: block
+
+      - type: factual_consistency
+        enabled:  false
+        provider: llm_guard
+        priority: 8
+        config:
+          minimum_score: 0.5
+        on_fail: warn
+
+      - type: ban_topics
+        enabled: false
+        provider: llm_guard
+        priority: 9
+        threshold: 0.5
+        config:
+          topics: []  # Add topics to ban (e.g., politics, religion, violence)
+        on_fail: block
+
+      - type: ban_substrings_output
+        enabled: false
+        provider: llm_guard
+        priority: 10
+        config:
+          substrings: []  # Add substrings to ban in outputs
+          match_type: STR
+          case_sensitive: false
+          redact: false
+        on_fail: block
+
+      # Phase 3 Output Guardrails (Additional LLM Guard Scanners)
+      - type: bias_output
+        enabled: false
+        provider: llm_guard
+        priority: 11
+        threshold: 0.5
+        config:
+          match_type: full  # full or sentence
+          use_onnx: true
+        on_fail: warn
+
+      - type: code_detection_output
+        enabled: false
+        provider: llm_guard
+        priority: 12
+        threshold: 0.5
+        config:
+          languages: []  # Languages to detect (empty = all)
+          is_blocked: false  # true = block listed languages, false = allow only listed
+          use_onnx: true
+        on_fail: block
+
+      - type: ban_competitors_output
+        enabled: false
+        provider: llm_guard
+        priority: 13
+        threshold: 0.5
+        config:
+          competitors: []  # Add competitor names to block in output
+          redact: true
+          use_onnx: true
+        on_fail: sanitize
+
+      - type: gibberish_output
+        enabled: false
+        provider: llm_guard
+        priority: 14
+        threshold: 0.5
+        config:
+          match_type: full  # full or sentence
+          use_onnx: true
+        on_fail: block
+
+      - type: json_validation
+        enabled: false
+        provider: llm_guard
+        priority: 15
+        config:
+          required_elements: 0  # Min number of JSON elements
+          repair: true  # Try to repair invalid JSON
+        on_fail: block
+
+      - type: language_output
+        enabled: false
+        provider: llm_guard
+        priority: 16
+        threshold: 0.5
+        config:
+          valid_languages: ["en"]  # ISO 639-1 language codes
+          match_type: full  # full or sentence
+          use_onnx: true
+        on_fail: block
+
+      - type: language_same
+        enabled: false
+        provider: llm_guard
+        priority: 17
+        threshold: 0.5
+        config:
+          use_onnx: true
+        on_fail: warn
+
+      - type: malicious_urls
+        enabled: false
+        provider: llm_guard
+        priority: 18
+        threshold: 0.5
+        config:
+          use_onnx: true
+        on_fail: block
+
+      - type: reading_time
+        enabled: false
+        provider: llm_guard
+        priority: 19
+        config:
+          max_time: 5  # Maximum reading time in minutes
+          truncate: false  # Whether to truncate text if too long
+        on_fail: warn
+
+      - type: regex_output
+        enabled: false
+        provider: llm_guard
+        priority: 20
+        config:
+          patterns: []  # Add regex patterns to detect
+          is_blocked: true  # true = block on match, false = require match
+          match_type: search  # search or full_match
+          redact: false
+        on_fail: block
+
+      - type: sensitive_output
+        enabled: false
+        provider: llm_guard
+        priority: 21
+        threshold: 0.5
+        config:
+          entity_types: []  # Entity types to detect (empty = all)
+          redact: false  # Set to false to block instead of redact
+          use_onnx: true
+        on_fail: block
+
+      - type: sentiment_output
+        enabled: false
+        provider: llm_guard
+        priority: 22
+        config:
+          threshold: -0.5  # Block very negative sentiment (-1 to 1 scale)
+        on_fail: warn
+
+      - type: url_reachability
+        enabled: false
+        provider: llm_guard
+        priority: 23
+        config:
+          success_status_codes: [200, 201, 202, 301, 302]
+          timeout: 5  # HTTP request timeout in seconds
+        on_fail: warn
+
+  # Context layer guardrails (renamed from "dialog" for consistency)
+  context:
+    enabled: false
+    checks:
+      # NeMo Topical Rails (LLM-based topic control using Colang flows)
+      - type: nemo_topical_rail
+        enabled: false
+        provider: nemo
+        priority: 1
+        on_fail: block
+        config:
+          # Topics to block (from built-in topic library)
+          # Available: politics, religion, medical_advice, legal_advice, financial_advice,
+          #            violence, illegal_activities, self_harm, explicit_content
+          disallowed_topics:
+            - politics
+            - medical_advice
+            - legal_advice
+          # Custom topics with your own examples
+          custom_topics:
+            cooking:
+              examples:
+                - "How do I make pasta"
+                - "What's a good recipe"
+                - "Can you help me cook"
+                - "Tell me how to bake a cake"
+              response: "I'm a financial assistant and can't help with cooking. How can I help you with your finances?"
+          # Default response for off-topic requests
+          off_topic_response: "I'm not able to discuss that topic. Is there something else I can help with?"
+
+      # Wealth Management Domain Check (prompt-based domain validation)
+      - type: wealth_management_domain_check
+        enabled: false
+        provider: nemo
+        priority: 2
+        on_fail: block
+
+# NeMo Guardrails configuration (for LLM config and code generation only)
+# NOTE: Runtime guardrails are configured in guardrails.*.checks section above
+# This section is purely for NeMo's LLM configuration and file generation
+nemo:
+  enabled: true
+  # LLM configuration for NeMo rails (used by NeMo's self-check prompts)
+  llm:
+    engine: openai
+    model: gpt-4o-mini
+    temperature: 0.0
+  # Output directory for generated NeMo files (relative to config path)
+  # If not specified, defaults to ./neo_configs/
+  output_path: null
+  # Industry preset to use (general, financial, healthcare, customer_service)
+  preset: general
+  # Streaming mode
+  streaming: false

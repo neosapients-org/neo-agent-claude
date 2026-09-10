@@ -1,0 +1,38 @@
+# Test agent configuration for LLM Guard only (no NeMo)
+version: "1.0"
+enabled: true
+
+execution:
+  input:
+    mode: parallel
+    timeout_ms: 30000
+
+defaults:
+  on_fail: block
+  log_level: INFO
+
+guardrails:
+  input:
+    enabled: true
+    checks:
+      - type: prompt_injection_input
+        enabled: true
+        provider: llm_guard
+        threshold: 0.75
+        on_fail: block
+        
+      - type: gibberish_input
+        enabled: true
+        provider: llm_guard
+        threshold: 0.5
+        on_fail: block
+        
+      - type: code_detection_input
+        enabled: true
+        provider: llm_guard
+        threshold: 0.5
+        on_fail: block
+
+# NeMo disabled for this test
+nemo:
+  enabled: false

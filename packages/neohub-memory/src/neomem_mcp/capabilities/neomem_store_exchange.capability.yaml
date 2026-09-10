@@ -1,0 +1,55 @@
+name: memory.store_exchange
+mcp_tool_name: neomem_store_exchange
+required_package: neo_memory_hub
+connector: high_level
+method: store_exchange
+description: |
+  Store a conversation exchange with full LLM pipeline processing.
+  Extracts facts from the user query and assistant response using LLM,
+  applies salience gating (skips low-importance facts), runs pre-store
+  deduplication against existing memories, and stores the surviving
+  facts in the vector database.
+  Returns: facts_stored (int), facts_skipped (int), facts_extracted (int),
+           results (list), investor_name (str|null).
+execution_mode: mandatory
+hook_position: post
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+      description: "User's message or question"
+    response:
+      type: string
+      description: "Assistant's response to the query"
+    user_id:
+      type: string
+      description: "User identifier for memory isolation"
+    investor_name:
+      type: string
+      description: "Client/investor name for entity isolation (optional)"
+    tenant_id:
+      type: string
+      description: "Tenant identifier for multi-tenant isolation (optional)"
+    session_id:
+      type: string
+      description: "Session identifier (optional)"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+    dept_id:
+      type: string
+      description: "Department identifier (optional)"
+    custom_extraction_prompt:
+      type: string
+      description: "Per-call extraction prompt override. When provided, replaces the default extraction prompt for this call only."
+  required:
+    - query
+    - response
+    - user_id
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: false
+  openWorldHint: true
+version: "0.3.0"

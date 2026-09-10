@@ -1,0 +1,35 @@
+name: memory.cleanup_expired
+mcp_tool_name: neomem_cleanup_expired
+required_package: neo_memory_hub
+connector: high_level
+method: cleanup_expired
+description: |
+  Scan and remove expired or low-salience memories. Intended to be
+  called as a scheduled maintenance task. Supports dry_run mode to
+  preview what would be deleted without actually removing anything.
+  Returns: scanned (int), expired (int), low_salience (int),
+           deleted_ids (list), dry_run (bool).
+execution_mode: mandatory
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    user_id:
+      type: string
+      description: "User identifier to scope cleanup (optional — all users if omitted)"
+    dry_run:
+      type: boolean
+      description: "If true, preview deletions without executing (default: false)"
+    batch_size:
+      type: integer
+      description: "Number of memories to process per batch (default: 100)"
+    salience_threshold:
+      type: number
+      description: "Delete memories with salience score below this threshold (optional)"
+  required: []
+annotations:
+  readOnlyHint: false
+  destructiveHint: true
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

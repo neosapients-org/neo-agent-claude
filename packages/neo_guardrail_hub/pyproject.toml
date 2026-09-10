@@ -1,0 +1,160 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neo-guardrail-hub"
+dynamic = ["version"]
+description = "Universal guardrail framework for AI agents with multi-layer protection, LLM Guard, NeMo Guardrails, and domain-specific validation"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Neo Guardrail Hub Team", email = "info@internal.org"}
+]
+keywords = [
+    "ai-safety",
+    "guardrails",
+    "llm-security",
+    "prompt-injection",
+    "nemo-guardrails",
+    "llm-guard",
+    "ai-agents",
+    "mlops",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "aiohttp>=3.8",
+    "openai>=1.0",
+    "structlog>=23.0",
+    "colorama>=0.4.6",  # For colored CLI output
+    "python-dotenv>=1.0.0",  # For loading environment variables from .env files
+]
+
+[project.optional-dependencies]
+llm-guard = [
+    "llm-guard>=0.3.14",
+    "en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl",
+    "zh-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/zh_core_web_sm-3.8.0/zh_core_web_sm-3.8.0-py3-none-any.whl",
+]
+nemo = [
+    "nemoguardrails>=0.10.0",
+    "langchain>=0.1.0",
+    "langchain-openai>=0.0.2",
+]
+api = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "gunicorn>=21.2.0",
+    "python-multipart>=0.0.6",
+]
+all = [
+    "llm-guard>=0.3.14",
+    "en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl",
+    "zh-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/zh_core_web_sm-3.8.0/zh_core_web_sm-3.8.0-py3-none-any.whl",
+    "nemoguardrails>=0.10.0",
+    "langchain>=0.1.0",
+    "langchain-openai>=0.0.2",
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+    "types-PyYAML>=6.0",
+    "ipython>=8.0",
+    "jupyter>=1.0",
+    "requests>=2.31.0",  # For API testing
+]
+
+[project.urls]
+Homepage = "https://github.com/local/neo_guardrail_hub"
+Documentation = "https://github.com/local/neo_guardrail_hub/tree/main/docs"
+Repository = "https://github.com/local/neo_guardrail_hub"
+Issues = "https://github.com/local/neo_guardrail_hub/issues"
+Changelog = "https://github.com/local/neo_guardrail_hub/blob/main/CHANGELOG.md"
+
+[project.scripts]
+neo-guardrail = "neo_guardrail_hub.cli:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "neo_guardrail_hub.__version__.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["neo_guardrail_hub*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+    | \.venv
+    | build
+    | dist
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4"]
+ignore = ["E501"]
+target-version = "py39"
+
+[tool.ruff.isort]
+known-first-party = ["neo_guardrail_hub"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_configs = true
+exclude = [
+    "build",
+    "dist",
+    ".venv",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["neo_guardrail_hub"]
+omit = ["tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]

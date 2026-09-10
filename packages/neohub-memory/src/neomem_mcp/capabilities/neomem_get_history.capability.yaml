@@ -1,0 +1,26 @@
+name: memory.get_history
+mcp_tool_name: neomem_get_history
+required_package: neo_memory_hub
+connector: high_level
+method: history
+description: |
+  Retrieve the change history (audit trail) for a specific memory.
+  Shows all modifications including creation, updates, and metadata
+  changes with timestamps and event types.
+  Returns: list of history entries with event, timestamp, and details.
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    memory_id:
+      type: string
+      description: "Unique identifier of the memory to get history for"
+  required:
+    - memory_id
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

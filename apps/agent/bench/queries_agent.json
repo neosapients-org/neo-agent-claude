@@ -1,0 +1,432 @@
+[
+  {
+    "id": "Q01",
+    "query": "What is the 1-year return of Axis Bluechip Fund?",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q02",
+    "query": "What is Ramesh and his family portfolio value",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q03",
+    "query": "What is the expense ratio of HDFC Mid-Cap Opportunities?",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q04",
+    "query": "Give me the client names under me",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q05",
+    "query": "What is the current price of Infosys?",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q06",
+    "query": "What is client Ram Krishnan's PAN number?",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q07",
+    "query": "How many Tata Motors shares Ram has ?",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q08",
+    "query": "What is the credit rating of NHAI 7.25% 2030 bond?",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q09",
+    "query": "What sector does Reliance Industries belong to?",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q10",
+    "query": "What is the Nifty 50 closing value today?",
+    "scenario": "Simple"
+  },
+  {
+    "id": "Q11",
+    "query": "Show all Equity holdings of Rama Krishna",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q12",
+    "query": "List all Large Cap Mutual Funds in Ram portfolio",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q13",
+    "query": "What Fixed Income instruments do I hold?",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q14",
+    "query": "Show all Alternative investments across all clients",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q15",
+    "query": "What all ETFs Ram and his family holding",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q16",
+    "query": "List all Sectoral/Thematic funds in all of my client's portfolios",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q17",
+    "query": "Show me all Bond holdings with credit rating above AA",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q18",
+    "query": "Which of my investments fall under Hybrid asset class?",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q19",
+    "query": "List all Direct Equity holdings in Banking & Finance sector for Rama Krishna's Portfolio",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q20",
+    "query": "Show Ultra HNI clients with AIF investments",
+    "scenario": "Taxonomic Reasoning"
+  },
+  {
+    "id": "Q21",
+    "query": "What is the unrealized gain on Ram's Mutual Fund holdings?",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q22",
+    "query": "Show me my MF holdings managed by HDFC AMC with their current NAVs",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q23",
+    "query": "What is the total invested value in IT sector stocks for the Krishnan family?",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q24",
+    "query": "List all holdings of clients serviced by banker Rajesh Kumar",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q25",
+    "query": "Show the fund manager and benchmark for all my MF schemes",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q26",
+    "query": "What is the accrued interest on bond portfolio by Rama Krishna",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q27",
+    "query": "Show realized gains by AMC for client Sita Devi",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q28",
+    "query": "What revenue has been generated from Ultra HNI clients in Wealth Advisory LOB?",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q29",
+    "query": "Show net inflows by product type for Krishna's family members",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q30",
+    "query": "List the bank accounts linked to my MF folios",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q31",
+    "query": "Which of Arjun Mehra's bonds are maturing within 1 year?",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q32",
+    "query": "Show all held-away investments with their current market value",
+    "scenario": "Multi-relational"
+  },
+  {
+    "id": "Q33",
+    "query": "How many mutual fund schemes do Arjun hold?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q34",
+    "query": "How many clients does banker Priya Sharma manage?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q35",
+    "query": "How many unique AMCs are in Arjun's MF portfolio?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q36",
+    "query": "What is the total number of transactions Ram Krishna made this year?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q37",
+    "query": "How many clients have invested in AIF?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q38",
+    "query": "What is the total number of active schemes in our product catalog?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q39",
+    "query": "How many of Ram Krishna's equity holdings are in the IT sector?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q40",
+    "query": "How many families have total AUM above 10 crores?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q41",
+    "query": "How many bonds in my portfolio have AAA rating?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q42",
+    "query": "How many SIP transactions happened last month across all clients?",
+    "scenario": "Count"
+  },
+  {
+    "id": "Q43",
+    "query": "Which is my best performing MF scheme by 1-year return?",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q44",
+    "query": "Who is the top client by total portfolio value?",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q45",
+    "query": "Which AMC has the highest AUM across all clients?",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q46",
+    "query": "What is my largest single holding by current value?",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q47",
+    "query": "Which sector has given me the highest unrealized gain?",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q48",
+    "query": "Top 5 clients by XIRR in the last 3 years",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q49",
+    "query": "Top 5 clients by realized gains  in the last 3 years",
+    "scenario": "general"
+  },
+  {
+    "id": "Q50",
+    "query": "Top 5 clients by totalinvestments in the last 3 years",
+    "scenario": "general"
+  },
+  {
+    "id": "Q51",
+    "query": "Which fund has the lowest expense ratio in all my cleints portfolio?",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q52",
+    "query": "What is the highest NAV MF scheme I hold?",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q53",
+    "query": "Which banker has the most clients?",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q54",
+    "query": "Which client family has the highest combined AUM?",
+    "scenario": "Superlative"
+  },
+  {
+    "id": "Q55",
+    "query": "Compare 3-year returns of HDFC Mid-Cap vs SBI Small Cap",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q56",
+    "query": "How does Rama Krishna's portfolio XIRR compare to Nifty 50?",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q57",
+    "query": "Compare RamaKrishna's Equity vs Fixed Income allocation percentages",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q58",
+    "query": "Which performed better this year: my Direct Equity or my MF portfolio?",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q59",
+    "query": "Compare expense ratios of Axis Focused 25 vs Mirae Asset Large Cap",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q60",
+    "query": "How does Ram's portfolio compare to Sita's by asset class?",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q61",
+    "query": "Compare YTD cash inflows vs outflows for my portfolio",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q62",
+    "query": "Is Rama Krishna MF portfolio outperforming Nifty 500 over 1 year?",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q63",
+    "query": "Compare revenue contribution of HNI vs Ultra HNI clients",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q64",
+    "query": "How does Embassy REIT compare to India Grid InvIT by current value?",
+    "scenario": "Comparative"
+  },
+  {
+    "id": "Q65",
+    "query": "What is the total AUM in Neo Wealth Advisory LOB?",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q66",
+    "query": "How many clients are serviced by the Private Wealth sub-LOB?",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q67",
+    "query": "Show AUM breakdown by service office (LOB)",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q68",
+    "query": "Which sub-LOB has the highest revenue?",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q69",
+    "query": "List all NRI clients and their total portfolio value",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q70",
+    "query": "What is the AUM distribution across all SBUs?",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q71",
+    "query": "Show clients in the NRI Advisory sub-LOB with Equity exposure > 50%",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q72",
+    "query": "Compare AUM between Broking Services and Asset Management LOBs",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q73",
+    "query": "Which LOB has the highest client-to-banker ratio?",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q74",
+    "query": "Show revenue by SBU for the last quarter",
+    "scenario": "Geographic Reasoning"
+  },
+  {
+    "id": "Q75",
+    "query": "What was Rama Krishna's portfolio P&L in April 2026?",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q76",
+    "query": "Show Rama Krishna's cash inflows and outflows for FY 2025-26",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q77",
+    "query": "What is Rama Krishana's YTD (Year-to-Date) unrealized gain?",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q78",
+    "query": "Compare Rama Krishna's Q1 2026 vs Q4 2025 portfolio returns",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q79",
+    "query": "When was Rama Krishna's last transaction in HDFC Mid-Cap fund?",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q80",
+    "query": "Which bonds in Sita's portfolio are maturing in the next 6 months?",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q81",
+    "query": "Show MoM (Month-over-Month) change in my portfolio value for 2026",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q82",
+    "query": "What was Nifty 50 return between Jan 2025 and Dec 2025?",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q83",
+    "query": "How much did all my clients invest in April 2026?",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q84",
+    "query": "Show all my clients realized gains for FY 2025-26 vs FY 2024-25",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q85",
+    "query": "What is the 1-year return of Rama Krishna's portfolio since May 2025?",
+    "scenario": "Temporal Reasoning"
+  },
+  {
+    "id": "Q86",
+    "query": "Show quarterly AUM trend for all Ultra HNI clients",
+    "scenario": "Temporal Reasoning"
+  }
+]

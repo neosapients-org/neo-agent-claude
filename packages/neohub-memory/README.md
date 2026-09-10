@@ -1,0 +1,9 @@
+OPENAI_API_KEY=sk-REDACTED-set-your-own-key
+OPENAI_MODEL=gpt-4o-mini
+OPENAI_BASE_URL=https://api.openai.com/v1
+MCP_API_KEY=2U6uVd1W2zQHm775hiWC6Qx87Y1dFDC4Sw9rZQIwvEQQrcDKSumjDQ1hfYWQYajBE1j0rsrf5wEOsv3UUruLIczQg3rARsJuT8shbdP9QmK9njcvnvWkkppPR6t0Dkh
+PORT=8000
+NS_PROBE_ENDPOINT=http://localhost:4318/v1/traces
+NS_PROBE_ENVIRONMENT=development
+GUARDRAIL_CONFIG_PATH=./configs
+QDRANT_URL=http://localhost:6333

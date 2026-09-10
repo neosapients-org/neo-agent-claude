@@ -1,0 +1,69 @@
+# Neo Guardrail Hub - Input Rails Template
+# Colang 2.x flows for input validation
+
+import core
+import llm
+import rails
+
+# ==============================================================================
+# Self-Check Input Rail (Jailbreak/Prompt Injection Detection)
+# ==============================================================================
+
+define flow self check input
+  """
+  Check if user input is safe and not attempting jailbreak/injection.
+  Uses NeMo's self_check_input action which calls an LLM to evaluate the input.
+  """
+  $allowed = execute self_check_input
+  
+  if not $allowed
+    bot refuse to respond
+    stop
+
+# ==============================================================================
+# Input Length Validation
+# ==============================================================================
+
+define flow check input length
+  """
+  Validate that user input is within acceptable length limits.
+  Default max length: 10000 characters (customize in config).
+  """
+  $input_length = len($user_message)
+  
+  if $input_length > 10000
+    bot inform input too long
+    stop
+
+# ==============================================================================
+# Banned Substrings Check
+# ==============================================================================
+
+define flow check banned substrings
+  """
+  Check if user input contains any banned substrings.
+  Configure banned strings in the config.yml file.
+  """
+  $has_banned = execute check_banned_substrings
+  
+  if $has_banned
+    bot refuse to respond
+    stop
+
+# ==============================================================================
+# PII Detection (Input)
+# ==============================================================================
+
+define flow check input pii
+  """
+  Detect personally identifiable information in user input.
+  Can be configured to warn or block based on PII type.
+  """
+  $contains_pii = execute detect_pii_input
+  
+  if $contains_pii
+    bot inform pii detected
+    stop
+
+define bot inform pii detected
+  "I noticed you've shared some personal information. Please be careful about sharing sensitive data."

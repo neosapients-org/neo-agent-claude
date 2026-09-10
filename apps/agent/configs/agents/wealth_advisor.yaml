@@ -1,0 +1,260 @@
+# Wealth Advisor Agent Configuration
+# This agent-specific config inherits from default.yaml and overrides
+# settings for a financial wealth management assistant.
+#
+# Usage:
+#   orchestrator = NeoGuardrailOrchestrator(config_path="./configs")
+#   result = await orchestrator.guard_input(text, agent_id="wealth_advisor")
+
+agent_id: wealth_advisor
+inherits: default
+
+# Execution mode: run all input guardrails in parallel for lower latency
+execution:
+  input:
+    mode: "parallel"
+    timeout_ms: 180000  # 3 min — allows cold-start model loading on first run
+
+# Agent-specific instructions (used for NeMo Guardrails)
+# These drive the NeMo self_check_input / self_check_output prompts. Keep them
+# strict so off-topic requests are refused at the input layer (domain gate).
+instructions: |
+  You are agent, a wealth management assistant. You ONLY help with the user's
+  investments: portfolio, holdings, account balances, transactions, fees, AUM,
+  returns, asset allocation, and general financial or investment education
+  (for example "what is a SIP", "what is inflation", "how do mutual funds work").
+
+  You MUST refuse any request that is not about personal finance, investments, or
+  the user's wealth. This includes recipes, cooking, coding, general knowledge,
+  entertainment, sports, travel, health or medical topics, legal advice, politics,
+  religion, and casual chit-chat. For any such off-topic request, do not answer it —
+  reply only that you can help with portfolio, accounts, and financial questions.
+
+  This is an advisor-facing tool. You MAY provide investment analysis, stock and
+  fund ideas, and portfolio recommendations to help the advisor serve their clients
+  (for example "which stock should I recommend this week", "should I rebalance this
+  portfolio"). Ground suggestions in sound financial reasoning and note that the
+  advisor should apply their own professional judgment and suitability checks.
+
+# NeMo Guardrails configuration
+# NOTE: NeMo is a SEPARATE provider from LLM Guard.
+# NeMo uses LLM-based self-checks, while LLM Guard uses scanner-based checks.
+# NeMo checks are now configured in guardrails.*.checks with provider: nemo
+nemo:
+  enabled: true   # Registers the NeMo provider so nemo_self_check_* and topical rail run
+  preset: financial
+  llm:
+    engine: openai
+    model: gpt-5.4-nano  # Fast/cheap model for self-check + topical rail (was gpt-4o-mini)
+    temperature: 0.0
+  # Agent-specific output path
+  output_path: null  # Will use ./nemo_generated/wealth_advisor/
+  # Generation settings for Colang and prompts
+  generation:
+    generate_colang: true
+    generate_prompts: true
+
+# Guardrails configuration (unified for all providers)
+guardrails:
+  # Stricter input validation for financial domain
+  input:
+    enabled: true
+    checks:
+      # NeMo self_check_input - LLM-based validation (disabled - requires nemo extra)
+      - type: nemo_self_check_input
+        enabled: true
+        provider: nemo
+        priority: 1
+        on_fail: block
+        config:
+          prompt_style: complex  # Better for financial compliance
+
+      # Stricter prompt injection threshold for finance (LLM Guard)
+      - type: prompt_injection
+        enabled: true
+        provider: llm_guard
+        priority: 2
+        threshold: 0.7  # Stricter than default 0.5
+        on_fail: block
+
+      # PII detection — only block sensitive financial PII (not person names)
+      - type: pii_detection
+        enabled: true
+        provider: llm_guard
+        priority: 3
+        threshold: 0.5
+        on_fail: block
+        config:
+          entities:
+            - CREDIT_CARD
+            - IBAN_CODE
+            - CRYPTO
+            - US_SSN
+            - US_PASSPORT
+            - US_BANK_NUMBER
+            - UK_NHS
+            - IN_AADHAAR
+            - ACCOUNTNUMBER
+            - PIN
+            - CREDITCARDCVV
+            - PASSWORD
+
+      # Enable input length for financial queries (LLM Guard)
+      # NOTE: min/max MUST live under `config:` — top-level keys are dropped by the
+      # orchestrator (only threshold, on_fail, and config.* reach the guardrail).
+      - type: input_length
+        enabled: true
+        provider: llm_guard
+        priority: 4
+        on_fail: block
+        config:
+          min_length: 1     # only block empty input; allow short greetings ("hi", "ok")
+          max_length: 5000
+          count_mode: chars
+
+      # Enable toxicity check (LLM Guard)
+      - type: toxicity_input
+        enabled: true
+        provider: llm_guard
+        priority: 5
+        threshold: 0.5
+        on_fail: block
+        config:
+          match_type: SENTENCE
+
+  # Stricter output validation for compliance
+  output:
+    enabled: true
+    checks:
+      # NeMo self_check_output - DISABLED for latency (~18s/request LLM call).
+      # Output safety is covered by toxicity_output + ban_topics + pii_redaction.
+      # The input-layer nemo_self_check_input already gates the domain.
+      - type: nemo_self_check_output
+        enabled: false
+        provider: nemo
+        priority: 1
+        on_fail: block
+
+      # NeMo fact checking - DISABLED for latency (and it warns only / skips when
+      # there's no evidence to check against).
+      - type: nemo_self_check_facts
+        enabled: false
+        provider: nemo
+        priority: 2
+        on_fail: warn
+        config:
+          prompt_style: complex  # Better for financial facts
+
+      # PII redaction is critical for finance (LLM Guard)
+      # Restrict to sensitive financial entities + raise threshold. The default
+      # entity list (PERSON, BIC, IP_ADDRESS, LOCATION, ORGANIZATION, DATE_TIME...)
+      # with threshold 0.0 redacts ordinary words ("cardamom"→BIC) and corrupts
+      # every answer. Mirror the input pii_detection set.
+      - type: pii_redaction
+        enabled: true
+        provider: llm_guard
+        priority: 3
+        threshold: 0.5
+        on_fail: sanitize
+        config:
+          entities:
+            - CREDIT_CARD
+            - IBAN_CODE
+            - CRYPTO
+            - US_SSN
+            - US_PASSPORT
+            - US_BANK_NUMBER
+            - UK_NHS
+            - IN_AADHAAR
+            - ACCOUNTNUMBER
+            - PIN
+            - CREDITCARDCVV
+            - PASSWORD
+
+      # factual_consistency - DISABLED for latency (~3s ONNX). It only warns
+      # (never blocks), so it adds cost without changing what reaches the user.
+      - type: factual_consistency
+        enabled: false
+        provider: llm_guard
+        priority: 4
+        on_fail: warn
+        config:
+          minimum_score: 0.7  # Higher threshold for finance
+
+      # relevance - DISABLED for latency (~2s ONNX). Warn-only (never blocks).
+      - type: relevance
+        enabled: false
+        provider: llm_guard
+        priority: 5
+        threshold: 0.6
+        on_fail: warn
+
+      # Enable toxicity check on output (LLM Guard)
+      - type: toxicity_output
+        enabled: true
+        provider: llm_guard
+        priority: 6
+        threshold: 0.5
+        on_fail: block
+        config:
+          match_type: SENTENCE
+
+      # Ban sensitive topics in output (LLM Guard)
+      # topics MUST be under config: — at top-level they're dropped and the
+      # guardrail logs "No topics configured" and passes everything.
+      - type: ban_topics
+        enabled: true
+        provider: llm_guard
+        priority: 7
+        threshold: 0.5
+        on_fail: block
+        config:
+          topics:
+            - politics
+            - religion
+            - violence
+            - illegal_activities
+
+  # Context layer — domain gate (keeps queries in the wealth domain)
+  context:
+    enabled: true
+    checks:
+      # Domain enforcement is now handled by nemo_self_check_input (input layer),
+      # whose prompt template includes the domain policy. The separate
+      # wealth_management_domain_check is disabled: it over-blocked legitimate
+      # financial education ("what is inflation") because it classified by running
+      # the query through the full rails, and it added a redundant LLM call.
+      - type: wealth_management_domain_check
+        enabled: false
+        provider: nemo
+        priority: 1
+        on_fail: block
+        config:
+          mode: blocking
+          refusal_message: "I'm a wealth management assistant and can only help with your portfolio, accounts, holdings, fees, and general financial education."
+
+      # NeMo topical rail — disabled: ineffective here (never blocked) and added
+      # ~12s latency. Kept for reference; domain enforcement is handled above.
+      - type: nemo_topical_rail
+        enabled: false
+        provider: nemo
+        priority: 2
+        on_fail: block
+        config:
+          allowed_topics:
+            - portfolio_overview
+            - account_balance
+            - transaction_history
+            - fee_structure
+            - general_financial_education
+            - market_overview
+          disallowed_topics:
+            - stock_tips
+            - specific_investment_recommendations
+            - insider_trading
+            - competitor_bashing
+            - politics
+            - religion
+            - medical_advice
+            - legal_advice
+          off_topic_response: "I'm a wealth management assistant and can only help with portfolio, accounts, and general financial education. I cannot provide specific investment recommendations or discuss non-financial topics."

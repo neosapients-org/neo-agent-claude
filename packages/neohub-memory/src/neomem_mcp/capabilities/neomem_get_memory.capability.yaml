@@ -1,0 +1,25 @@
+name: memory.get_memory
+mcp_tool_name: neomem_get_memory
+required_package: neo_memory_hub
+connector: high_level
+method: get
+description: |
+  Retrieve a single memory entry by its unique ID.
+  Returns the full memory record including content, metadata, timestamps.
+  Returns null if the memory does not exist.
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    memory_id:
+      type: string
+      description: "Unique memory identifier"
+  required:
+    - memory_id
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

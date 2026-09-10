@@ -1,0 +1,2003 @@
+[
+  {
+    "srno": 1,
+    "question": "What is the total AUM across all my client portfolios?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The total AUM across all client portfolios is ₹13,45,50,63,632.72 (≈ ₹1,345.51 crore).",
+        "latency": {
+          "guardrail_ms": 4,
+          "memory_ms": 2515,
+          "parallel_init_ms": 2519,
+          "enrichment_ms": 2761,
+          "tool_selection_ms": 1285,
+          "mcp_exec_ms": 8442,
+          "llm_ms": 1285,
+          "total_ms": 16328
+        },
+        "wall_ms": 21308,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8442,
+        "total_ms": 16328,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The total AUM across all client portfolios is ₹13,45,50,63,632.72 (≈ ₹1345.51 crore).",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 1132,
+          "parallel_init_ms": 1133,
+          "enrichment_ms": 3843,
+          "tool_selection_ms": 816,
+          "mcp_exec_ms": 1419,
+          "llm_ms": 1144,
+          "total_ms": 8366
+        },
+        "wall_ms": 13634,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1419,
+        "total_ms": 8366,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The total AUM across all client portfolios is ₹13,45,50,63,632.72 (≈ ₹1,345.51 crore).",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1194,
+          "parallel_init_ms": 1197,
+          "enrichment_ms": 2281,
+          "tool_selection_ms": 962,
+          "mcp_exec_ms": 1429,
+          "llm_ms": 1025,
+          "total_ms": 6909
+        },
+        "wall_ms": 10480,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1429,
+        "total_ms": 6909,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 2,
+    "question": "Show quarterly AUM trend for all UHNI clients.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Could not retrieve the quarterly AUM trend for UHNI clients. Please rephrase your query to be more specific.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1474,
+          "parallel_init_ms": 1477,
+          "enrichment_ms": 3045,
+          "tool_selection_ms": 1026,
+          "mcp_exec_ms": 14484,
+          "llm_ms": 1097,
+          "total_ms": 22330
+        },
+        "wall_ms": 25716,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 14484,
+        "total_ms": 22330,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Could not retrieve the quarterly AUM trend for UHNI clients. Please rephrase your query to be more specific.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1287,
+          "parallel_init_ms": 1290,
+          "enrichment_ms": 1959,
+          "tool_selection_ms": 1530,
+          "mcp_exec_ms": 8153,
+          "llm_ms": 1116,
+          "total_ms": 15216
+        },
+        "wall_ms": 19444,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8153,
+        "total_ms": 15216,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Could not retrieve the quarterly AUM trend for UHNI clients. Please rephrase your query to be more specific.",
+        "latency": {
+          "guardrail_ms": 4,
+          "memory_ms": 1144,
+          "parallel_init_ms": 1148,
+          "enrichment_ms": 2219,
+          "tool_selection_ms": 1089,
+          "mcp_exec_ms": 7857,
+          "llm_ms": 1196,
+          "total_ms": 15394
+        },
+        "wall_ms": 18570,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7857,
+        "total_ms": 15394,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 3,
+    "question": "How many of my clients have direct or indirect exposure to Information Technology",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Found 0 clients with direct or indirect exposure to Information Technology.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1540,
+          "parallel_init_ms": 1544,
+          "enrichment_ms": 2084,
+          "tool_selection_ms": 939,
+          "mcp_exec_ms": 8086,
+          "llm_ms": 1885,
+          "total_ms": 15695
+        },
+        "wall_ms": 18882,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8086,
+        "total_ms": 15695,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "None of your clients have direct or indirect exposure to Information Technology.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 2430,
+          "parallel_init_ms": 2433,
+          "enrichment_ms": 1985,
+          "tool_selection_ms": 1334,
+          "mcp_exec_ms": 1187,
+          "llm_ms": 868,
+          "total_ms": 9266
+        },
+        "wall_ms": 13088,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1187,
+        "total_ms": 9266,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Found 0 clients with direct or indirect exposure to Information Technology.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1233,
+          "parallel_init_ms": 1234,
+          "enrichment_ms": 2187,
+          "tool_selection_ms": 941,
+          "mcp_exec_ms": 1210,
+          "llm_ms": 802,
+          "total_ms": 7609
+        },
+        "wall_ms": 10992,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1210,
+        "total_ms": 7609,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 4,
+    "question": "What is the split of investment types across all client portfolios — Equities, Fixed Income, Alternatives?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here is the split of investment types across all client portfolios:\n\n| Investment Type      | Current Value (₹)         |\n|----------------------|---------------------------|\n| Direct Equity        | ₹4,78,81,92,83.65         |\n| Bonds                | ₹1,12,06,04,71.35         |\n| InvITs               | ₹15,61,07,76.74           |\n| Mutual Funds         | ₹7,66,64,41,07.12         |\n| Fixed Deposits       | ₹2,83,01,17,56.93         |\n| AIF                  | ₹4,10,41,05,03.12         |\n| PMS                  | ₹2,64,83,56,63.48         |\n| REITs                | ₹2,52,21,05.16            |",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1918,
+          "parallel_init_ms": 1920,
+          "enrichment_ms": 2522,
+          "tool_selection_ms": 1088,
+          "mcp_exec_ms": 11330,
+          "llm_ms": 3906,
+          "total_ms": 20778
+        },
+        "wall_ms": 24932,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 11330,
+        "total_ms": 20778,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here is the split of investment types across all client portfolios:\n\n| Investment Type      | Current Value (₹)         |\n|----------------------|---------------------------|\n| Direct Equity        | ₹4,78,81,92,83.65         |\n| Bonds                | ₹1,12,06,04,71.35         |\n| InvITs               | ₹15,61,07,76.74           |\n| Mutual Funds         | ₹7,66,64,41,07.12         |\n| Fixed Deposits       | ₹2,83,01,17,56.93         |\n| AIF                  | ₹4,10,41,05,03.12         |\n| PMS                  | ₹2,64,83,56,63.48         |\n| REITs                | ₹2,52,21,05.16            |",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1823,
+          "parallel_init_ms": 1825,
+          "enrichment_ms": 3704,
+          "tool_selection_ms": 1284,
+          "mcp_exec_ms": 1263,
+          "llm_ms": 3475,
+          "total_ms": 11563
+        },
+        "wall_ms": 15734,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1263,
+        "total_ms": 11563,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here is the split of investment types across all client portfolios:\n\n| Investment Type      | Current Value (₹)         |\n|----------------------|---------------------------|\n| Direct Equity        | ₹47,88,19,283.65          |\n| Bonds                | ₹11,20,60,471.35          |\n| InvITs               | ₹15,61,07,6.74            |\n| Mutual Funds         | ₹76,66,44,107.12          |\n| Fixed Deposits       | ₹28,30,11,756.93          |\n| AIF                  | ₹41,04,10,503.12          |\n| PMS                  | ₹26,48,35,663.48          |\n| REITs                | ₹2,52,21,205.16           |",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1983,
+          "parallel_init_ms": 1984,
+          "enrichment_ms": 2303,
+          "tool_selection_ms": 1162,
+          "mcp_exec_ms": 1154,
+          "llm_ms": 2594,
+          "total_ms": 9211
+        },
+        "wall_ms": 13581,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1154,
+        "total_ms": 9211,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 5,
+    "question": "List all sectoral and thematic funds held across my client portfolios.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "No sectoral or thematic funds could be retrieved from the data.",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 1715,
+          "parallel_init_ms": 1717,
+          "enrichment_ms": 2214,
+          "tool_selection_ms": 1047,
+          "mcp_exec_ms": 20968,
+          "llm_ms": 1012,
+          "total_ms": 28120
+        },
+        "wall_ms": 34868,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 20968,
+        "total_ms": 28120,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "No sectoral or thematic funds could be retrieved from the data.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1311,
+          "parallel_init_ms": 1313,
+          "enrichment_ms": 2245,
+          "tool_selection_ms": 1145,
+          "mcp_exec_ms": 7688,
+          "llm_ms": 1136,
+          "total_ms": 14833
+        },
+        "wall_ms": 18087,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7688,
+        "total_ms": 14833,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "No sectoral or thematic funds could be retrieved from the data.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1310,
+          "parallel_init_ms": 1312,
+          "enrichment_ms": 1966,
+          "tool_selection_ms": 920,
+          "mcp_exec_ms": 7683,
+          "llm_ms": 1403,
+          "total_ms": 14455
+        },
+        "wall_ms": 18191,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7683,
+        "total_ms": 14455,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 6,
+    "question": "How many clients have invested in AIF? What is the aggregate AIF exposure?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Found 10 clients who have invested in AIF. The aggregate AIF exposure is ₹4,10,41,050.31 (≈ ₹4.10 crore).",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 1009,
+          "parallel_init_ms": 1010,
+          "enrichment_ms": 2220,
+          "tool_selection_ms": 1242,
+          "mcp_exec_ms": 7236,
+          "llm_ms": 1332,
+          "total_ms": 13052
+        },
+        "wall_ms": 19549,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7236,
+        "total_ms": 13052,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Found 10 clients who have invested in AIF. The aggregate AIF exposure is ₹4,10,41,050.31 (≈ ₹4.10 crore).",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 1331,
+          "parallel_init_ms": 1332,
+          "enrichment_ms": 1972,
+          "tool_selection_ms": 1252,
+          "mcp_exec_ms": 1145,
+          "llm_ms": 1205,
+          "total_ms": 6918
+        },
+        "wall_ms": 15471,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1145,
+        "total_ms": 6918,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Found 10 clients who have invested in AIF. The aggregate AIF exposure is ₹4,10,41,050.31 (≈ ₹4.10 crore).",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 6054,
+          "parallel_init_ms": 6056,
+          "enrichment_ms": 2181,
+          "tool_selection_ms": 1017,
+          "mcp_exec_ms": 1366,
+          "llm_ms": 1170,
+          "total_ms": 11800
+        },
+        "wall_ms": 19240,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1366,
+        "total_ms": 11800,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 7,
+    "question": "Which AMC has the highest AUM concentration across all my clients?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "It seems there was an error retrieving the data for your request. Please rephrase your query to be more specific, and I will assist you further.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1435,
+          "parallel_init_ms": 1437,
+          "enrichment_ms": 2084,
+          "tool_selection_ms": 1041,
+          "mcp_exec_ms": 24069,
+          "llm_ms": 1160,
+          "total_ms": 29803
+        },
+        "wall_ms": 35286,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 24069,
+        "total_ms": 29803,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "It seems there was an error retrieving the data for your request. Please rephrase your query to be more specific, and I will assist you further.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1351,
+          "parallel_init_ms": 1353,
+          "enrichment_ms": 1912,
+          "tool_selection_ms": 1535,
+          "mcp_exec_ms": 24675,
+          "llm_ms": 910,
+          "total_ms": 30399
+        },
+        "wall_ms": 33624,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 24675,
+        "total_ms": 30399,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "It seems there was an error retrieving the data for your request. Please rephrase your query to be more specific, and I'll do my best to assist you.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1674,
+          "parallel_init_ms": 1675,
+          "enrichment_ms": 2063,
+          "tool_selection_ms": 920,
+          "mcp_exec_ms": 19411,
+          "llm_ms": 1271,
+          "total_ms": 25353
+        },
+        "wall_ms": 28781,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 19411,
+        "total_ms": 25353,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 8,
+    "question": "Which clients have more than 30% concentration in a single asset class?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The following clients have more than 30% concentration in a single asset class:\n\n| Client Name        | Product Type     | Count |\n|--------------------|------------------|-------|\n| Ram Krishnan       | Direct Equity     | 8     |\n| Sita Krishnan      | Direct Equity     | 9     |\n| Karthik Krishnan   | Direct Equity     | 4     |\n| Lakshmi Krishnan   | Direct Equity     | 5     |\n| Venkat Krishnan    | Direct Equity     | 8     |\n\nAll listed clients have a significant concentration in Direct Equity.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1137,
+          "parallel_init_ms": 1139,
+          "enrichment_ms": 3026,
+          "tool_selection_ms": 1048,
+          "mcp_exec_ms": 7886,
+          "llm_ms": 2377,
+          "total_ms": 15489
+        },
+        "wall_ms": 28813,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7886,
+        "total_ms": 15489,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The following clients have more than 30% concentration in a single asset class:\n\n| Client Name        | Product Type     | Count |\n|--------------------|------------------|-------|\n| Ram Krishnan       | Direct Equity     | 8     |\n| Sita Krishnan      | Direct Equity     | 9     |\n| Karthik Krishnan   | Direct Equity     | 4     |\n| Lakshmi Krishnan   | Direct Equity     | 5     |\n| Venkat Krishnan    | Direct Equity     | 8     |\n\nAll listed clients have a significant concentration in Direct Equity.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 865,
+          "parallel_init_ms": 869,
+          "enrichment_ms": 2312,
+          "tool_selection_ms": 1020,
+          "mcp_exec_ms": 1375,
+          "llm_ms": 2114,
+          "total_ms": 7701
+        },
+        "wall_ms": 21314,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1375,
+        "total_ms": 7701,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The following clients have more than 30% concentration in a single asset class:\n\n| Client Name        | Product Type     | Count |\n|--------------------|------------------|-------|\n| Ram Krishnan       | Direct Equity     | 8     |\n| Sita Krishnan      | Direct Equity     | 9     |\n| Karthik Krishnan   | Direct Equity     | 4     |\n| Lakshmi Krishnan   | Direct Equity     | 5     |\n| Venkat Krishnan    | Direct Equity     | 8     |\n\nAll listed clients have a significant concentration in Direct Equity.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 953,
+          "parallel_init_ms": 955,
+          "enrichment_ms": 2413,
+          "tool_selection_ms": 997,
+          "mcp_exec_ms": 1116,
+          "llm_ms": 1875,
+          "total_ms": 7369
+        },
+        "wall_ms": 22490,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1116,
+        "total_ms": 7369,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 9,
+    "question": "Show me everything Rama Krishna holds — full portfolio snapshot with current values.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The portfolio snapshot for Rama Krishna could not be retrieved. Please check the name or provide a more specific query.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1415,
+          "parallel_init_ms": 1416,
+          "enrichment_ms": 2299,
+          "tool_selection_ms": 1325,
+          "mcp_exec_ms": 46034,
+          "llm_ms": 1086,
+          "total_ms": 53387
+        },
+        "wall_ms": 59323,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 46034,
+        "total_ms": 53387,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The portfolio snapshot for Rama Krishna could not be retrieved. Please check the name or provide a more specific query.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1223,
+          "parallel_init_ms": 1226,
+          "enrichment_ms": 2146,
+          "tool_selection_ms": 1202,
+          "mcp_exec_ms": 7739,
+          "llm_ms": 846,
+          "total_ms": 14307
+        },
+        "wall_ms": 26980,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7739,
+        "total_ms": 14307,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The portfolio snapshot for Rama Krishna could not be retrieved. Please check the name for accuracy or provide a more specific query.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1507,
+          "parallel_init_ms": 1510,
+          "enrichment_ms": 1913,
+          "tool_selection_ms": 921,
+          "mcp_exec_ms": 8132,
+          "llm_ms": 1020,
+          "total_ms": 14660
+        },
+        "wall_ms": 20136,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8132,
+        "total_ms": 14660,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 10,
+    "question": "Show all equity holdings for Rama Krishna.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Rama Krishna holds no equity holdings.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1279,
+          "parallel_init_ms": 1281,
+          "enrichment_ms": 2077,
+          "tool_selection_ms": 919,
+          "mcp_exec_ms": 17129,
+          "llm_ms": 737,
+          "total_ms": 23323
+        },
+        "wall_ms": 28795,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 17129,
+        "total_ms": 23323,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Rama Krishna holds no equity holdings.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1315,
+          "parallel_init_ms": 1317,
+          "enrichment_ms": 2079,
+          "tool_selection_ms": 1151,
+          "mcp_exec_ms": 7937,
+          "llm_ms": 1229,
+          "total_ms": 14937
+        },
+        "wall_ms": 21057,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7937,
+        "total_ms": 14937,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Rama Krishna holds no equity holdings.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1220,
+          "parallel_init_ms": 1222,
+          "enrichment_ms": 5834,
+          "tool_selection_ms": 1124,
+          "mcp_exec_ms": 7922,
+          "llm_ms": 730,
+          "total_ms": 18026
+        },
+        "wall_ms": 23648,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7922,
+        "total_ms": 18026,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 11,
+    "question": "List all direct equity holdings in Banking & Finance sector for Rama Krishna's portfolio.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Rama Krishna holds no direct equity investments in the Banking & Finance sector.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 2455,
+          "parallel_init_ms": 2457,
+          "enrichment_ms": 2934,
+          "tool_selection_ms": 1041,
+          "mcp_exec_ms": 14870,
+          "llm_ms": 4252,
+          "total_ms": 26729
+        },
+        "wall_ms": 33255,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 14870,
+        "total_ms": 26729,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Rama Krishna holds no direct equity investments in the Banking & Finance sector.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 2131,
+          "parallel_init_ms": 2133,
+          "enrichment_ms": 2297,
+          "tool_selection_ms": 1023,
+          "mcp_exec_ms": 8047,
+          "llm_ms": 2075,
+          "total_ms": 16719
+        },
+        "wall_ms": 22760,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8047,
+        "total_ms": 16719,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Rama Krishna holds no direct equity holdings in the Banking & Finance sector.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 2397,
+          "parallel_init_ms": 2399,
+          "enrichment_ms": 2304,
+          "tool_selection_ms": 1020,
+          "mcp_exec_ms": 7899,
+          "llm_ms": 1093,
+          "total_ms": 15970
+        },
+        "wall_ms": 21768,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7899,
+        "total_ms": 15970,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 12,
+    "question": "List all large cap mutual funds in Ram's portfolio.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here are the large cap mutual funds in Ram Krishnan's portfolio:\n\n| Investment Name                                           | Product Type   | Category  | Current Value      |\n|---------------------------------------------------------|----------------|-----------|--------------------|\n| Axis Bluechip Fund - Direct Growth                       | Mutual Funds    | Large Cap | ₹25,81,394.13      |\n| Aditya Birla SL Frontline Equity Fund - Direct Growth   | Mutual Funds    | Large Cap | ₹10,60,560.39      |",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1275,
+          "parallel_init_ms": 1277,
+          "enrichment_ms": 9242,
+          "tool_selection_ms": 981,
+          "mcp_exec_ms": 10549,
+          "llm_ms": 2510,
+          "total_ms": 24571
+        },
+        "wall_ms": 31170,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 10549,
+        "total_ms": 24571,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here are the large cap mutual funds in Ram Krishnan's portfolio:\n\n| Investment Name                                           | Product Type   | Category  | Current Value      |\n|----------------------------------------------------------|----------------|-----------|---------------------|\n| Axis Bluechip Fund - Direct Growth                       | Mutual Funds    | Large Cap | ₹25,81,394.13       |\n| Aditya Birla SL Frontline Equity Fund - Direct Growth    | Mutual Funds    | Large Cap | ₹10,60,560.39       |",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1142,
+          "parallel_init_ms": 1144,
+          "enrichment_ms": 2032,
+          "tool_selection_ms": 1226,
+          "mcp_exec_ms": 1216,
+          "llm_ms": 2057,
+          "total_ms": 7686
+        },
+        "wall_ms": 14497,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1216,
+        "total_ms": 7686,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here are the large cap mutual funds in Ram Krishnan's portfolio:\n\n| Instrument Name                                           | Quantity  | Current Value      | Product Type   | Category   | ISIN            | Fund Name                                           |\n|----------------------------------------------------------|-----------|--------------------|----------------|------------|-----------------|-----------------------------------------------------|\n| Axis Bluechip Fund - Direct Growth                       | 44,331    | ₹25,81,394.13      | Mutual Funds    | Large Cap  | INF846K01DP8    | Axis Bluechip Fund - Direct Growth                  |\n| Aditya Birla SL Frontline Equity Fund - Direct Growth    | 20,701.9  | ₹10,60,560.39      | Mutual Funds    | Large Cap  | INF209K01LQ0    | Aditya Birla SL Frontline Equity Fund - Direct Growth|",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1461,
+          "parallel_init_ms": 1463,
+          "enrichment_ms": 1851,
+          "tool_selection_ms": 1022,
+          "mcp_exec_ms": 1168,
+          "llm_ms": 2516,
+          "total_ms": 8031
+        },
+        "wall_ms": 14035,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1168,
+        "total_ms": 8031,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 13,
+    "question": "What is the unrealized gain on Ram's mutual fund holdings?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan's mutual fund holdings have a total unrealized gain of ₹1,01,00,000. \n\nHere is a breakdown of his mutual fund holdings:\n\n| Investment Name                                           | Invested Value   | Current Value     | Unrealized Gain   | Gain/Loss %   |\n|----------------------------------------------------------|------------------|-------------------|-------------------|----------------|\n| Kotak Flexi Cap Fund - Direct Growth                     | ₹26,12,290.48    | ₹33,12,897.26     | ₹7,00,606.78      | 26.8%          |\n| HSBC Value Fund - Direct Growth                           | ₹9,73,830.01     | ₹11,36,475.68     | ₹1,62,645.67      | 16.7%          |\n| HDFC Mid-Cap Opportunities Fund - Direct Growth          | ₹29,89,168.16    | ₹37,77,769.01     | ₹7,88,600.85      | 26.4%          |\n| ICICI Prudential Technology Fund - Direct Growth         | ₹51,86,886.56    | ₹67,71,979.43     | ₹15,85,092.87     | 30.5%          |\n| Axis Bluechip Fund - Direct Growth                       | ₹22,70,190.51    | ₹25,81,394.13     | ₹3,11,203.62      | 13.7%          |\n| ICICI Prudential All Seasons Bond Fund - Direct Growth   | ₹6,55,811.29     | ₹7,88,316.26      | ₹1,32,504.97      | 20.2%          |\n| Axis Healthcare Fund - Direct Growth                     | ₹14,68,496.86    | ₹16,06,318.51     | ₹1,37,821.65      | 9.4%           |\n| Aditya Birla SL Frontline Equity Fund - Direct Growth    | ₹9,75,268.39     | ₹10,60,560.39     | ₹85,292           | 8.7%           |\n| True Beacon One                                          | ₹1,50,00,000     | ₹1,98,75,652.62   | ₹48,75,652.62     | 32.5%          |\n| Nippon India AIF Equity                                  | ₹2,50,00,000     | ₹2,96,46,905.30   | ₹46,46,905.30     | 18.6%          |\n| Motilal Oswal NTDOP PMS                                  | ₹1,00,00,000     | ₹1,39,17,027.17   | ₹39,17,027.17     | 39.2%          |\n| Marcellus CCP (Consistent Compounders)                   | ₹50,00,000       | ₹65,99,814.24     | ₹15,99,814.24     | 31.9%          |\n| Mindspace Business Parks REIT                             | ₹13,73,628.30    | ₹18,19,242        | ₹4,45,613.70      | 32.4%          |\n\nNote: The unrealized gains for the mutual fund holdings are all positive, indicating that they are currently in profit.",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 1463,
+          "parallel_init_ms": 1465,
+          "enrichment_ms": 2362,
+          "tool_selection_ms": 1225,
+          "mcp_exec_ms": 41470,
+          "llm_ms": 10614,
+          "total_ms": 64625
+        },
+        "wall_ms": 80236,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 41470,
+        "total_ms": 64625,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan's mutual fund holdings have a total unrealized gain of ₹1,10,00,000 (≈ ₹1.10 crore). \n\nHere is a breakdown of the unrealized gains for each mutual fund holding:\n\n| Investment Name                                           | Invested Value  | Current Value   | Unrealized Gain | Gain/Loss % |\n|----------------------------------------------------------|------------------|------------------|------------------|--------------|\n| Kotak Flexi Cap Fund - Direct Growth                     | ₹26,12,290.48    | ₹33,12,897.26    | ₹7,00,606.78     | 26.8%        |\n| HSBC Value Fund - Direct Growth                           | ₹9,73,830.01     | ₹11,36,475.68    | ₹1,62,645.67     | 16.7%        |\n| HDFC Mid-Cap Opportunities Fund - Direct Growth          | ₹29,89,168.16    | ₹37,77,769.01    | ₹7,88,600.85     | 26.4%        |\n| ICICI Prudential Technology Fund - Direct Growth         | ₹51,86,886.56    | ₹67,71,979.43    | ₹15,85,092.87    | 30.5%        |\n| Axis Bluechip Fund - Direct Growth                       | ₹22,70,190.51    | ₹25,81,394.13    | ₹3,11,203.62     | 13.7%        |\n| ICICI Prudential All Seasons Bond Fund - Direct Growth   | ₹6,55,811.29     | ₹7,88,316.26     | ₹1,32,504.97     | 20.2%        |\n| Axis Healthcare Fund - Direct Growth                     | ₹14,68,496.86    | ₹16,06,318.51    | ₹1,37,821.65     | 9.4%         |\n| Aditya Birla SL Frontline Equity Fund - Direct Growth    | ₹9,75,268.39     | ₹10,60,560.39    | ₹85,292          | 8.7%         |\n| True Beacon One                                          | ₹1,50,00,000     | ₹1,98,75,652.62  | ₹48,75,652.62    | 32.5%        |\n| Nippon India AIF Equity                                  | ₹2,50,00,000     | ₹2,96,46,905.30  | ₹46,46,905.30    | 18.6%        |\n| Motilal Oswal NTDOP PMS                                  | ₹1,00,00,000     | ₹1,39,17,027.17  | ₹39,17,027.17    | 39.2%        |\n| Marcellus CCP (Consistent Compounders)                   | ₹50,00,000       | ₹65,99,814.24    | ₹15,99,814.24    | 31.9%        |\n| Mindspace Business Parks REIT                            | ₹13,73,628.30    | ₹18,19,242       | ₹4,45,613.70     | 32.4%        |\n\nNote: The unrealized gains for other investments, such as bonds and stocks, are not included in this summary as they are not mutual funds.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1552,
+          "parallel_init_ms": 1555,
+          "enrichment_ms": 2623,
+          "tool_selection_ms": 1142,
+          "mcp_exec_ms": 1327,
+          "llm_ms": 10091,
+          "total_ms": 16751
+        },
+        "wall_ms": 26755,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1327,
+        "total_ms": 16751,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan's mutual fund holdings have a total unrealized gain of ₹1,01,00,000. \n\nHere is a breakdown of the unrealized gains for each mutual fund holding:\n\n| Investment Name                                           | Invested Value  | Current Value   | Unrealized Gain | Gain/Loss % |\n|----------------------------------------------------------|------------------|------------------|------------------|--------------|\n| Kotak Flexi Cap Fund - Direct Growth                     | ₹26,12,290.48    | ₹33,12,897.26    | ₹7,00,606.78     | 26.8%        |\n| HSBC Value Fund - Direct Growth                           | ₹9,73,830.01     | ₹11,36,475.68    | ₹1,62,645.67     | 16.7%        |\n| HDFC Mid-Cap Opportunities Fund - Direct Growth          | ₹29,89,168.16    | ₹37,77,769.01    | ₹7,88,600.85     | 26.4%        |\n| ICICI Prudential Technology Fund - Direct Growth         | ₹51,86,886.56    | ₹67,71,979.43    | ₹15,85,092.87    | 30.5%        |\n| Axis Bluechip Fund - Direct Growth                       | ₹22,70,190.51    | ₹25,81,394.13    | ₹3,11,203.62     | 13.7%        |\n| Aditya Birla SL Frontline Equity Fund - Direct Growth    | ₹9,75,268.39     | ₹10,60,560.39    | ₹85,292          | 8.7%         |\n| True Beacon One                                          | ₹1,50,00,000     | ₹1,98,75,652.62  | ₹48,75,652.62    | 32.5%        |\n| Nippon India AIF Equity                                  | ₹2,50,00,000     | ₹2,96,46,905.30  | ₹46,46,905.30    | 18.6%        |\n| Motilal Oswal NTDOP PMS                                  | ₹1,00,00,000     | ₹1,39,17,027.17  | ₹39,17,027.17    | 39.2%        |\n| Marcellus CCP (Consistent Compounders)                   | ₹50,00,000       | ₹65,99,814.24    | ₹15,99,814.24    | 31.9%        |\n| Mindspace Business Parks REIT                             | ₹13,73,628.30    | ₹18,19,242       | ₹4,45,613.70     | 32.4%        |\n\nNote: The unrealized gains for other investments, such as bonds and REITs, are not included in this summary as they are not mutual funds.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1534,
+          "parallel_init_ms": 1535,
+          "enrichment_ms": 2397,
+          "tool_selection_ms": 1429,
+          "mcp_exec_ms": 1251,
+          "llm_ms": 7574,
+          "total_ms": 14198
+        },
+        "wall_ms": 24100,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1251,
+        "total_ms": 14198,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 14,
+    "question": "How does Rama Krishna's portfolio XIRR compare to Nifty 50 over 1 year?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan's portfolio XIRR over the past year is not directly provided in the data. However, I can compare the Nifty 50 index values over the same period.\n\nHere are the Nifty 50 closing values at various points:\n\n| Date       | Nifty 50 Close |\n|------------|----------------|\n| 1 Year Ago | 22,256.8       |\n| Current     | 24,580         |\n\nThe Nifty 50 has increased from ₹22,256.8 to ₹24,580 over the past year. \n\nTo summarize:\n- **1 Year Ago Nifty 50 Close**: ₹22,256.8\n- **Current Nifty 50 Close**: ₹24,580\n\nIf you need further analysis or specific calculations, please let me know!",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1605,
+          "parallel_init_ms": 1607,
+          "enrichment_ms": 2555,
+          "tool_selection_ms": 1070,
+          "mcp_exec_ms": 49465,
+          "llm_ms": 3176,
+          "total_ms": 57884
+        },
+        "wall_ms": 64989,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 49465,
+        "total_ms": 57884,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan's portfolio XIRR over the past year is not provided in the data. However, the current value of the Nifty 50 index is ₹24,580.\n\nHere is a summary of the Nifty 50 index values over the past year:\n\n| Date       | Nifty 50 Close |\n|------------|----------------|\n| -          | ₹24,580        |\n| -          | ₹24,564.5      |\n| -          | ₹24,205.1      |\n| -          | ₹25,033.6      |\n| -          | ₹25,134.8      |\n| -          | ₹24,364.8      |\n| -          | ₹24,035.3      |\n| -          | ₹25,079.7      |\n| -          | ₹24,298.2      |\n| -          | ₹23,408.2      |\n| -          | ₹23,229.5      |\n| -          | ₹23,635        |\n\nIf you need further analysis or specific calculations, please provide more details.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1860,
+          "parallel_init_ms": 1863,
+          "enrichment_ms": 2412,
+          "tool_selection_ms": 1538,
+          "mcp_exec_ms": 1183,
+          "llm_ms": 3813,
+          "total_ms": 10823
+        },
+        "wall_ms": 14723,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1183,
+        "total_ms": 10823,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "To compare Ram Krishnan's portfolio XIRR to the Nifty 50 over the past year, we need to summarize the relevant data.\n\n### Ram Krishnan's Portfolio Performance\nUnfortunately, the specific XIRR value for Ram Krishnan's portfolio is not provided in the data. \n\n### Nifty 50 Performance\nThe Nifty 50 index values over the past year are as follows:\n\n| Nav Date | Nav Close |\n|----------|-----------|\n| -        | 24580     |\n| -        | 24564.5   |\n| -        | 24205.1   |\n| -        | 24364.8   |\n| -        | 24035.3   |\n| -        | 25079.7   |\n| -        | 24298.2   |\n| -        | 23408.2   |\n| -        | 23229.5   |\n| -        | 23635     |\n\nThe Nifty 50 index has shown fluctuations, with the highest value being ₹24,580 and the lowest around ₹23,229.5.\n\nFor a precise comparison, please provide the XIRR value for Ram Krishnan's portfolio, or if you need further analysis, let me know!",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 1848,
+          "parallel_init_ms": 1849,
+          "enrichment_ms": 3127,
+          "tool_selection_ms": 1007,
+          "mcp_exec_ms": 11523,
+          "llm_ms": 4475,
+          "total_ms": 21997
+        },
+        "wall_ms": 35679,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 11523,
+        "total_ms": 21997,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 15,
+    "question": "Compare Rama Krishna's equity vs. fixed income allocation percentages.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "No data could be retrieved for Rama Krishna's equity and fixed income allocation percentages. Please rephrase your query for more specific information.",
+        "latency": {
+          "guardrail_ms": 4,
+          "memory_ms": 1255,
+          "parallel_init_ms": 1259,
+          "enrichment_ms": 2616,
+          "tool_selection_ms": 2375,
+          "mcp_exec_ms": 16950,
+          "llm_ms": 1280,
+          "total_ms": 25738
+        },
+        "wall_ms": 28876,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 16950,
+        "total_ms": 25738,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "No data could be retrieved for Rama Krishna's equity and fixed income allocation percentages. Please rephrase your query for more specific information.",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 1564,
+          "parallel_init_ms": 1565,
+          "enrichment_ms": 2364,
+          "tool_selection_ms": 4569,
+          "mcp_exec_ms": 7979,
+          "llm_ms": 1049,
+          "total_ms": 19026
+        },
+        "wall_ms": 22513,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7979,
+        "total_ms": 19026,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Rama Krishna's investment allocation is as follows:\n\n### Equity and Fixed Income Allocation\n\n| Asset Class     | Current Value (₹)         |\n|------------------|---------------------------|\n| Equity           | ₹1,01,00,000.00 (≈ ₹10.10 crore) |\n| Fixed Income     | ₹3,00,00,000.00 (≈ ₹30.00 crore) |\n\n### Allocation Percentages\n\n- **Equity Allocation Percentage**: 25.17%\n- **Fixed Income Allocation Percentage**: 74.83%\n\nRama Krishna has a significant allocation towards fixed income compared to equity.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1492,
+          "parallel_init_ms": 1494,
+          "enrichment_ms": 2654,
+          "tool_selection_ms": 1156,
+          "mcp_exec_ms": 8047,
+          "llm_ms": 2391,
+          "total_ms": 15755
+        },
+        "wall_ms": 30920,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8047,
+        "total_ms": 15755,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 16,
+    "question": "Is Rama Krishna's MF portfolio outperforming Nifty 500 over 1 year?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "To determine if Ram Krishnan's mutual fund portfolio is outperforming the Nifty 500 over the past year, we can compare the performance of the Axis Bluechip Fund with the Nifty 500 index.\n\n### Performance Data\n\n| Metric                     | Axis Bluechip Fund | Nifty 500 Index |\n|----------------------------|--------------------|------------------|\n| Current Value              | ₹25,81,394.13      | ₹62,457.60       |\n| NAV (Latest)               | ₹62.4576           | -                |\n| NAV (1 Year Ago)           | ₹57.1793           | -                |\n\n### Performance Calculation\n\n- **Axis Bluechip Fund Performance**:\n  - NAV increase: ₹62.4576 - ₹57.1793 = ₹5.2783\n  - Percentage increase: (₹5.2783 / ₹57.1793) * 100 ≈ 9.24%\n\n- **Nifty 500 Performance**:\n  - NAV increase: ₹62,457.60 - ₹22,150 = ₹40,307.60\n  - Percentage increase: (₹40,307.60 / ₹22,150) * 100 ≈ 182.00%\n\n### Conclusion\n\nRam Krishnan's Axis Bluechip Fund has increased by approximately **9.24%** over the past year, while the Nifty 500 has increased by approximately **182.00%**. Therefore, Ram Krishnan's mutual fund portfolio is **not** outperforming the Nifty 500 index over the past year.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1566,
+          "parallel_init_ms": 1568,
+          "enrichment_ms": 3297,
+          "tool_selection_ms": 1200,
+          "mcp_exec_ms": 23980,
+          "llm_ms": 5010,
+          "total_ms": 35068
+        },
+        "wall_ms": 41886,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 23980,
+        "total_ms": 35068,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "To determine if Ram Krishnan's mutual fund portfolio is outperforming the Nifty 500 over the past year, we can compare the performance of the Axis Bluechip Fund with the Nifty 500 index.\n\n### Ram Krishnan's Mutual Fund Performance\n\n| Investment Name                       | Current Value (₹) | NAV Value (Latest) | NAV Value (Initial) | Gain/Loss % |\n|---------------------------------------|--------------------|---------------------|---------------------|--------------|\n| Axis Bluechip Fund - Direct Growth    | 25,81,394.13       | 62.4576             | 57.1793             | 9.99%        |\n\n### Nifty 500 Performance\n\n| Index Name | NAV Close (Latest) | NAV Close (Initial) | Gain/Loss % |\n|------------|---------------------|---------------------|--------------|\n| Nifty 500  | 22,224.7            | 22,150              | 0.33%        |\n\n### Conclusion\nRam Krishnan's mutual fund, Axis Bluechip Fund, has a gain of **9.99%**, while the Nifty 500 has a gain of **0.33%**. Therefore, Ram Krishnan's mutual fund portfolio is outperforming the Nifty 500 over the past year.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1796,
+          "parallel_init_ms": 1797,
+          "enrichment_ms": 2954,
+          "tool_selection_ms": 3230,
+          "mcp_exec_ms": 1137,
+          "llm_ms": 4598,
+          "total_ms": 13731
+        },
+        "wall_ms": 20789,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1137,
+        "total_ms": 13731,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "To determine if Ram Krishnan's mutual fund portfolio is outperforming the Nifty 500 over the past year, we can compare the performance of the Axis Bluechip Fund - Direct Growth with the Nifty 500 index.\n\n### Performance Data\n\n| Metric                     | Axis Bluechip Fund - Direct Growth | Nifty 500 Index |\n|----------------------------|------------------------------------|------------------|\n| Current Value              | ₹25,81,394.13 (≈ ₹25.81 lakh)     | ₹62,457.60       |\n| NAV (Latest)               | ₹62.4576                           | -                |\n| NAV (1 Year Ago)           | ₹57.1793                           | -                |\n\n### Performance Calculation\n\n- **Axis Bluechip Fund Performance**:\n  - NAV Change: ₹62.4576 - ₹57.1793 = ₹5.2783\n  - Percentage Change: (₹5.2783 / ₹57.1793) * 100 ≈ 9.24%\n\n- **Nifty 500 Performance**:\n  - NAV Change: ₹62,457.60 - ₹22,150 = ₹40,307.60\n  - Percentage Change: (₹40,307.60 / ₹22,150) * 100 ≈ 182.00%\n\n### Conclusion\n\nRam Krishnan's Axis Bluechip Fund has increased by approximately **9.24%** over the past year, while the Nifty 500 has increased by approximately **182.00%**. Therefore, Ram Krishnan's mutual fund portfolio is **not** outperforming the Nifty 500 index over the past year.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1641,
+          "parallel_init_ms": 1643,
+          "enrichment_ms": 2323,
+          "tool_selection_ms": 2714,
+          "mcp_exec_ms": 1338,
+          "llm_ms": 6141,
+          "total_ms": 14174
+        },
+        "wall_ms": 23016,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1338,
+        "total_ms": 14174,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 17,
+    "question": "Which client family has the highest combined AUM?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The client family with the highest combined AUM is the Krishnan family, with a total AUM of ₹1,34,55,06,632.72 (≈ ₹134.55 crore).",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1271,
+          "parallel_init_ms": 1273,
+          "enrichment_ms": 3365,
+          "tool_selection_ms": 1085,
+          "mcp_exec_ms": 8231,
+          "llm_ms": 3613,
+          "total_ms": 17579
+        },
+        "wall_ms": 26958,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8231,
+        "total_ms": 17579,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The client family with the highest combined AUM is the Krishnan family, with a total of ₹1,34,55,06,632.72 (≈ ₹134.55 crore).",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1377,
+          "parallel_init_ms": 1378,
+          "enrichment_ms": 3852,
+          "tool_selection_ms": 1251,
+          "mcp_exec_ms": 1232,
+          "llm_ms": 1553,
+          "total_ms": 9279
+        },
+        "wall_ms": 17392,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1232,
+        "total_ms": 9279,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The client family with the highest combined AUM is the Krishnan family, with a total AUM of ₹1,34,55,06,632.72 (≈ ₹134.55 crore).",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1320,
+          "parallel_init_ms": 1323,
+          "enrichment_ms": 2313,
+          "tool_selection_ms": 1032,
+          "mcp_exec_ms": 1163,
+          "llm_ms": 1911,
+          "total_ms": 7757
+        },
+        "wall_ms": 13577,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1163,
+        "total_ms": 7757,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 18,
+    "question": "How many families have total AUM above ₹10 crores?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The total AUM data could not be retrieved. Please rephrase your query for more specific information.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1003,
+          "parallel_init_ms": 1005,
+          "enrichment_ms": 2604,
+          "tool_selection_ms": 1118,
+          "mcp_exec_ms": 15466,
+          "llm_ms": 4253,
+          "total_ms": 25694
+        },
+        "wall_ms": 28601,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 15466,
+        "total_ms": 25694,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The total AUM data could not be retrieved. Please rephrase your query for more specific information.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1088,
+          "parallel_init_ms": 1090,
+          "enrichment_ms": 2225,
+          "tool_selection_ms": 4586,
+          "mcp_exec_ms": 7687,
+          "llm_ms": 1046,
+          "total_ms": 17829
+        },
+        "wall_ms": 21226,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7687,
+        "total_ms": 17829,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The total AUM data could not be retrieved. Please rephrase your query for more specific information.",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 865,
+          "parallel_init_ms": 867,
+          "enrichment_ms": 2206,
+          "tool_selection_ms": 1261,
+          "mcp_exec_ms": 8174,
+          "llm_ms": 1122,
+          "total_ms": 14785
+        },
+        "wall_ms": 17801,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8174,
+        "total_ms": 14785,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 19,
+    "question": "What ETFs are Ram and his family holding across all accounts?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan and his family hold the following ETFs across all accounts:\n\n| Investment Name                               | Account Type | Folio          | ISIN              | Product Type   |\n|-----------------------------------------------|--------------|----------------|-------------------|-----------------|\n| UTI Nifty 50 Index Fund - Direct Gr           | HUF          | FOLIO715011    | INE121A01024      | Mutual Funds     |\n| UTI Nifty 50 Index Fund - Direct Gr           | Individual   |                | INE121A01024      | Mutual Funds     |\n| UTI Nifty 50 Index Fund - Direct Gr           | HUF          | FOLIO715011    | INE121A01024      | Mutual Funds     |\n| UTI Nifty 50 Index Fund - Direct Gr           | Individual   |                | INE121A01024      | Mutual Funds     |\n\nThese entries indicate that the family has multiple holdings in the UTI Nifty 50 Index Fund, categorized as ETFs.",
+        "latency": {
+          "guardrail_ms": 5,
+          "memory_ms": 1330,
+          "parallel_init_ms": 1335,
+          "enrichment_ms": 2947,
+          "tool_selection_ms": 1164,
+          "mcp_exec_ms": 13746,
+          "llm_ms": 12202,
+          "total_ms": 31417
+        },
+        "wall_ms": 38857,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 13746,
+        "total_ms": 31417,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan and his family hold the following ETFs across all accounts:\n\n| Investment Name                               | Account Type | Folio         | ISIN               | Product Type     |\n|-----------------------------------------------|--------------|---------------|--------------------|-------------------|\n| UTI Nifty 50 Index Fund - Direct Gr           | HUF          | FOLIO715011   | INE121A01024       | Mutual Funds       |\n| UTI Nifty 50 Index Fund - Direct Gr           | Individual   |               | INE121A01024       | Mutual Funds       |\n| UTI Nifty 50 Index Fund - Direct Gr           | HUF          | FOLIO715011   | INE121A01024       | Mutual Funds       |\n| UTI Nifty 50 Index Fund - Direct Gr           | Individual   |               | INE121A01024       | Mutual Funds       |\n\nThese entries indicate that the family has multiple accounts holding the same ETF.",
+        "latency": {
+          "guardrail_ms": 5,
+          "memory_ms": 1621,
+          "parallel_init_ms": 1626,
+          "enrichment_ms": 2788,
+          "tool_selection_ms": 953,
+          "mcp_exec_ms": 1202,
+          "llm_ms": 5899,
+          "total_ms": 12485
+        },
+        "wall_ms": 19565,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1202,
+        "total_ms": 12485,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan and his family hold the following ETFs across all accounts:\n\n| Investment Name                               | Account Type | Folio          | ISIN              | Product Type   |\n|-----------------------------------------------|--------------|----------------|-------------------|-----------------|\n| UTI Nifty 50 Index Fund - Direct Gr           | HUF          | FOLIO715011    | INE121A01024      | Mutual Funds     |\n| UTI Nifty 50 Index Fund - Direct Gr           | Individual   |                | INE121A01024      | Mutual Funds     |\n| UTI Nifty 50 Index Fund - Direct Gr           | HUF          | FOLIO715011    | INE121A01024      | Mutual Funds     |\n| UTI Nifty 50 Index Fund - Direct Gr           | Individual   |                | INE121A01024      | Mutual Funds     |\n\nThese entries indicate that the family has multiple accounts holding the same ETF.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1419,
+          "parallel_init_ms": 1422,
+          "enrichment_ms": 2346,
+          "tool_selection_ms": 1226,
+          "mcp_exec_ms": 1197,
+          "llm_ms": 3463,
+          "total_ms": 9673
+        },
+        "wall_ms": 15180,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1197,
+        "total_ms": 9673,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 20,
+    "question": "Show net inflows by product type for Krishna's family members.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here are the net inflows by product type for the members of the Krishnan family:\n\n| Client Name          | Product Type      | Sum Inflow      | Sum Outflow     | Net Inflow       |\n|----------------------|-------------------|------------------|------------------|------------------|\n| Ram Krishnan         | Direct Equity      | ₹18,53,972.15    | ₹6,81,660.40     | ₹11,72,311.75    |\n| Sita Krishnan        | Mutual Funds       | ₹33,46,988.56    | ₹11,29,225.27    | ₹22,17,763.29    |\n| Karthik Krishnan     | Bonds              | ₹27,08,268.42    | ₹5,08,663.99     | ₹22,99,604.43    |\n| Lakshmi Krishnan     | Fixed Deposits     | ₹22,64,727.35    | ₹4,77,234.13     | ₹17,87,493.22    |\n| Venkat Krishnan      |                   |                  |                  |                  |\n| Priya Krishnan       |                   |                  |                  |                  |\n\n**Note:** Venkat and Priya Krishnan have no recorded inflows or outflows.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1715,
+          "parallel_init_ms": 1718,
+          "enrichment_ms": 3082,
+          "tool_selection_ms": 1355,
+          "mcp_exec_ms": 9359,
+          "llm_ms": 4699,
+          "total_ms": 20224
+        },
+        "wall_ms": 30745,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 9359,
+        "total_ms": 20224,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here are the net inflows by product type for the members of the Krishnan family:\n\n| Client Name          | Product Type      | Sum Inflow      | Sum Outflow     | Net Inflow       |\n|----------------------|-------------------|------------------|------------------|------------------|\n| Ram Krishnan         | Direct Equity      | ₹18,53,972.15    | ₹6,81,660.40     | ₹11,72,311.75    |\n| Sita Krishnan        | Mutual Funds       | ₹33,46,988.56    | ₹11,29,225.27    | ₹22,17,763.29    |\n| Karthik Krishnan     | Bonds              | ₹27,08,268.42    | ₹5,08,663.99     | ₹22,99,604.43    |\n| Lakshmi Krishnan     | Fixed Deposits     | ₹22,64,727.35    | ₹4,77,234.13     | ₹17,87,493.22    |\n| Venkat Krishnan      |                   |                  |                  |                  |\n| Priya Krishnan       |                   |                  |                  |                  |\n\n**Note:** Venkat and Priya Krishnan have no recorded inflows or outflows.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1918,
+          "parallel_init_ms": 1920,
+          "enrichment_ms": 2484,
+          "tool_selection_ms": 1689,
+          "mcp_exec_ms": 1248,
+          "llm_ms": 4973,
+          "total_ms": 12330
+        },
+        "wall_ms": 26686,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1248,
+        "total_ms": 12330,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here are the net inflows by product type for the members of the Krishnan family:\n\n| Client Name          | Product Type      | Sum Inflow      | Sum Outflow     | Net Inflow       |\n|----------------------|-------------------|------------------|------------------|------------------|\n| Ram Krishnan         | Direct Equity      | ₹18,53,972.15    | ₹6,81,660.40     | ₹11,72,311.75    |\n| Sita Krishnan        | Mutual Funds       | ₹33,46,988.56    | ₹11,29,225.27    | ₹22,17,763.29    |\n| Karthik Krishnan     | Bonds              | ₹27,08,268.42    | ₹5,08,663.99     | ₹22,99,604.43    |\n| Lakshmi Krishnan     | Fixed Deposits     | ₹22,64,727.35    | ₹4,77,234.13     | ₹17,87,493.22    |\n| Venkat Krishnan      |                   |                  |                  |                  |\n| Priya Krishnan       |                   |                  |                  |                  |\n\n**Note:** Venkat and Priya Krishnan have no recorded inflows or outflows.",
+        "latency": {
+          "guardrail_ms": 5,
+          "memory_ms": 1817,
+          "parallel_init_ms": 1822,
+          "enrichment_ms": 2345,
+          "tool_selection_ms": 1407,
+          "mcp_exec_ms": 4342,
+          "llm_ms": 4578,
+          "total_ms": 14509
+        },
+        "wall_ms": 29622,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 4342,
+        "total_ms": 14509,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 21,
+    "question": "Show realized gains by AMC for client Sita Krishnan.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Sita Krishnan has no recorded realized gains by AMC.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1396,
+          "parallel_init_ms": 1398,
+          "enrichment_ms": 2503,
+          "tool_selection_ms": 1355,
+          "mcp_exec_ms": 14530,
+          "llm_ms": 899,
+          "total_ms": 20702
+        },
+        "wall_ms": 27647,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 14530,
+        "total_ms": 20702,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here are the realized gains by AMC for client Sita Krishnan:\n\n| AMC Name               | Instrument Name                                      | Realized Gain (₹)   |\n|-----------------------|-----------------------------------------------------|---------------------|\n| Axis AMC              | Axis Healthcare Fund - Direct Growth                 | ₹45,049.57          |\n| Canara Robeco AMC     | Canara Robeco Equity Hybrid Fund - Direct Growth     | ₹45,049.57          |\n| Kotak Mahindra AMC    | Kotak Emerging Equity Fund - Direct Growth           | ₹45,049.57          |\n| Bandhan AMC           | Bandhan Balanced Advantage Fund - Direct Growth      | ₹45,049.57          |\n| UTI AMC               | UTI Nifty 50 Index Fund - Direct Growth              | ₹45,049.57          |\n\nThe realized gains are consistent across multiple records for each AMC.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1491,
+          "parallel_init_ms": 1493,
+          "enrichment_ms": 2538,
+          "tool_selection_ms": 1231,
+          "mcp_exec_ms": 10533,
+          "llm_ms": 3687,
+          "total_ms": 19494
+        },
+        "wall_ms": 26654,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 10533,
+        "total_ms": 19494,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Here are the realized gains by AMC for client Sita Krishnan:\n\n| AMC Name                | Instrument Name                                      | Realized Gain (₹)   |\n|------------------------|------------------------------------------------------|---------------------|\n| Axis AMC               | Axis Healthcare Fund - Direct Growth                  | ₹45,049.57          |\n| Canara Robeco AMC      | Canara Robeco Equity Hybrid Fund - Direct Growth      | ₹45,049.57          |\n| Kotak Mahindra AMC     | Kotak Emerging Equity Fund - Direct Growth            | ₹45,049.57          |\n| Bandhan AMC            | Bandhan Balanced Advantage Fund - Direct Growth       | ₹45,049.57          |\n| UTI AMC                | UTI Nifty 50 Index Fund - Direct Growth               | ₹45,049.57          |\n\nThe realized gains are consistent across multiple records for each AMC.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1546,
+          "parallel_init_ms": 1548,
+          "enrichment_ms": 2388,
+          "tool_selection_ms": 1794,
+          "mcp_exec_ms": 1177,
+          "llm_ms": 3548,
+          "total_ms": 10467
+        },
+        "wall_ms": 16470,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1177,
+        "total_ms": 10467,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 22,
+    "question": "Which of Arjun Mehra's bonds are maturing within 1 year?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Arjun Mehra holds no bonds maturing within 1 year.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1099,
+          "parallel_init_ms": 1101,
+          "enrichment_ms": 2493,
+          "tool_selection_ms": 1540,
+          "mcp_exec_ms": 17745,
+          "llm_ms": 1740,
+          "total_ms": 25766
+        },
+        "wall_ms": 31460,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 17745,
+        "total_ms": 25766,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Arjun Mehra holds no bonds maturing within 1 year.",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 892,
+          "parallel_init_ms": 893,
+          "enrichment_ms": 2308,
+          "tool_selection_ms": 1219,
+          "mcp_exec_ms": 7695,
+          "llm_ms": 1129,
+          "total_ms": 14465
+        },
+        "wall_ms": 20401,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7695,
+        "total_ms": 14465,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Arjun Mehra holds no bonds maturing within 1 year.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1037,
+          "parallel_init_ms": 1038,
+          "enrichment_ms": 2544,
+          "tool_selection_ms": 1200,
+          "mcp_exec_ms": 7695,
+          "llm_ms": 1163,
+          "total_ms": 14952
+        },
+        "wall_ms": 22623,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7695,
+        "total_ms": 14952,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 23,
+    "question": "Who is my top client by total portfolio value?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Your top client by total portfolio value is:\n\n| Client Id | Total Portfolio Value         |\n|-----------|-------------------------------|\n| 7005      | ₹2,30,37,04,652.89 (≈ ₹230.37 crore) |",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1827,
+          "parallel_init_ms": 1830,
+          "enrichment_ms": 4449,
+          "tool_selection_ms": 1669,
+          "mcp_exec_ms": 9355,
+          "llm_ms": 1900,
+          "total_ms": 19218
+        },
+        "wall_ms": 25182,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 9355,
+        "total_ms": 19218,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Your top client by total portfolio value is:\n\n| Client Id | Total Portfolio Value         |\n|-----------|-------------------------------|\n| 7005      | ₹2,30,37,04,652.89 (≈ ₹230.37 crore) |",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1222,
+          "parallel_init_ms": 1224,
+          "enrichment_ms": 4405,
+          "tool_selection_ms": 958,
+          "mcp_exec_ms": 1185,
+          "llm_ms": 1505,
+          "total_ms": 9289
+        },
+        "wall_ms": 16984,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1185,
+        "total_ms": 9289,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Your top client by total portfolio value is:\n\n| Client Id | Total Portfolio Value         |\n|-----------|-------------------------------|\n| 7005      | ₹2,30,37,04,652.89 (≈ ₹230.37 crore) |",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1324,
+          "parallel_init_ms": 1326,
+          "enrichment_ms": 5882,
+          "tool_selection_ms": 1088,
+          "mcp_exec_ms": 1161,
+          "llm_ms": 1330,
+          "total_ms": 10804
+        },
+        "wall_ms": 17713,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1161,
+        "total_ms": 10804,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 24,
+    "question": "Top 5 clients by total new investments in the last 3 years.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The data provided does not include any total new investment amounts for the clients. Please rephrase your query to include specific investment amounts or details for a more accurate response.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1047,
+          "parallel_init_ms": 1048,
+          "enrichment_ms": 12480,
+          "tool_selection_ms": 1742,
+          "mcp_exec_ms": 8832,
+          "llm_ms": 1254,
+          "total_ms": 25368
+        },
+        "wall_ms": 31708,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8832,
+        "total_ms": 25368,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The data provided does not include any total new investment amounts for the clients. Please rephrase your query to include specific investment amounts or details for a more accurate response.",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 1354,
+          "parallel_init_ms": 1356,
+          "enrichment_ms": 3623,
+          "tool_selection_ms": 1417,
+          "mcp_exec_ms": 1372,
+          "llm_ms": 1186,
+          "total_ms": 8963
+        },
+        "wall_ms": 11883,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1372,
+        "total_ms": 8963,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The data provided does not include any total new investment amounts for the clients. Please rephrase your query to include specific investment amounts or details for a more accurate response.",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 969,
+          "parallel_init_ms": 970,
+          "enrichment_ms": 2631,
+          "tool_selection_ms": 1244,
+          "mcp_exec_ms": 1178,
+          "llm_ms": 1266,
+          "total_ms": 7301
+        },
+        "wall_ms": 10773,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1178,
+        "total_ms": 7301,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 25,
+    "question": "How much did all my clients invest in April 2026?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "All your clients invested a total of ₹83,43,483.08 in April 2026.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 956,
+          "parallel_init_ms": 957,
+          "enrichment_ms": 4998,
+          "tool_selection_ms": 1086,
+          "mcp_exec_ms": 7600,
+          "llm_ms": 1025,
+          "total_ms": 15679
+        },
+        "wall_ms": 21155,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7600,
+        "total_ms": 15679,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "All your clients invested a total of ₹83,43,483.08 in April 2026.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 910,
+          "parallel_init_ms": 912,
+          "enrichment_ms": 8742,
+          "tool_selection_ms": 2739,
+          "mcp_exec_ms": 1177,
+          "llm_ms": 1049,
+          "total_ms": 14631
+        },
+        "wall_ms": 20407,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1177,
+        "total_ms": 14631,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "All your clients invested a total of ₹83,43,483.08 in April 2026.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1112,
+          "parallel_init_ms": 1115,
+          "enrichment_ms": 4521,
+          "tool_selection_ms": 1157,
+          "mcp_exec_ms": 1127,
+          "llm_ms": 1050,
+          "total_ms": 8982
+        },
+        "wall_ms": 14672,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1127,
+        "total_ms": 8982,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 26,
+    "question": "What is the total number of transactions Rama Krishna made this year?",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan made a total of 6 transactions this year.",
+        "latency": {
+          "guardrail_ms": 4,
+          "memory_ms": 1173,
+          "parallel_init_ms": 1176,
+          "enrichment_ms": 2578,
+          "tool_selection_ms": 1244,
+          "mcp_exec_ms": 11110,
+          "llm_ms": 968,
+          "total_ms": 17103
+        },
+        "wall_ms": 21794,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 11110,
+        "total_ms": 17103,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan made a total of 6 transactions this year.",
+        "latency": {
+          "guardrail_ms": 4,
+          "memory_ms": 1046,
+          "parallel_init_ms": 1050,
+          "enrichment_ms": 3022,
+          "tool_selection_ms": 1388,
+          "mcp_exec_ms": 8357,
+          "llm_ms": 1238,
+          "total_ms": 15075
+        },
+        "wall_ms": 19069,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 8357,
+        "total_ms": 15075,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "Ram Krishnan made a total of 6 transactions this year.",
+        "latency": {
+          "guardrail_ms": 4,
+          "memory_ms": 799,
+          "parallel_init_ms": 804,
+          "enrichment_ms": 2291,
+          "tool_selection_ms": 1615,
+          "mcp_exec_ms": 1332,
+          "llm_ms": 950,
+          "total_ms": 7007
+        },
+        "wall_ms": 13690,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 1332,
+        "total_ms": 7007,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 27,
+    "question": "Show the 1-year return of key funds in my clients' portfolios — Axis Bluechip and HDFC Mid-Cap Opportunities.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The data for the 1-year return of the specified funds could not be retrieved. Please rephrase your query for more specific information.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1667,
+          "parallel_init_ms": 1669,
+          "enrichment_ms": 3313,
+          "tool_selection_ms": 2013,
+          "mcp_exec_ms": 15385,
+          "llm_ms": 2011,
+          "total_ms": 25625
+        },
+        "wall_ms": 29480,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 15385,
+        "total_ms": 25625,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The data for the 1-year return of the specified funds could not be retrieved. Please rephrase your query for more specific information.",
+        "latency": {
+          "guardrail_ms": 8,
+          "memory_ms": 2737,
+          "parallel_init_ms": 2745,
+          "enrichment_ms": 5241,
+          "tool_selection_ms": 1529,
+          "mcp_exec_ms": 17864,
+          "llm_ms": 896,
+          "total_ms": 29452
+        },
+        "wall_ms": 40200,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 17864,
+        "total_ms": 29452,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The data for the 1-year return of the specified funds could not be retrieved. Please rephrase your query or specify different funds.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 1564,
+          "parallel_init_ms": 1566,
+          "enrichment_ms": 2516,
+          "tool_selection_ms": 1356,
+          "mcp_exec_ms": 7645,
+          "llm_ms": 1348,
+          "total_ms": 15638
+        },
+        "wall_ms": 19319,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7645,
+        "total_ms": 15638,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 28,
+    "question": "Compare expense ratios of Axis Focused 25 vs. Mirae Asset Large Cap.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The data could not be retrieved. Please rephrase your query to be more specific.",
+        "latency": {
+          "guardrail_ms": 2,
+          "memory_ms": 2644,
+          "parallel_init_ms": 2645,
+          "enrichment_ms": 2607,
+          "tool_selection_ms": 1369,
+          "mcp_exec_ms": 15765,
+          "llm_ms": 1017,
+          "total_ms": 24675
+        },
+        "wall_ms": 28655,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 15765,
+        "total_ms": 24675,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The data could not be retrieved. Please rephrase your query to be more specific.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 2135,
+          "parallel_init_ms": 2138,
+          "enrichment_ms": 2803,
+          "tool_selection_ms": 1385,
+          "mcp_exec_ms": 13814,
+          "llm_ms": 1087,
+          "total_ms": 22417
+        },
+        "wall_ms": 30840,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 13814,
+        "total_ms": 22417,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "The data could not be retrieved. Please rephrase your query to be more specific.",
+        "latency": {
+          "guardrail_ms": 5,
+          "memory_ms": 2159,
+          "parallel_init_ms": 2164,
+          "enrichment_ms": 2314,
+          "tool_selection_ms": 1369,
+          "mcp_exec_ms": 7724,
+          "llm_ms": 1267,
+          "total_ms": 16087
+        },
+        "wall_ms": 20419,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7724,
+        "total_ms": 16087,
+        "run": 3
+      }
+    ]
+  },
+  {
+    "srno": 29,
+    "question": "Show me clients whose portfolio XIRR has underperformed their assigned benchmark over the last 1 year.",
+    "runs": [
+      {
+        "ok": true,
+        "status": 200,
+        "response": "No data could be retrieved regarding clients whose portfolio XIRR has underperformed their assigned benchmark over the last year. Please rephrase your query for more specific information.",
+        "latency": {
+          "guardrail_ms": 1,
+          "memory_ms": 1432,
+          "parallel_init_ms": 1433,
+          "enrichment_ms": 2869,
+          "tool_selection_ms": 1258,
+          "mcp_exec_ms": 22723,
+          "llm_ms": 1086,
+          "total_ms": 30529
+        },
+        "wall_ms": 34353,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 22723,
+        "total_ms": 30529,
+        "run": 1
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "No clients' portfolio XIRR data could be retrieved. Please rephrase your query for more specific information.",
+        "latency": {
+          "guardrail_ms": 5,
+          "memory_ms": 2075,
+          "parallel_init_ms": 2080,
+          "enrichment_ms": 4229,
+          "tool_selection_ms": 1061,
+          "mcp_exec_ms": 7882,
+          "llm_ms": 880,
+          "total_ms": 17328
+        },
+        "wall_ms": 20506,
+        "class": "empty",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7882,
+        "total_ms": 17328,
+        "run": 2
+      },
+      {
+        "ok": true,
+        "status": 200,
+        "response": "No data could be retrieved regarding clients whose portfolio XIRR has underperformed their assigned benchmark over the last year. Please try a more specific query.",
+        "latency": {
+          "guardrail_ms": 3,
+          "memory_ms": 1365,
+          "parallel_init_ms": 1369,
+          "enrichment_ms": 2462,
+          "tool_selection_ms": 1172,
+          "mcp_exec_ms": 7835,
+          "llm_ms": 1029,
+          "total_ms": 15003
+        },
+        "wall_ms": 18329,
+        "class": "data",
+        "mcp_hit": true,
+        "mcp_exec_ms": 7835,
+        "total_ms": 15003,
+        "run": 3
+      }
+    ]
+  }
+]

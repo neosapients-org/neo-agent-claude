@@ -1,0 +1,43 @@
+# Neo Memory Hub - Test Configuration
+# Minimal configuration for running tests
+
+system:
+  environment: "test"
+  log_level: "WARNING"
+
+# Use test-specific collection
+milvus:
+  host: "localhost"
+  port: 19530
+  collection_name: "neo_memories_test"
+
+# Test Redis DB
+redis:
+  url: "redis://localhost:6379"
+  db: 1  # Use different DB for tests
+
+# Test PostgreSQL DB
+postgres:
+  url: "postgresql+asyncpg://neo:neo_secret@localhost:5432/neo_memory_test"
+
+# Disable features not needed for basic tests
+mem0:
+  features:
+    fact_extraction: false
+    entity_linking: false
+
+# Disable API auth for tests
+api:
+  auth:
+    enabled: false
+
+# Disable background tasks
+retention:
+  enabled: false
+
+# Minimal observability
+observability:
+  metrics:
+    enabled: false
+  logging:
+    format: "console"

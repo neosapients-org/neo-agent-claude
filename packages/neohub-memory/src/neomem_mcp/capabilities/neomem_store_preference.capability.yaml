@@ -1,0 +1,36 @@
+name: memory.store_preference
+mcp_tool_name: neomem_store_preference
+required_package: neo_memory_hub
+connector: low_level
+method: store_preference
+description: |
+  Store a user preference directly. Bypasses LLM extraction (infer=False)
+  and automatically tags with category 'preference'. Use when recording
+  explicit user preferences like "prefers dark mode" or "likes conservative investments".
+  Returns: results (list of stored memory entries).
+execution_mode: optional
+hook_position: post
+input_schema:
+  type: object
+  properties:
+    preference:
+      type: string
+      description: "The preference to store (e.g. 'User prefers conservative investments')"
+    user_id:
+      type: string
+      description: "User identifier for memory isolation"
+    categories:
+      type: array
+      description: "Additional categories to apply (optional, 'preference' is always included)"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+  required:
+    - preference
+    - user_id
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: false
+  openWorldHint: true
+version: "0.3.0"

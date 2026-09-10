@@ -1,0 +1,89 @@
+# Ignore virtual environment
+.venv/
+.venv312/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+#downloaded models
+models/
+# ...but DO track the api request/response models package (source code, not weights)
+!neo_guardrail_hub/api/models/
+!neo_guardrail_hub/api/models/*.py
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Environments
+.env
+.venv
+ENV/
+env.bak/
+venv.bak/
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.log
+logs/
+
+#docs
+docs/

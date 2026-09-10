@@ -1,0 +1,24 @@
+name: memory.count_memories
+mcp_tool_name: neomem_count_memories
+required_package: neo_memory_hub
+connector: high_level
+method: count_memories
+description: |
+  Count the total number of stored memories, optionally filtered by
+  user_id. Returns a simple count for monitoring and diagnostics.
+  Returns: total (int).
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    user_id:
+      type: string
+      description: "User identifier to count memories for (optional — all if omitted)"
+  required: []
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

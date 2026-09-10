@@ -1,0 +1,33 @@
+name: memory.flush_buffer
+mcp_tool_name: neomem_flush_buffer
+required_package: neo_memory_hub
+connector: high_level
+method: flush_session_buffer
+description: |
+  Flush all buffered conversation exchanges for a user/session.
+  Processes each buffered exchange through the full LLM pipeline
+  (extraction, salience, dedup, storage). Call at session end or
+  when the buffer reaches a threshold.
+  Returns: flushed_count (int), total_facts_stored (int), results (list).
+execution_mode: mandatory
+hook_position: post
+input_schema:
+  type: object
+  properties:
+    user_id:
+      type: string
+      description: "User identifier whose buffer to flush"
+    session_id:
+      type: string
+      description: "Session identifier to flush (optional — flushes all if omitted)"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+  required:
+    - user_id
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

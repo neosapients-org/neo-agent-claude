@@ -1,0 +1,59 @@
+# agent — local orchestration.
+#
+#   Browser ─▶ agent (8000, serves its own chat page) ─▶ qdrant (6333)
+#
+# The agent serves its own UI and holds no chat persistence; the former
+# backend/frontend/postgres stack was unused and has been removed.
+
+services:
+
+  qdrant:
+    image: qdrant/qdrant:v1.14.0
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  agent:
+    build:
+      context: .
+      dockerfile: apps/agent/Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - apps/agent/.env
+    environment:
+      # Hosted collector; the pipeline behind it is run centrally, we only send.
+      - NS_PROBE_ENDPOINT=${NS_PROBE_ENDPOINT:-https://observability.neosapientai.com/v1/traces}
+      # The ONE field that tells the two variants apart on a shared dashboard.
+      # Each variant repo pins this: agent-cortex / agent-claude.
+      - NS_PROBE_SERVICE_NAME=${NS_PROBE_SERVICE_NAME:-agent}
+      - OTEL_SERVICE_NAME=${NS_PROBE_SERVICE_NAME:-agent}
+      # Memory off (overrides .env) — no post-turn memory-extraction llm.call in traces.
+      - MEMORY_ENABLED=false
+      - QDRANT_URL=http://qdrant:6333
+      - PYTHONUNBUFFERED=1
+      # Guardrails kill-switch: false = bypass all guardrail layers (saves tokens).
+      # To turn guardrails back ON, set this to true (or remove this line) and restart.
+      - GUARDRAILS_ENABLED=false
+      # Advisor-only memory: store + retrieve only advisor-owned memories; client
+      # (investor) memories are never written or read. Set false to restore mixed mode.
+      - MEMORY_ADVISOR_ONLY=true
+      # Skills are front-loaded from the Cortex platform (MCP list_skills) into the agent's
+      # RAM registry at startup and refreshed on a TTL. Set false to disable platform sync
+      # (the registry then stays empty — no skill applies).
+      - SKILLS_MCP_SYNC=true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./apps/agent/configs:/workspace/agent/configs
+      - ./apps/agent/app:/workspace/agent/app
+    depends_on:
+      - qdrant
+    restart: unless-stopped
+
+
+
+volumes:
+  qdrant_data:

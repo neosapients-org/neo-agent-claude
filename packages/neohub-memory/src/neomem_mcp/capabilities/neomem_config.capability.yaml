@@ -1,0 +1,23 @@
+name: memory.config
+mcp_tool_name: neomem_config
+mcp_type: resource
+mcp_resource_uri: "neomem://config"
+required_package: neo_memory_hub
+connector: high_level
+method: null
+description: |
+  Exposes the current server configuration as an MCP resource.
+  Returns the active MemoryHubConfig including vector store, LLM,
+  embedder, feature toggles, and registered capabilities.
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties: {}
+  required: []
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

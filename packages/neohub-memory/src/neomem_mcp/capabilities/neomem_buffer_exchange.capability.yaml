@@ -1,0 +1,50 @@
+name: memory.buffer_exchange
+mcp_tool_name: neomem_buffer_exchange
+required_package: neo_memory_hub
+connector: high_level
+method: buffer_exchange
+description: |
+  Buffer a conversation exchange for later batch processing.
+  Adds the exchange to an in-memory session buffer instead of
+  processing it immediately. Use neomem_flush_buffer to process
+  all buffered exchanges at once (e.g. at session end).
+  Returns: buffered (bool), buffer_size (int), auto_flushed (bool).
+execution_mode: mandatory
+hook_position: post
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+      description: "User's message or question"
+    response:
+      type: string
+      description: "Assistant's response to the query"
+    user_id:
+      type: string
+      description: "User identifier for memory isolation"
+    investor_name:
+      type: string
+      description: "Client/investor name for entity isolation (optional)"
+    tenant_id:
+      type: string
+      description: "Tenant identifier for multi-tenant isolation (optional)"
+    session_id:
+      type: string
+      description: "Session identifier (optional)"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+    dept_id:
+      type: string
+      description: "Department identifier (optional)"
+  required:
+    - query
+    - response
+    - user_id
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: false
+  openWorldHint: false
+version: "0.3.0"

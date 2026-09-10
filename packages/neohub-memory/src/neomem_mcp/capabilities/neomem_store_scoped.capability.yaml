@@ -1,0 +1,53 @@
+name: memory.store_scoped
+mcp_tool_name: neomem_store_scoped
+required_package: memory_utils
+connector: scoped
+method: store_exchange_scoped
+description: |
+  Store a conversation exchange with enterprise scope isolation.
+  Applies IsolationScope (tenant, user, agent, department, access tier)
+  to control which pools the memory is written to. Requires the
+  memory_utils package to be installed.
+  Returns: facts_stored (int), scope applied, results (list).
+execution_mode: mandatory
+hook_position: post
+input_schema:
+  type: object
+  properties:
+    user_message:
+      type: string
+      description: "User's message or question"
+    assistant_response:
+      type: string
+      description: "Assistant's response"
+    tenant_id:
+      type: string
+      description: "Tenant identifier (default: 'default')"
+    user_id:
+      type: string
+      description: "User identifier for memory isolation"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+    dept_id:
+      type: string
+      description: "Department identifier (optional)"
+    pool:
+      type: string
+      description: "Access tier: 'private', 'shared', or 'global' (default: 'private')"
+    strategy:
+      type: string
+      description: "Sharing strategy override (optional)"
+    infer:
+      type: boolean
+      description: "Whether to use LLM inference for categorization (default: true)"
+  required:
+    - user_message
+    - assistant_response
+    - user_id
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: false
+  openWorldHint: true
+version: "0.3.0"

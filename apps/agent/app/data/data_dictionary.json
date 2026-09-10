@@ -1,0 +1,2290 @@
+[
+  {
+    "atom": "CMOT Index Prices",
+    "name": "latest_index_close",
+    "display_name": "Latest Index Close",
+    "type": "Metric",
+    "subtype": "max",
+    "description": "Most recent closing price for a given index."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "avg_daily_close_by_month",
+    "display_name": "Average Daily Close by Month",
+    "type": "Metric",
+    "subtype": "avg",
+    "description": "Average closing price of an index per calendar month."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "index_close_by_date",
+    "display_name": "Index Closing Prices by Date",
+    "type": "Aggregation",
+    "subtype": "max",
+    "description": "Raw time-series of closing prices per index."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "avg_monthly_close_by_index",
+    "display_name": "Average Monthly Close by Index",
+    "type": "Aggregation",
+    "subtype": "avg",
+    "description": "Monthly average closing price per index — useful for trend smoothing."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "index_high_low_by_month",
+    "display_name": "Monthly High and Low per Index",
+    "type": "Aggregation",
+    "subtype": "max",
+    "description": "Maximum and minimum closing price per index per month."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "price_date_month",
+    "display_name": "Price Month",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Calendar month of the price date for monthly aggregation."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "is_latest_price",
+    "display_name": "Is Latest Price",
+    "type": "Derived Attribute",
+    "subtype": "window",
+    "description": "Flag indicating this is the most recent price record for this index. Uses window function."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "daily_return_pct",
+    "display_name": "Daily Return %",
+    "type": "Derived Attribute",
+    "subtype": "window",
+    "description": "Percentage change in closing price from the previous trading day."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "price_range",
+    "display_name": "Day Price Range",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Intraday range: High minus Low."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "co_code",
+    "display_name": "Index Code",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Numeric code identifying the market index. 9001=Nifty 50, 9002=Nifty 500, 9003=Nifty 10yr G-sec. Part of composite primary key."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "index_name",
+    "display_name": "Index Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Human-readable name of the market index (e.g. Nifty 50, Nifty 500, Nifty 10yr G-sec). Maps 1:1 to co_code; use for display, but filter on co_code for reliability. Equity indices benchmark equity portfolios, G-sec benchmarks debt."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "nav_close",
+    "display_name": "Closing Price",
+    "type": "Raw Column (used in measure)",
+    "subtype": "measure",
+    "description": "End-of-day closing price of the index, in index points (not currency). Primary field for benchmark levels, returns, and alpha; compute returns from nav_close between two dates. Aggregatable and sortable; always scope by index."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "nav_date",
+    "display_name": "Price Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "The trading date for this index price record. Part of composite primary key."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "nav_high",
+    "display_name": "Day High",
+    "type": "Raw Column (used in measure)",
+    "subtype": "measure",
+    "description": "Highest price of the index during the trading day, in index points. Use for period highs (e.g. 52-week high via MAX(nav_high)) and intraday-range or volatility context; pairs with nav_low for the day's range. Optional/nullable."
+  },
+  {
+    "atom": "CMOT Index Prices",
+    "name": "nav_low",
+    "display_name": "Day Low",
+    "type": "Raw Column (used in measure)",
+    "subtype": "measure",
+    "description": "Lowest price of the index during the trading day, in index points. Use for period lows (e.g. MIN(nav_low)) and drawdown or intraday-range context; pairs with nav_high for the day's range. Optional/nullable."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "account_count",
+    "display_name": "Account Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total number of investment accounts."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "accounts_per_client",
+    "display_name": "Accounts per Client",
+    "type": "Metric",
+    "subtype": "custom",
+    "description": "Average number of accounts each client holds."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "account_count_by_type",
+    "display_name": "Account Count by Type",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Distribution of accounts across Individual, HUF, etc."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "account_count_by_bank",
+    "display_name": "Account Count by Bank",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "How many accounts are linked to each bank."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "account_count_by_client",
+    "display_name": "Account Count by Client",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Number of accounts per client."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "has_folio",
+    "display_name": "Has MF Folio",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Whether this account has a mutual fund folio linked."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "has_demat",
+    "display_name": "Has Demat Account",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Whether this account has a DP/demat ID — i.e. can hold listed securities."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "account_details_id",
+    "display_name": "Account Details ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Unique numeric identifier for each account record. Primary key."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "account_type",
+    "display_name": "Account Type",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Legal type of the investment account. Impacts tax treatment and regulatory reporting."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "bank_name",
+    "display_name": "Bank Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Name of the bank linked to this account for transactions."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "client_id",
+    "display_name": "Client ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Foreign key to dim_client_master. Links account to its owner client."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "dp_id",
+    "display_name": "DP ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Depository Participant ID for demat-held securities. Populated for equity and bond accounts."
+  },
+  {
+    "atom": "Client Account Map",
+    "name": "folio",
+    "display_name": "Folio Number",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Mutual fund folio number. Populated only for MF accounts. NULL for equity/other accounts."
+  },
+  {
+    "atom": "Client Assets Under Management",
+    "name": "total_aum",
+    "display_name": "Total AUM",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Total AUM across all clients."
+  },
+  {
+    "atom": "Client Assets Under Management",
+    "name": "avg_aum_per_client",
+    "display_name": "Avg AUM per Client",
+    "type": "Metric",
+    "subtype": "avg",
+    "description": "Average AUM per client."
+  },
+  {
+    "atom": "Client Assets Under Management",
+    "name": "client_count",
+    "display_name": "Client Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Number of unique clients."
+  },
+  {
+    "atom": "Client Assets Under Management",
+    "name": "aum_month",
+    "display_name": "AUM Month",
+    "type": "Derived Attribute",
+    "subtype": "extraction",
+    "description": "Month of value_date."
+  },
+  {
+    "atom": "Client Assets Under Management",
+    "name": "aum_bucket",
+    "display_name": "AUM Bucket",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Client tier classification by AUM size."
+  },
+  {
+    "atom": "Client Assets Under Management",
+    "name": "as_on_date",
+    "display_name": "As On Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Date of the AUM snapshot."
+  },
+  {
+    "atom": "Client Assets Under Management",
+    "name": "aum_value",
+    "display_name": "AUM Value",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Total assets under management for this client on as_on_date."
+  },
+  {
+    "atom": "Client Assets Under Management",
+    "name": "client_id",
+    "display_name": "Client ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "FK to dim_client_master."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "total_portfolio_value",
+    "display_name": "Total Portfolio Value (AUM)",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Sum of market_value across all holdings."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "total_invested_value",
+    "display_name": "Total Invested Value",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Sum of cost across all holdings."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "total_unrealized_gain",
+    "display_name": "Total Unrealized Gain/Loss",
+    "type": "Metric",
+    "subtype": "custom",
+    "description": "SUM(market_value) - SUM(cost)."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "portfolio_return_pct",
+    "display_name": "Portfolio Return %",
+    "type": "Metric",
+    "subtype": "custom",
+    "description": "Overall absolute return %."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "aum_by_client",
+    "display_name": "",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": ""
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "aum_by_security_type",
+    "display_name": "",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": ""
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "cost_by_client",
+    "display_name": "",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": ""
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "unrealized_gain_loss",
+    "display_name": "Unrealized Gain / Loss",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "market_value minus cost. Positive = profit."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "unrealized_gain_pct",
+    "display_name": "Unrealized Gain %",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Unrealized gain as percentage of cost."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "weight_in_portfolio",
+    "display_name": "Weight in Portfolio (%)",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "This holding's market_value as % of client's total portfolio."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "gain_loss_flag",
+    "display_name": "Gain / Loss Flag",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Classification: Gain, Loss, or Breakeven."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "client_id",
+    "display_name": "Client Id",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Unique numeric identifier assigned to a client within the wealth management platform. Links this record to the Client Master for accessing client demographics, KYC status, relationship details, and portfolio ownership. Example: 7001."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "current_value",
+    "display_name": "Current Value",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Current market value of the client's holding, calculated as quantity Ã— current market price (or latest NAV for mutual funds). Represents the liquidation value of the position at the reference date and is a key input for AUM reporting, portfolio rebalancing, and client statements."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "invested_value",
+    "display_name": "Invested Value",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Total amount invested by the client in this position, calculated as quantity Ã— average cost price. Represents the client's cost basis for the entire holding and is used as the denominator in return calculations, portfolio analytics, and performance attribution."
+  },
+  {
+    "atom": "Client Holdings",
+    "name": "product_type",
+    "display_name": "Product Type",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Category or type of the financial product associated with this record. Indicates the broad instrument class such as 'Direct Equity', 'Mutual Fund', 'Bond', 'NCD', or 'AIF'. Used for asset classâ€“level aggregation, filtering, and regulatory classification across reports and dashboards."
+  },
+  {
+    "atom": "Client Master",
+    "name": "client_count",
+    "display_name": "Client Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total number of distinct active clients."
+  },
+  {
+    "atom": "Client Master",
+    "name": "client_count_by_tier",
+    "display_name": "Client Count by Tier",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Number of active clients in each AUM tier."
+  },
+  {
+    "atom": "Client Master",
+    "name": "family_count",
+    "display_name": "Family Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total number of distinct families."
+  },
+  {
+    "atom": "Client Master",
+    "name": "clients_per_family",
+    "display_name": "Clients per Family",
+    "type": "Metric",
+    "subtype": "custom",
+    "description": "Average number of clients per family group."
+  },
+  {
+    "atom": "Client Master",
+    "name": "client_count_by_tier",
+    "display_name": "Client Count by Tier",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Number of clients grouped by AUM tier."
+  },
+  {
+    "atom": "Client Master",
+    "name": "client_count_by_family",
+    "display_name": "Client Count by Family",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Number of clients per family group."
+  },
+  {
+    "atom": "Client Master",
+    "name": "client_count_by_banker",
+    "display_name": "Client Count by Servicing Banker",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "How many clients each RM is servicing."
+  },
+  {
+    "atom": "Client Master",
+    "name": "client_count_by_kyc_status",
+    "display_name": "Client Count by KYC Status",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Distribution of clients across KYC compliance statuses."
+  },
+  {
+    "atom": "Client Master",
+    "name": "client_count_by_sub_lob",
+    "display_name": "Client Count by Sub-LOB",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Number of clients per service model (Private Wealth, Family Office, etc.)."
+  },
+  {
+    "atom": "Client Master",
+    "name": "age_years",
+    "display_name": "Age (Years)",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Client's current age in years, computed from date of birth."
+  },
+  {
+    "atom": "Client Master",
+    "name": "age_band",
+    "display_name": "Age Band",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Bucketed age group for segmentation. Useful for cohort analysis and suitability."
+  },
+  {
+    "atom": "Client Master",
+    "name": "is_pep",
+    "display_name": "Is PEP",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Boolean flag for politically exposed persons. Derived from pep_status for easier filtering."
+  },
+  {
+    "atom": "Client Master",
+    "name": "is_kyc_compliant",
+    "display_name": "Is KYC Compliant",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Boolean flag for KYC compliance. Clients with False cannot transact."
+  },
+  {
+    "atom": "Client Master",
+    "name": "dob",
+    "display_name": "Date of Birth",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Client date of birth. PII field. Used for age-band segmentation and suitability checks."
+  },
+  {
+    "atom": "Client Master",
+    "name": "family_id",
+    "display_name": "Family ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Identifier for the client's family group. Used for family-level AUM aggregations and consolidated reporting."
+  },
+  {
+    "atom": "Client Master",
+    "name": "family_name",
+    "display_name": "Family Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Name of the client's family group. Critical for family-level aggregations — e.g. total AUM of Krishnan family."
+  },
+  {
+    "atom": "Client Master",
+    "name": "id",
+    "display_name": "Client ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Unique numeric identifier for each client. Primary key used as client_id in all fact tables (client_holdings, client_transactions, client_revenue, etc.)."
+  },
+  {
+    "atom": "Client Master",
+    "name": "kyc_status",
+    "display_name": "KYC Status",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Client's KYC compliance status. Non-compliant clients cannot transact. Critical for regulatory operations."
+  },
+  {
+    "atom": "Client Master",
+    "name": "pep_status",
+    "display_name": "PEP Status",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Indicates whether the client is a Politically Exposed Person. Compliance-critical field."
+  },
+  {
+    "atom": "Client Master",
+    "name": "servicing_banker_name",
+    "display_name": "Servicing Banker Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Name of the primary servicing relationship manager."
+  },
+  {
+    "atom": "Client Master",
+    "name": "sub_lob_name",
+    "display_name": "Sub-LOB Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Sub-LOB name — represents the service model (e.g. Private Wealth, Family Office)."
+  },
+  {
+    "atom": "Client Master",
+    "name": "tier",
+    "display_name": "Client Tier",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "AUM-based client tier classification. Drives service model, fee structure, and product access."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "total_net_new_money",
+    "display_name": "Total Net New Money",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Aggregate NNM."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "total_inflow",
+    "display_name": "Total Inflow",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Total fresh investments."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "total_outflow",
+    "display_name": "Total Outflow",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Total redemptions."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "nnm_by_asset_class",
+    "display_name": "NNM by Asset Class",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Net flows by asset class."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "retention_rate",
+    "display_name": "Retention Rate %",
+    "type": "Metric",
+    "subtype": "custom",
+    "description": "% of inflows retained."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "flow_direction",
+    "display_name": "Flow Direction",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Net Inflow or Net Outflow classification."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "period_month",
+    "display_name": "Period Month",
+    "type": "Derived Attribute",
+    "subtype": "extraction",
+    "description": "Month of period_end for grouping."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "outflow_ratio",
+    "display_name": "Outflow Ratio %",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Outflow as % of inflow — retention indicator."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "inflow",
+    "display_name": "Inflow",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Total monetary value (in INR) of assets that flowed into the client's account for this product during the reporting period. Includes fresh investments, SIP instalments, switch-ins, and reinvested dividends. Used to measure client acquisition and deepening activity."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "net_flow",
+    "display_name": "Net Flow",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Net money movement for the client and product during the reporting period, calculated as inflow minus outflow (in INR). A positive value indicates net accumulation; a negative value indicates net redemption. A key metric for tracking business momentum, AUM growth, and revenue forecasting."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "outflow",
+    "display_name": "Outflow",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Total monetary value (in INR) of assets that flowed out of the client's account for this product during the reporting period. Includes redemptions, withdrawals, switch-outs, and dividend payouts. Used alongside inflow to compute net new money and assess client attrition or rebalancing activity."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "period_date",
+    "display_name": "Period Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Reference date representing the start of the reporting period for which the net new money figures are calculated. Used to track monthly or periodic flows of client assets into and out of the platform. Paired with the inflow, outflow, and net flow fields to compute periodic AUM growth attribution."
+  },
+  {
+    "atom": "Client Net New Money",
+    "name": "product_type",
+    "display_name": "Product Type",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Category or type of the financial product associated with this record. Indicates the broad instrument class such as 'Direct Equity', 'Mutual Fund', 'Bond', 'NCD', or 'AIF'. Used for asset classâ€“level aggregation, filtering, and regulatory classification across reports and dashboards."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "total_realized_gain",
+    "display_name": "Total Realized Gain/Loss",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Aggregate realized P&L."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "total_stcg",
+    "display_name": "Total Short-Term Capital Gain",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Realized gain on holdings held < 1 year."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "total_ltcg",
+    "display_name": "Total Long-Term Capital Gain",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Realized gain on holdings held >= 1 year."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "win_rate",
+    "display_name": "Win Rate %",
+    "type": "Metric",
+    "subtype": "custom",
+    "description": "Percentage of trades that were profitable."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "holding_period_days",
+    "display_name": "Holding Period (Days)",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Days between buy_date and sell_date."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "is_short_term",
+    "display_name": "Is Short Term",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "True if holding period < 365 days (tax implication)."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "return_pct",
+    "display_name": "Return %",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Realized gain as % of buy_amount."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "gain_loss_flag",
+    "display_name": "Gain/Loss Flag",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Profit or Loss classification."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "tax_category",
+    "display_name": "Tax Category",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "STCG or LTCG based on holding period."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "buy_date",
+    "display_name": "Buy Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Date on which the security was originally purchased, as recorded in the transaction history. Used as the start date for holding period calculation, which determines the applicable capital gains tax rate — short-term (â‰¤ 1 year for equity) or long-term (> 1 year). Example: '2023-05-04'."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "buy_price",
+    "display_name": "Buy Price",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Net price per unit at which the security was originally purchased, inclusive of applicable charges. Serves as the cost basis per unit for realized gain/loss computation. For equities this is the net rate after brokerage; for mutual funds this is the NAV at the time of purchase."
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "holding_period_days",
+    "display_name": "Holding Period Days",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Number of calendar days the security was held between the buy date and sell date. Used to classify the gain as short-term or long-term capital gain for tax purposes. For listed equities, gains on holdings â‰¤ 365 days are short-term (STCG at 15%); gains on holdings > 365 days are long-term (LTCG at 10"
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "realized_gain",
+    "display_name": "Realized Gain",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Actual profit or loss realized from the sale of a security, calculated as (sell price âˆ’ buy price) Ã— quantity, adjusted for any transaction fees. Positive values represent capital gains; negative values represent capital losses. Used for capital gains tax reporting, P&L statements, and client perfor"
+  },
+  {
+    "atom": "Client Realized Gain",
+    "name": "sell_date",
+    "display_name": "Sell Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Date on which the security was sold or redeemed, triggering the realization of the gain or loss. Used as the end date for holding period calculation and as the event date for capital gains tax computation and reporting. Example: '2026-03-27'."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "total_revenue",
+    "display_name": "Total Revenue",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Sum of all revenue amounts."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "total_advisory_fee",
+    "display_name": "Total Advisory Fee",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Total advisory fees collected."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "total_transaction_fee",
+    "display_name": "Total Transaction Fee",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Total transaction fees collected."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_per_client",
+    "display_name": "Revenue per Client",
+    "type": "Metric",
+    "subtype": "custom",
+    "description": "Average revenue generated per client."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_per_banker",
+    "display_name": "Revenue per Banker",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Total revenue grouped by banker."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_by_banker",
+    "display_name": "Revenue by Banker",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": "Total revenue generated per banker."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_by_client",
+    "display_name": "Revenue by Client",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": "Total revenue per client."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_by_product_type",
+    "display_name": "Revenue by Product Type",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": "Revenue breakdown by product type."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_by_type_and_month",
+    "display_name": "Revenue by Type and Month",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": "Advisory vs transaction fee mix over time."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_month",
+    "display_name": "Revenue Month",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Year-Month of the revenue event."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_fy",
+    "display_name": "Revenue Financial Year",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Indian financial year of the revenue event."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "is_advisory_fee",
+    "display_name": "Is Advisory Fee",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Whether this revenue event is an advisory fee."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "client_id",
+    "display_name": "Client ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Foreign key to dim_client_master. The client generating this revenue."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "emp_id",
+    "display_name": "Banker Employee ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Foreign key to dim_employee_profile (id). The banker responsible for this client/revenue."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "product_type",
+    "display_name": "Product Type",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Product type from which the revenue was generated. Use to break revenue down by asset class; enum of product types."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_amount",
+    "display_name": "Revenue Amount",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Amount of revenue/fee in INR. Headline measure; SUM for total firm revenue and for banker/client/product attribution."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_date",
+    "display_name": "Revenue Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Date the revenue was recognized/posted. Primary date for revenue trends; group by month/financial year."
+  },
+  {
+    "atom": "Client Revenue",
+    "name": "revenue_type",
+    "display_name": "Revenue Type",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Type of revenue event. Advisory Fee = periodic, AUM-based. Transaction Fee = per-trade event."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "total_buy_value",
+    "display_name": "Total Buy Value",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Sum of net_amount for buy transactions."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "total_sell_value",
+    "display_name": "Total Sell Value",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Sum of net_amount for sell transactions."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "transaction_count",
+    "display_name": "Transaction Count",
+    "type": "Metric",
+    "subtype": "count",
+    "description": "Number of transactions."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "volume_by_client",
+    "display_name": "",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": ""
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "volume_by_month",
+    "display_name": "",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": ""
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "count_by_type",
+    "display_name": "",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": ""
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "transaction_month",
+    "display_name": "Transaction Month",
+    "type": "Derived Attribute",
+    "subtype": "extraction",
+    "description": "Month extracted from transaction_date for time-series grouping."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "is_buy",
+    "display_name": "Is Buy",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Flag: true if transaction is a purchase."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "is_sell",
+    "display_name": "Is Sell",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Flag: true if transaction is a sale/redemption."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "xirr_cashflow",
+    "display_name": "XIRR Cashflow",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Signed cashflow for XIRR: negative for buys, positive for sells."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "amount",
+    "display_name": "Amount",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Total monetary value of the transaction in Indian Rupees (INR), representing the net consideration paid or received. For purchases, this is the total cost including charges; for redemptions, this is the net proceeds received. Primary field for revenue, AUM, and flow analytics."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "client_id",
+    "display_name": "Client Id",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Unique numeric identifier assigned to a client within the wealth management platform. Links this record to the Client Master for accessing client demographics, KYC status, relationship details, and portfolio ownership. Example: 7001."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "id",
+    "display_name": "Id",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Unique system-generated surrogate key that identifies each record within this dataset. Auto-incremented integer assigned at the time of record creation. Used as the primary key for joins and lookups within the platform."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "transaction_date",
+    "display_name": "Transaction Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Trade date on which the transaction was executed in the market or processed by the fund house. For equities, this is the exchange execution date; for mutual funds, this is the applicable NAV date. Used for chronological ordering, holding period calculation, and periodic transaction reports."
+  },
+  {
+    "atom": "Client Transactions",
+    "name": "transaction_type",
+    "display_name": "Transaction Type",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Type of financial transaction executed by the client. Defines the nature of the activity such as 'Purchase' (Buy), 'Sale' (Sell), 'Switch In', 'Switch Out', 'SIP', 'Dividend Reinvestment', or 'Transfer'. Drives transaction processing logic, gain/loss calculation, and regulatory reporting classificat"
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "total_market_value",
+    "display_name": "Total Market Value (AUM)",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Sum of market_value across all selected holdings for a given scope and value_date. Represents total AUM."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "total_invested_value",
+    "display_name": "Total Invested Value",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Sum of total_cost - the total capital deployed by the client."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "total_unrealized_gain",
+    "display_name": "Total Unrealized Gain / Loss",
+    "type": "Metric",
+    "subtype": "sum",
+    "description": "Sum of unrealized_gain_loss across all holdings for the given scope and value_date."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "portfolio_return_pct",
+    "display_name": "Portfolio Return %",
+    "type": "Metric",
+    "subtype": "custom",
+    "description": "Overall portfolio return as percentage of total invested value."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "aum_by_client_by_month",
+    "display_name": "AUM by Client by Month",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": "Monthly portfolio value per client - the core time-series AUM view."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "unrealized_gain_by_client",
+    "display_name": "Unrealized Gain by Client",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": "Total unrealized P&L per client for a given value_date."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "unrealized_gain_pct",
+    "display_name": "Unrealized Gain %",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Unrealized gain/loss expressed as a percentage of total_cost. Positive = profit, negative = loss. Formula: (market_value - total_cost) / total_cost x 100."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "valuation_month",
+    "display_name": "Valuation Month",
+    "type": "Derived Attribute",
+    "subtype": "extraction",
+    "description": "Calendar month derived from value_date (format YYYY-MM). Used to group valuation records by month for time-series and month-over-month comparisons."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "gain_loss_flag",
+    "display_name": "Gain / Loss Flag",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Classifies each holding snapshot as Gain, Loss, or Breakeven based on unrealized_gain_loss."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "client_id",
+    "display_name": "Client ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Foreign key to dim_client_master. Identifies the client whose portfolio is being valued."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "cost_value",
+    "display_name": "Cost Value",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Total acquisition cost of this holding (holding x per_unit_cost). Represents the capital deployed by the client in this instrument."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "market_value",
+    "display_name": "Market Value",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Total current market value of this holding as of value_date (holding x market_rate). This is the primary AUM field - summing market_value across all holdings gives total client AUM."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "unrealized_pnl",
+    "display_name": "Unrealized Pnl",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Unrealized profit or loss on this holding as of value_date (market_value minus total_cost). Positive = holding is in profit; negative = holding is in loss. Reflects the gain or loss if the position were liquidated at value_date prices."
+  },
+  {
+    "atom": "Client Valuations",
+    "name": "valuation_date",
+    "display_name": "Valuation Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "The date on which this valuation snapshot was taken. Typically the last trading day of the month. The latest value_date per client x product represents the current holding valuation."
+  },
+  {
+    "atom": "Company Master",
+    "name": "company_count",
+    "display_name": "Company Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total number of listed equity companies in the registry."
+  },
+  {
+    "atom": "Company Master",
+    "name": "company_count_by_sector",
+    "display_name": "Company Count by Sector",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Number of companies in each industry sector."
+  },
+  {
+    "atom": "Company Master",
+    "name": "company_count_by_mcap",
+    "display_name": "Company Count by Market Cap",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Distribution of companies across Large Cap, Mid Cap, Small Cap."
+  },
+  {
+    "atom": "Company Master",
+    "name": "company_count_by_sector",
+    "display_name": "Company Count by Sector",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "How many companies we hold per industry sector."
+  },
+  {
+    "atom": "Company Master",
+    "name": "company_count_by_mcap",
+    "display_name": "Company Count by Market Cap",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Distribution across Large Cap, Mid Cap, Small Cap."
+  },
+  {
+    "atom": "Company Master",
+    "name": "company_count_by_bse_group",
+    "display_name": "Company Count by BSE Group",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "How many companies are in each BSE classification group."
+  },
+  {
+    "atom": "Company Master",
+    "name": "is_large_cap",
+    "display_name": "Is Large Cap",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Boolean flag — whether this is a SEBI Large Cap company."
+  },
+  {
+    "atom": "Company Master",
+    "name": "is_nifty50_eligible",
+    "display_name": "Is Nifty 50 Eligible",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "BSE Group A Large Cap companies — proxy for Nifty 50 constituent eligibility."
+  },
+  {
+    "atom": "Company Master",
+    "name": "bse_group",
+    "display_name": "BSE Group",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "BSE classification group. Group A = most liquid large companies. Enum A/B/T/XT/Z; use to filter by liquidity/governance tier (Group A = highest)."
+  },
+  {
+    "atom": "Company Master",
+    "name": "co_code",
+    "display_name": "Company Code",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Internal CMOT company identifier. Primary key. Used as co_code in dim_product_unified_cat for equity products."
+  },
+  {
+    "atom": "Company Master",
+    "name": "mcap_type",
+    "display_name": "Market Cap Type",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "SEBI-defined market cap classification — Large Cap, Mid Cap, or Small Cap."
+  },
+  {
+    "atom": "Company Master",
+    "name": "sector_name",
+    "display_name": "Sector",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Industry sector of the company. Used for sector exposure and concentration analysis."
+  },
+  {
+    "atom": "Dim Master Enums",
+    "name": "enum_category_count",
+    "display_name": "Enum Category Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total number of distinct enum categories."
+  },
+  {
+    "atom": "Dim Master Enums",
+    "name": "values_per_category",
+    "display_name": "Values per Category",
+    "type": "Metric",
+    "subtype": "count",
+    "description": "Number of allowed values per enum category."
+  },
+  {
+    "atom": "Dim Master Enums",
+    "name": "all_categories",
+    "display_name": "All Enum Categories",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "All available enum categories with their value counts."
+  },
+  {
+    "atom": "Dim Master Enums",
+    "name": "master_category_name",
+    "display_name": "Master Category Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Human-readable name of the category group (e.g. 'Account' for ACCOUNT_TYPE)."
+  },
+  {
+    "atom": "Dim Master Enums",
+    "name": "name",
+    "display_name": "Value",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "The actual allowed value for the given type_key/category. This is the value that appears in fact/dimension tables."
+  },
+  {
+    "atom": "Dim Master Enums",
+    "name": "type_key",
+    "display_name": "Type Key",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "The category this value belongs to. Used as the primary filter when looking up allowed values. Examples: ACCOUNT_TYPE, CLIENT_TIER, RISK_PROFILE, KYC_STATUS."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "active_banker_count",
+    "display_name": "Active Banker Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total number of active bankers/advisors."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "banker_count_by_sublob",
+    "display_name": "Banker Count by Sub-LOB",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Number of bankers in each service vertical."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "banker_count_by_designation",
+    "display_name": "Banker Count by Designation",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Distribution of bankers across job titles."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "banker_count_by_sublob",
+    "display_name": "Banker Count by Sub-LOB",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "How many bankers are in each service vertical."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "avg_tenure_by_designation",
+    "display_name": "Average Tenure by Designation",
+    "type": "Aggregation",
+    "subtype": "avg",
+    "description": "Average years of service grouped by designation level."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "tenure_years",
+    "display_name": "Tenure (Years)",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Number of years the banker has been employed at Neo Wealth, calculated from date of joining."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "tenure_band",
+    "display_name": "Tenure Band",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Bucketed tenure for segmentation — Junior (<3 yrs), Mid (3-7 yrs), Senior (7+ yrs)."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "is_team_lead",
+    "display_name": "Is Team Lead",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Whether this banker is a team lead (reporting_manager_code is NULL — top of hierarchy)."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "designation",
+    "display_name": "Designation",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Job designation/title of the employee (e.g. Senior RM, RM, RM). Use for seniority grouping and headcount-by-title."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "doj",
+    "display_name": "Date of Joining",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Date the employee joined Neo Wealth. Used for tenure calculations."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "id",
+    "display_name": "employee ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Unique numeric identifier for each banker/employee. Used as emp_id in all fact tables (client_revenue, client_net_new_money, client_aum)."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "is_active",
+    "display_name": "Is Active",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Boolean flag indicating whether this record is currently active and operational. Active records (True) are included in standard queries, reports, and downstream processing. Inactive records (False) are retained for historical reference and audit trails but excluded from live workflows."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "is_deleted",
+    "display_name": "Is Deleted",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Soft-delete flag that marks a record as logically removed without physically deleting it from the database. When True, the record is hidden from standard queries but preserved for audit, compliance, and data recovery purposes. Supports regulatory requirements to retain historical data."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "reporting_manager_code",
+    "display_name": "Reporting Manager Code",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Employee code of the reporting manager. Self-referential — joins back to 'code' in this same table. NULL for top-level (e.g. Senior VP)."
+  },
+  {
+    "atom": "Employee Profile",
+    "name": "sublob_name",
+    "display_name": "Sub-LOB Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "The sub-LOB this banker specializes in (Private Wealth or Family Office)."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "latest_closing_price",
+    "display_name": "Latest Closing Price",
+    "type": "Metric",
+    "subtype": "max",
+    "description": "Most recent closing price per stock."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "avg_daily_volume",
+    "display_name": "Average Daily Traded Volume",
+    "type": "Metric",
+    "subtype": "avg",
+    "description": "Average daily traded volume per stock over a period."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "price_trend_by_stock",
+    "display_name": "Daily Price Trend per Stock",
+    "type": "Aggregation",
+    "subtype": "max",
+    "description": "Raw time-series of closing prices per stock for charting."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "avg_monthly_close_by_stock",
+    "display_name": "Average Monthly Close per Stock",
+    "type": "Aggregation",
+    "subtype": "avg",
+    "description": "Monthly average closing price per stock."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "latest_price_all_stocks",
+    "display_name": "Latest Price Snapshot — All Stocks",
+    "type": "Aggregation",
+    "subtype": "max",
+    "description": "Most recent closing price for each stock in the universe."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "total_daily_market_volume",
+    "display_name": "Total Market Volume by Date",
+    "type": "Aggregation",
+    "subtype": "sum",
+    "description": "Sum of traded volume across all stocks per trading day."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "price_date_month",
+    "display_name": "Price Month",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Calendar month of the price date for monthly grouping."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "is_latest_price",
+    "display_name": "Is Latest Price",
+    "type": "Derived Attribute",
+    "subtype": "window",
+    "description": "Whether this record is the most recent price for this stock. Window function over co_code."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "daily_return_pct",
+    "display_name": "Daily Return %",
+    "type": "Derived Attribute",
+    "subtype": "window",
+    "description": "Day-over-day percentage change in closing price."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "intraday_range",
+    "display_name": "Intraday Range",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Difference between day high and day low — measure of intraday volatility."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "week_52_high",
+    "display_name": "52-Week High",
+    "type": "Derived Attribute",
+    "subtype": "window",
+    "description": "Maximum closing price over the last 252 trading days (approx 1 year)."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "week_52_low",
+    "display_name": "52-Week Low",
+    "type": "Derived Attribute",
+    "subtype": "window",
+    "description": "Minimum closing price over the last 252 trading days (approx 1 year)."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "co_code",
+    "display_name": "Company Code",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "CMOT numeric identifier for the company. Part of composite key. Joins to dim_cmot_company_mstr."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "company_name",
+    "display_name": "Company Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Full name of the listed company (denormalized from company master)."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "isin",
+    "display_name": "ISIN",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "ISIN of the equity stock. Joins to dim_product_unified_cat and client_holdings."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "nav_close",
+    "display_name": "Closing Price",
+    "type": "Raw Column (used in measure)",
+    "subtype": "measure",
+    "description": "End-of-day closing price. This is the authoritative market price used to compute current_value and unrealized_gain in client_holdings."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "nav_date",
+    "display_name": "Price Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "The trading date for this price record. Part of composite key."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "nav_high",
+    "display_name": "Day High",
+    "type": "Raw Column (used in measure)",
+    "subtype": "measure",
+    "description": "Highest traded price of the stock during the day."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "nav_low",
+    "display_name": "Day Low",
+    "type": "Raw Column (used in measure)",
+    "subtype": "measure",
+    "description": "Lowest traded price of the stock during the day."
+  },
+  {
+    "atom": "Equity Price Latest",
+    "name": "nav_volume",
+    "display_name": "Traded Volume",
+    "type": "Raw Column (used in measure)",
+    "subtype": "measure",
+    "description": "Total number of shares traded during the day."
+  },
+  {
+    "atom": "Line of Business Hierarchy",
+    "name": "lob_count",
+    "display_name": "LOB Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total distinct Lines of Business."
+  },
+  {
+    "atom": "Line of Business Hierarchy",
+    "name": "sub_lob_count",
+    "display_name": "Sub-LOB Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total distinct Sub-LOBs."
+  },
+  {
+    "atom": "Line of Business Hierarchy",
+    "name": "sub_lob_by_lob",
+    "display_name": "Sub-LOBs by LOB",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "List of sub-LOBs grouped under each LOB."
+  },
+  {
+    "atom": "Line of Business Hierarchy",
+    "name": "lob_sub_lob_label",
+    "display_name": "LOB > Sub-LOB",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Concatenated display label for LOB breadcrumb in dashboards."
+  },
+  {
+    "atom": "Line of Business Hierarchy",
+    "name": "lob_id",
+    "display_name": "LOB ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Numeric identifier for the Line of Business. FK target for lob_id in dim_client_master and client_revenue."
+  },
+  {
+    "atom": "Line of Business Hierarchy",
+    "name": "lob_name",
+    "display_name": "LOB Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Human-readable name of the Line of Business."
+  },
+  {
+    "atom": "Line of Business Hierarchy",
+    "name": "sub_lob_id",
+    "display_name": "Sub-LOB ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Numeric identifier for the Sub-LOB. Primary key at row level. FK target for sub_lob_id in dim_client_master."
+  },
+  {
+    "atom": "Line of Business Hierarchy",
+    "name": "sub_lob_name",
+    "display_name": "Sub-LOB Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Human-readable name of the Sub-LOB."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "fund_count",
+    "display_name": "Fund Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total number of MF schemes in the registry."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "avg_expense_ratio",
+    "display_name": "Average Expense Ratio",
+    "type": "Metric",
+    "subtype": "avg",
+    "description": "Average TER across all funds."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "fund_count_by_amc",
+    "display_name": "Fund Count by AMC",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Number of funds managed by each AMC."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "fund_count_by_category",
+    "display_name": "Fund Count by Category",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Distribution of funds across SEBI categories."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "fund_count_by_category",
+    "display_name": "Fund Count by Category",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Number of funds per SEBI category."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "fund_count_by_amc",
+    "display_name": "Fund Count by AMC",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "How many schemes each AMC manages."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "avg_expense_ratio_by_category",
+    "display_name": "Avg Expense Ratio by Category",
+    "type": "Aggregation",
+    "subtype": "avg",
+    "description": "Average TER per fund category."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "avg_equity_alloc_by_category",
+    "display_name": "Avg Equity Allocation by Category",
+    "type": "Aggregation",
+    "subtype": "avg",
+    "description": "Average equity allocation percentage per fund category."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "fund_age_years",
+    "display_name": "Fund Age (Years)",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "How old the fund is from inception date to today."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "is_low_cost_fund",
+    "display_name": "Is Low Cost Fund",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Funds with expense ratio below 0.75% — generally index/direct plan funds."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "equity_tilt",
+    "display_name": "Equity Tilt",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Classifies fund by equity allocation — High (>75%), Balanced (40-75%), Low (<40%)."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "amc_name",
+    "display_name": "AMC Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Name of the Asset Management Company managing this fund."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "asset_alloc_equity_net",
+    "display_name": "Equity Allocation %",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Percentage of fund assets allocated to equity. Used for risk profiling and asset allocation analysis."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "category",
+    "display_name": "Fund Category",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "SEBI-defined fund category (e.g. Large Cap, Mid Cap, Liquid, Debt)."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "expense_ratio",
+    "display_name": "Expense Ratio",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Annual expense ratio (Total Expense Ratio) of the fund as a percentage. Lower is generally better for investors."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "fund_id",
+    "display_name": "Fund ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Unique internal identifier for each MF scheme. Primary key. Used to join to dim_mf_nav_history and dim_mf_returns_history."
+  },
+  {
+    "atom": "MF Fund Complete",
+    "name": "inception_date",
+    "display_name": "Inception Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Date the fund scheme was launched."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "latest_nav",
+    "display_name": "Latest NAV",
+    "type": "Metric",
+    "subtype": "custom",
+    "description": "Most recent NAV value for a fund."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "nav_by_fund_and_date",
+    "display_name": "NAV by Fund and Date",
+    "type": "Aggregation",
+    "subtype": "select",
+    "description": "NAV values per fund per date — the raw time series."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "avg_nav_by_category_by_month",
+    "display_name": "Avg NAV by Category by Month",
+    "type": "Aggregation",
+    "subtype": "avg",
+    "description": "Average NAV per fund category per month."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "nav_month",
+    "display_name": "NAV Month",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Year-Month of the NAV record for monthly grouping."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "is_latest_nav",
+    "display_name": "Is Latest NAV",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Whether this row is the most recent NAV for this fund."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "nav_return_since_start",
+    "display_name": "Return Since Inception Date",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Percentage NAV growth from the first available date in series to the current row. Requires self-join on MIN(nav_date) per fund."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "category",
+    "display_name": "Fund Category",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "SEBI/Morningstar category of the fund (e.g. Large Cap, Mid Cap, Flexi Cap). Use to filter/group funds by type; enum of fund categories."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "fund_name",
+    "display_name": "Fund Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Full name of the MF scheme. Denormalised for search and display."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "mstar_id",
+    "display_name": "Morningstar ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Morningstar unique fund identifier. Primary join key to dim_mf_fund_complete."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "nav_date",
+    "display_name": "NAV Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Date for which this NAV is recorded. Primary time dimension. Non-contiguous (no weekends/holidays); group/filter by this for trends; latest NAV = MAX(nav_date) per fund."
+  },
+  {
+    "atom": "Mutual Fund NAV History",
+    "name": "nav_value",
+    "display_name": "NAV Value",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "NAV of the fund per unit on nav_date in INR. Primary measure for valuation and returns; compute period return from NAV between two nav_date values."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "avg_category_return_1y",
+    "display_name": "Average Category 1Y Return",
+    "type": "Metric",
+    "subtype": "avg",
+    "description": "Average 1-year trailing return for all funds in a category."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "top_performing_fund_1y",
+    "display_name": "Top Fund 1Y Return",
+    "type": "Metric",
+    "subtype": "max",
+    "description": "Fund with the highest 1-year return as of the latest snapshot."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "avg_return_by_category",
+    "display_name": "Average Return by Fund Category",
+    "type": "Aggregation",
+    "subtype": "avg",
+    "description": "Average trailing returns grouped by fund category."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "fund_performance_trend",
+    "display_name": "Fund 1Y Return Trend Over Time",
+    "type": "Aggregation",
+    "subtype": "max",
+    "description": "How a fund's 1-year return has changed month-over-month."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "top_3_funds_by_category_1y",
+    "display_name": "Top 3 Funds by Category (1Y Return)",
+    "type": "Aggregation",
+    "subtype": "rank_window",
+    "description": "Rank funds within each category by 1-year return and pick top 3."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "return_month",
+    "display_name": "Return Month",
+    "type": "Derived Attribute",
+    "subtype": "transformation",
+    "description": "Calendar month of the return date for monthly grouping."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "is_latest_return",
+    "display_name": "Is Latest Return Snapshot",
+    "type": "Derived Attribute",
+    "subtype": "window",
+    "description": "Whether this is the most recent return record for this fund."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "return_1y_band",
+    "display_name": "1Y Return Band",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Bucketed 1-year return for performance segmentation."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "category",
+    "display_name": "Fund Category",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "SEBI/Morningstar category of the fund (e.g. Large Cap, Mid Cap, Flexi Cap). Use to filter/group funds and compute category-average returns; enum of fund categories."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "fund_id",
+    "display_name": "Fund ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Internal numeric identifier for the fund. Part of composite key. Matches fund_id in dim_mf_fund_complete."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "fund_name",
+    "display_name": "Fund Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Full name of the mutual fund scheme (denormalized for convenience)."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "return_1y",
+    "display_name": "1 Year Return %",
+    "type": "Raw Column (used in measure)",
+    "subtype": "measure",
+    "description": "Trailing 1-year return percentage as of return_date. Most commonly used performance metric."
+  },
+  {
+    "atom": "Mutual Fund Returns History",
+    "name": "return_date",
+    "display_name": "Return As On Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "The date as of which the trailing returns are calculated. Monthly snapshots. Part of composite key."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "instrument_count_by_rating",
+    "display_name": "Instrument Count by Rating",
+    "type": "Metric",
+    "subtype": "count",
+    "description": "Number of instruments per credit rating."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "avg_coupon_rate",
+    "display_name": "Avg Coupon Rate",
+    "type": "Metric",
+    "subtype": "avg",
+    "description": "Average coupon rate across all rated instruments."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "instruments_by_rating_bucket",
+    "display_name": "Instruments by Rating Bucket",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Count of instruments per rating bucket."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "instruments_by_maturity_bucket",
+    "display_name": "Instruments by Maturity Bucket",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Count of instruments per maturity bucket."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "days_to_maturity",
+    "display_name": "Days to Maturity",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Number of calendar days remaining until the instrument matures."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "maturity_bucket",
+    "display_name": "Maturity Bucket",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Classifies instrument by time to maturity for maturity ladder analysis."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "is_investment_grade",
+    "display_name": "Is Investment Grade",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Whether the instrument is rated investment grade (BBB- or better)."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "rating_bucket",
+    "display_name": "Rating Bucket",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Groups ratings into broad credit quality tiers."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "credit_rating",
+    "display_name": "Credit Rating",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Composite/primary credit rating for the instrument. Used for filtering and risk bucketing."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "interest_rate",
+    "display_name": "Interest Rate (Coupon %)",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Annual coupon/interest rate as a percentage. Used for fixed income income analysis."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "isin",
+    "display_name": "ISIN",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "ISIN of the fixed income instrument. Primary key and canonical join key."
+  },
+  {
+    "atom": "Product Credit Rating",
+    "name": "maturity_date",
+    "display_name": "Maturity Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Date on which the instrument matures and principal is repaid."
+  },
+  {
+    "atom": "Product Segment Map",
+    "name": "product_count_by_segment",
+    "display_name": "Product Count by Segment",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Number of distinct products in each sector segment."
+  },
+  {
+    "atom": "Product Segment Map",
+    "name": "segment_count",
+    "display_name": "Total Segment Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total number of distinct segments in the mapping table."
+  },
+  {
+    "atom": "Product Segment Map",
+    "name": "product_count_by_segment",
+    "display_name": "Products per Segment",
+    "type": "Aggregation",
+    "subtype": "count_distinct",
+    "description": "How many products are mapped to each segment."
+  },
+  {
+    "atom": "Product Segment Map",
+    "name": "product_count_by_segment_group",
+    "display_name": "Products per Macro Segment Group",
+    "type": "Aggregation",
+    "subtype": "count_distinct",
+    "description": "Products grouped into Cyclical, Defensive, Financial macro themes."
+  },
+  {
+    "atom": "Product Segment Map",
+    "name": "segment_group",
+    "display_name": "Segment Group",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Broad grouping of segments into macro themes: Cyclical, Defensive, or Financial."
+  },
+  {
+    "atom": "Product Segment Map",
+    "name": "product_id",
+    "display_name": "Product ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Foreign key to dim_product_unified_cat. Identifies which product this segment mapping applies to (e.g. PROD_EQ_001)."
+  },
+  {
+    "atom": "Product Segment Map",
+    "name": "segment_id",
+    "display_name": "Segment ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Numeric identifier for the segment/sector category."
+  },
+  {
+    "atom": "Product Segment Map",
+    "name": "segment_name",
+    "display_name": "Segment Name",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Human-readable name of the market segment or industry sector (e.g. Information Technology, Energy, BFSI)."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "product_count",
+    "display_name": "Product Count",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Total number of distinct products in the catalogue."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "product_count_by_asset_class",
+    "display_name": "Product Count by Asset Class",
+    "type": "Metric",
+    "subtype": "count_distinct",
+    "description": "Number of products in each asset class."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "avg_interest_rate",
+    "display_name": "Average Interest Rate",
+    "type": "Metric",
+    "subtype": "avg",
+    "description": "Average coupon/interest rate across fixed income products."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "product_count_by_type",
+    "display_name": "Product Count by Type",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "How many products in each product type."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "product_count_by_asset_class",
+    "display_name": "Product Count by Asset Class",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Distribution of products across Equity, Fixed Income, Alternatives."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "product_count_by_sector",
+    "display_name": "Product Count by Sector",
+    "type": "Aggregation",
+    "subtype": "count",
+    "description": "Number of products per industry sector."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "avg_interest_by_product_type",
+    "display_name": "Average Interest Rate by Product Type",
+    "type": "Aggregation",
+    "subtype": "avg",
+    "description": "Average coupon rate for bonds and FDs grouped by type."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "is_fixed_income",
+    "display_name": "Is Fixed Income",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Whether this product is a fixed income instrument (Bond or FD)."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "is_alternative",
+    "display_name": "Is Alternative Investment",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Whether this product falls under Alternatives (AIF, PMS, REIT, InvIT)."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "days_to_maturity",
+    "display_name": "Days to Maturity",
+    "type": "Derived Attribute",
+    "subtype": "calculation",
+    "description": "Number of days remaining until this product matures. NULL for open-ended products."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "maturity_bucket",
+    "display_name": "Maturity Bucket",
+    "type": "Derived Attribute",
+    "subtype": "classification",
+    "description": "Classifies fixed income products by time to maturity — Short (<1Y), Medium (1-3Y), Long (3Y+)."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "asset_class",
+    "display_name": "Asset Class",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Broad asset class grouping — Equity, Fixed Income, Alternatives, Real Estate."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "interest_rate",
+    "display_name": "Interest Rate",
+    "type": "Raw Column (used in measure)",
+    "subtype": "fact",
+    "description": "Coupon/interest rate for bonds and FDs. NULL for equity products."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "maturity_date",
+    "display_name": "Maturity Date",
+    "type": "Raw Column (used in measure)",
+    "subtype": "time_dimension",
+    "description": "Maturity/redemption date for bonds and FDs. NULL for open-ended products."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "product_id",
+    "display_name": "Product ID",
+    "type": "Raw Column (used in measure)",
+    "subtype": "identifier",
+    "description": "Internal Neo Wealth product identifier. Primary key used as FK in client_holdings, client_transactions, client_realized_gain."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "product_type",
+    "display_name": "Product Type",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Top-level product classification. Primary filter for asset class queries. Enum (Direct Equity, Mutual Funds, Bonds, FD, AIF, PMS, REIT, InvIT); use to filter/group by product class."
+  },
+  {
+    "atom": "Unified Product Catalog",
+    "name": "sector",
+    "display_name": "Sector",
+    "type": "Raw Column (used in measure)",
+    "subtype": "dimension",
+    "description": "Industry sector of the company. Used for sector exposure analysis. Populated for equities/bonds; use to group concentration and exposure."
+  }
+]

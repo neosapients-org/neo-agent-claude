@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>__AGENT_NAME__</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Visual language ported from the Ava (vic-cortex-assistant) frontend so the two
+   variants and Ava read as one family. Tokens only — nothing below hardcodes a
+   colour except the two variant accents, which carry meaning rather than theme.
+   The webfont link is best-effort: this runs on localhost and must degrade to the
+   system UI font rather than to Times if there is no network. */
+:root{
+  --bg:#08090d; --bg-elev:#0e0e15; --bg-elev-2:#14151c; --bg-sidebar:#0a0b10;
+  --bg-input:#14151c; --bg-hover:rgba(255,255,255,.05); --bg-userbubble:#1c1d27;
+  --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
+  --text:#f4f4f5; --text-muted:#a1a1aa; --text-dim:#8b8b9a; --text-faint:#52525b;
+  --accent:#8b5cf6; --accent-2:#6366f1; --accent-soft:rgba(139,92,246,.18);
+  --shadow:0 12px 40px rgba(0,0,0,.55);
+  --ok:#34d399; --warn:#fbbf24; --err:#f87171;
+}
+/* The one thing that differs per variant: an accent that makes it obvious at a
+   glance which agent you are talking to, so two side-by-side windows can't be
+   confused. */
+:root[data-variant="cortex"]{ --accent:#8b5cf6; --accent-2:#6366f1; --accent-soft:rgba(139,92,246,.18); }
+:root[data-variant="claude"]{ --accent:#d97757; --accent-2:#c2410c; --accent-soft:rgba(217,119,87,.18); }
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg); color:var(--text); height:100vh; display:flex; overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+aside{
+  width:260px; background:var(--bg-sidebar); border-right:1px solid var(--border);
+  display:flex; flex-direction:column; padding:20px 16px; flex-shrink:0;
+}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+     display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff;font-family:'Outfit',sans-serif}
+.brand h1{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;letter-spacing:-.2px}
+.sub{font-size:11.5px;color:var(--text-faint);margin:2px 0 20px 40px}
+.meta{margin-top:auto;font-size:11px;color:var(--text-faint);line-height:1.9;border-top:1px solid var(--border);padding-top:14px}
+.meta b{color:var(--text-dim);font-weight:500}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--accent-soft);
+      color:var(--accent);font-size:10.5px;font-weight:600;letter-spacing:.3px}
+
+main{flex:1;display:flex;flex-direction:column;min-width:0}
+#log{flex:1;overflow-y:auto;padding:32px 0}
+.wrap{max-width:760px;margin:0 auto;padding:0 28px}
+.msg{margin-bottom:26px;display:flex;flex-direction:column;gap:7px}
+.who{font-size:11px;font-weight:600;color:var(--text-faint);letter-spacing:.5px;text-transform:uppercase}
+.bubble{background:var(--bg-userbubble);padding:12px 16px;border-radius:14px;align-self:flex-end;
+        max-width:82%;font-size:14.5px;line-height:1.6}
+.msg.user{align-items:flex-end}
+.answer{font-size:15px;line-height:1.75;white-space:pre-wrap;color:var(--text)}
+.answer.streaming::after{content:'▍';color:var(--accent);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* The step trail is the point of this UI: it shows what the agent DID, not just
+   what it said — which is what makes the two variants comparable by eye. */
+.steps{border-left:2px solid var(--border);margin:2px 0 6px;padding:2px 0 2px 14px;
+       display:flex;flex-direction:column;gap:6px}
+.step{font-size:12px;color:var(--text-dim);line-height:1.5;display:flex;gap:8px}
+.step .n{color:var(--accent);font-weight:600;flex-shrink:0;font-size:11px;
+         font-family:ui-monospace,SFMono-Regular,Menlo,monospace;padding-top:1px}
+.step .pending{color:var(--text-faint)}
+.answer strong{color:#fff;font-weight:650}
+.answer code{background:var(--bg-elev-2);border:1px solid var(--border);border-radius:5px;padding:1px 6px;font-size:12.5px;font-family:ui-monospace,Menlo,monospace}
+.step code{background:var(--bg-elev-2);border:1px solid var(--border);border-radius:5px;
+           padding:1px 6px;font-size:11px;color:var(--text-muted);
+           font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}
+.foot{font-size:11px;color:var(--text-faint);display:flex;gap:14px;flex-wrap:wrap}
+.err{color:var(--err);font-size:13.5px;background:rgba(248,113,113,.08);
+     border:1px solid rgba(248,113,113,.25);border-radius:10px;padding:11px 14px}
+
+.composer{border-top:1px solid var(--border);background:var(--bg);padding:16px 0 22px}
+.box{max-width:760px;margin:0 auto;padding:0 28px;display:flex;gap:10px}
+textarea{
+  flex:1;background:var(--bg-input);border:1px solid var(--border-strong);border-radius:14px;
+  padding:13px 16px;color:var(--text);font-family:inherit;font-size:14.5px;resize:none;
+  min-height:50px;max-height:170px;line-height:1.5;outline:none;
+}
+textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+button{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));border:0;border-radius:14px;
+  color:#fff;padding:0 22px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;
+}
+button:disabled{opacity:.4;cursor:not-allowed}
+.hint{max-width:760px;margin:9px auto 0;padding:0 28px;font-size:11px;color:var(--text-faint)}
+.empty{text-align:center;color:var(--text-faint);margin-top:16vh}
+.empty h2{font-family:'Outfit',sans-serif;font-size:22px;color:var(--text-muted);font-weight:600;margin-bottom:8px}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.chip{background:var(--bg-elev);border:1px solid var(--border);border-radius:999px;
+      padding:7px 15px;font-size:12.5px;color:var(--text-muted);cursor:pointer}
+.chip:hover{border-color:var(--accent);color:var(--text)}
+#log::-webkit-scrollbar{width:9px}
+#log::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:9px}
+</style>
+</head>
+<body>
+<aside>
+  <div class="brand"><div class="dot" id="initial">C</div><h1 id="name">__AGENT_NAME__</h1></div>
+  <div class="sub" id="tagline">—</div>
+  <div class="meta">
+    <div><b>data path</b> &nbsp;<span class="pill" id="path">—</span></div>
+    <div><b>model</b> &nbsp;<span id="model">—</span></div>
+    <div><b>traces</b> &nbsp;<span id="svc">—</span></div>
+    <div><b>last turn</b> &nbsp;<span id="lastms">—</span></div>
+  </div>
+</aside>
+
+<main>
+  <div id="log"><div class="wrap">
+    <div class="empty" id="empty">
+      <h2 id="greet">Ask about the portfolio data</h2>
+      <div style="font-size:13px" id="greetsub">—</div>
+      <div class="chips">
+        <div class="chip">Which client has the highest total portfolio value?</div>
+        <div class="chip">How many clients are there in total?</div>
+        <div class="chip">Show the AUM breakdown by client tier</div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="composer">
+    <div class="box">
+      <textarea id="q" rows="1" placeholder="Ask a question…"></textarea>
+      <button id="send">Send</button>
+    </div>
+    <div class="hint">Enter to send · Shift+Enter for a new line</div>
+  </div>
+</main>
+
+<script>
+const CFG = window.__AGENT_CONFIG__ || {};
+const VARIANT = CFG.variant || "cortex";
+document.documentElement.dataset.variant = VARIANT;
+document.getElementById("name").textContent    = CFG.name || "agent";
+document.getElementById("initial").textContent = (CFG.name || "a").replace("agent-","")[0].toUpperCase();
+document.getElementById("tagline").textContent = CFG.tagline || "";
+document.getElementById("path").textContent    = CFG.dataPath || "—";
+document.getElementById("model").textContent   = CFG.model || "—";
+document.getElementById("svc").textContent     = CFG.service || "—";
+document.getElementById("greetsub").textContent= CFG.tagline || "";
+document.title = (CFG.name || "agent");
+
+const log = document.getElementById("log").firstElementChild;
+const q = document.getElementById("q"), send = document.getElementById("send");
+let busy = false;
+
+q.addEventListener("input", () => { q.style.height="auto"; q.style.height=Math.min(q.scrollHeight,170)+"px"; });
+q.addEventListener("keydown", e => { if (e.key==="Enter" && !e.shiftKey) { e.preventDefault(); ask(); } });
+send.onclick = ask;
+document.querySelectorAll(".chip").forEach(c =>
+  c.onclick = () => { q.value = c.textContent; ask(); });
+
+/* Minimal markdown. The text comes from a model summarising database rows, so it is
+   ESCAPED FIRST and only then given inline formatting — anything else would let a value
+   stored in the database execute as markup in this page. */
+function render(md) {
+  const esc = md.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  return esc
+    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[\s(])\*([^*\n]+)\*/g, '$1<em>$2</em>')
+    .replace(/^\s*[-*]\s+(.*)$/gm, '• $1');
+}
+
+function el(cls, parent, text) {
+  const d = document.createElement("div");
+  d.className = cls; if (text !== undefined) d.textContent = text;
+  parent.appendChild(d); return d;
+}
+
+async function ask() {
+  const text = q.value.trim();
+  if (!text || busy) return;
+  busy = true; send.disabled = true; q.value = ""; q.style.height = "auto";
+  const empty = document.getElementById("empty"); if (empty) empty.remove();
+
+  const u = el("msg user", log); el("who", u, "You"); el("bubble", u, text);
+  const a = el("msg", log); el("who", a, CFG.name || "agent");
+  const steps = el("steps", a);
+  const answer = el("answer streaming", a, "");
+  const foot = el("foot", a);
+  const seen = new Set();
+  let raw = "";
+  log.parentElement.scrollTop = log.parentElement.scrollHeight;
+
+  const t0 = performance.now();
+  try {
+    const res = await fetch("/chat/stream", {
+      method: "POST", headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ message: text, user_id: "ui-user" }),
+    });
+    if (!res.ok) throw new Error(`agent returned HTTP ${res.status}`);
+
+    // Manual SSE parse: EventSource cannot POST, and the agent needs a body.
+    const reader = res.body.getReader(), dec = new TextDecoder();
+    let buf = "", ev = null;
+    while (true) {
+      const {done, value} = await reader.read(); if (done) break;
+      buf += dec.decode(value, {stream:true});
+      const lines = buf.split("\n"); buf = lines.pop();
+      for (const line of lines) {
+        if (line.startsWith("event:")) { ev = line.slice(6).trim(); continue; }
+        if (!line.startsWith("data:")) continue;
+        let d = {}; try { d = JSON.parse(line.slice(5).trim()); } catch { continue; }
+
+        if (ev === "token" && d.content) {
+          raw += d.content;
+          answer.innerHTML = render(raw);
+          log.parentElement.scrollTop = log.parentElement.scrollHeight;
+        } else if (ev === "tool_start") {
+          // A step with no narration yet — show the stage so the user sees progress
+          // immediately rather than waiting for the first detail line.
+          if (!seen.has(d.tool)) {
+            seen.add(d.tool);
+            const s = el("step", steps);
+            el("n", s, (d.tool || "").replace(/_/g, " "));
+            const body = document.createElement("span");
+            body.className = "pending"; body.textContent = "…";
+            body.dataset.tool = d.tool; s.appendChild(body);
+          }
+        } else if (ev === "step_detail" && d.text) {
+          // The agent emits {tool, text}. Fill the stage's pending line if it is still
+          // empty, otherwise append another line under the same stage.
+          const pending = steps.querySelector(`.pending[data-tool="${d.tool}"]`);
+          if (pending) { pending.textContent = d.text; pending.classList.remove("pending"); }
+          else {
+            const s = el("step", steps);
+            el("n", s, (d.tool || "").replace(/_/g, " "));
+            const body = document.createElement("span");
+            body.textContent = d.text; s.appendChild(body);
+          }
+          log.parentElement.scrollTop = log.parentElement.scrollHeight;
+        } else if (ev === "latency" && d.total_ms) {
+          foot.textContent = `${d.total_ms} ms`;
+          document.getElementById("lastms").textContent = `${d.total_ms} ms`;
+        } else if (ev === "error") {
+          el("err", a, d.message || "The agent reported an error.");
+        }
+      }
+    }
+  } catch (e) {
+    el("err", a, `${e.message}. Is the agent still running?`);
+  } finally {
+    answer.classList.remove("streaming");
+    if (!foot.textContent) {
+      const ms = Math.round(performance.now() - t0);
+      foot.textContent = `${ms} ms`;
+      document.getElementById("lastms").textContent = `${ms} ms`;
+    }
+    busy = false; send.disabled = false; q.focus();
+  }
+}
+q.focus();
+</script>
+</body>
+</html>

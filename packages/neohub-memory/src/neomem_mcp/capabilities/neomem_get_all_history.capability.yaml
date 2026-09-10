@@ -1,0 +1,29 @@
+name: memory.get_all_history
+mcp_tool_name: neomem_get_all_history
+required_package: neo_memory_hub
+connector: high_level
+method: get_all_history
+description: |
+  Retrieve the full audit history across all memories. Returns a paginated
+  list of history events (ADD, UPDATE, DELETE, SEARCH) with timestamps,
+  memory IDs, and event details. Useful for monitoring, compliance, and
+  debugging. Optionally filter by event type.
+  Returns: list of history event dicts.
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    limit:
+      type: integer
+      description: "Maximum number of history events to return (default: 100)"
+    event_filter:
+      type: string
+      description: "Filter by event type: 'ADD', 'UPDATE', 'DELETE', 'SEARCH' (optional)"
+  required: []
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

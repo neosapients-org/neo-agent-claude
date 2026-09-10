@@ -1,0 +1,47 @@
+name: memory.retrieve_context
+mcp_tool_name: neomem_retrieve_context
+required_package: neo_memory_hub
+connector: high_level
+method: retrieve_context
+description: |
+  Retrieve memory context relevant to a query using multi-category retrieval.
+  Searches across all memory categories (preferences, facts, personal, etc.),
+  re-ranks and deduplicates results, assembles a structured profile, and
+  formats the output as a context string suitable for LLM prompt injection.
+  Returns: context (str), memories (list), by_category (dict),
+           structured_profile (dict), count (int), user_id (str).
+execution_mode: mandatory
+hook_position: pre
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+      description: "Query to search memories for"
+    user_id:
+      type: string
+      description: "User identifier for memory isolation"
+    investor_name:
+      type: string
+      description: "Client/investor name for entity-scoped retrieval (optional)"
+    tenant_id:
+      type: string
+      description: "Tenant identifier (optional)"
+    session_id:
+      type: string
+      description: "Session identifier (optional)"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+    dept_id:
+      type: string
+      description: "Department identifier (optional)"
+  required:
+    - query
+    - user_id
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: true
+version: "0.3.0"

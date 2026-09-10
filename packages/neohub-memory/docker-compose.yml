@@ -1,0 +1,61 @@
+# ============================================================
+#  NeoMemory MCP — Docker Compose
+#
+#  The MCP server runs standalone. Qdrant is expected to be
+#  running separately (e.g., in the ns_agents network).
+#
+#  Usage:
+#    docker compose up --build -d
+#    docker compose logs -f neomem-mcp
+#    docker compose down
+#
+#  To run with a local Qdrant for dev, uncomment the qdrant
+#  service block below.
+# ============================================================
+
+services:
+  neomem-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: neomem-mcp:latest
+    container_name: neomem-mcp
+    ports:
+      - "${NEOMEM_MCP_PORT:-18432}:${NEOMEM_MCP_PORT:-18432}"
+    env_file:
+      - .env
+    environment:
+      - PORT=${NEOMEM_MCP_PORT:-18432}
+      - NEOMEM_QDRANT_URL=${NEOMEM_QDRANT_URL:-http://qdrant:6333}
+      - NEOMEM_QDRANT_COLLECTION=${NEOMEM_QDRANT_COLLECTION:-neo_memory}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - NEOMEM_LLM_MODEL=${NEOMEM_LLM_MODEL:-gpt-4o-mini}
+      - NEOMEM_LOG_LEVEL=${NEOMEM_LOG_LEVEL:-INFO}
+    volumes:
+      - ./.env:/app/.env:ro
+    restart: unless-stopped
+    networks:
+      - ns_agents
+
+  # ── Optional: local Qdrant for development ─────────────────
+  # Uncomment below if Qdrant is NOT already running in ns_agents.
+  #
+  # qdrant:
+  #   image: qdrant/qdrant:latest
+  #   container_name: qdrant
+  #   ports:
+  #     - "6335:6333"
+  #   volumes:
+  #     - qdrant_storage:/qdrant/storage
+  #   networks:
+  #     - ns_agents
+
+networks:
+  ns_agents:
+    name: ns_agents_default
+    external: true   # Attach to the existing ns_agents_default network
+    # If the network doesn't exist yet, create it first:
+    #   docker network create ns_agents_default
+
+# volumes:
+#   qdrant_storage:

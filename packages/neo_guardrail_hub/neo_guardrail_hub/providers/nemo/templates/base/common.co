@@ -1,0 +1,58 @@
+# Neo Guardrail Hub - Common Colang Definitions
+# Base template for shared definitions across all rails
+
+import core
+import llm
+
+# ==============================================================================
+# Standard Bot Messages
+# ==============================================================================
+
+define bot refuse to respond
+  "I'm sorry, I can't respond to that."
+
+define bot inform input too long
+  "Your message is too long. Please shorten it and try again."
+
+define bot inform cannot discuss topic
+  "I'm not able to discuss that topic. Is there something else I can help with?"
+
+define bot inform response may be inaccurate
+  "I'm not confident in the accuracy of my response. Please verify this information."
+
+define bot inform response may contain errors
+  "My response may contain errors. Please double-check any important information."
+
+define bot apologize
+  "I apologize for any confusion."
+
+define bot ask clarification
+  "Could you please clarify what you mean?"
+
+# ==============================================================================
+# Standard User Intents
+# ==============================================================================
+
+define user greeting
+  "hello"
+  "hi"
+  "hey"
+  "good morning"
+  "good afternoon"
+
+define user goodbye
+  "bye"
+  "goodbye"
+  "see you"
+  "take care"
+
+define user thank
+  "thanks"
+  "thank you"
+  "appreciate it"
+
+define user ask for help
+  "help"
+  "help me"
+  "I need help"
+  "can you help me"

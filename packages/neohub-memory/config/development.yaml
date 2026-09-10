@@ -1,0 +1,31 @@
+# Neo Memory Hub - Development Configuration
+# Overrides defaults.yaml for development environment
+
+system:
+  environment: "development"
+  log_level: "DEBUG"
+
+# Use local Milvus
+milvus:
+  host: "localhost"
+  port: 19530
+  collection_name: "neo_memories_dev"
+
+# Local Redis
+redis:
+  url: "redis://localhost:6379"
+
+# Local PostgreSQL
+postgres:
+  url: "postgresql+asyncpg://neo:neo_secret@localhost:5432/neo_memory"
+
+# Disable strict auth for development
+api:
+  auth:
+    enabled: false
+
+# Enable verbose observability
+observability:
+  logging:
+    format: "console"
+    include_request_id: true

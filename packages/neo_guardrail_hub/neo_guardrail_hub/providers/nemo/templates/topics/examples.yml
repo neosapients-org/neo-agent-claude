@@ -1,0 +1,302 @@
+# Neo Guardrail Hub - Topic Examples Library
+# Pre-built topics with examples for topical rails
+# Version: 1.0.0
+
+version: "1.0.0"
+
+topics:
+  # =============================================================================
+  # Sensitive Topics - Typically Disallowed
+  # =============================================================================
+  
+  - name: "politics"
+    category: "sensitive"
+    description: "Political topics, elections, political parties, and policy debates"
+    user_examples:
+      - "What do you think about the president?"
+      - "Which political party is better?"
+      - "Tell me about the upcoming election"
+      - "What's your opinion on immigration policy?"
+      - "Should we raise taxes?"
+    bot_responses:
+      - "I'm not able to discuss political topics. Is there something else I can help with?"
+    keywords:
+      - "election"
+      - "vote"
+      - "democrat"
+      - "republican"
+      - "liberal"
+      - "conservative"
+      - "congress"
+      - "senate"
+
+  - name: "religion"
+    category: "sensitive"
+    description: "Religious beliefs, practices, and comparisons between religions"
+    user_examples:
+      - "Which religion is the true one?"
+      - "What do you think about God?"
+      - "Is Christianity better than Islam?"
+      - "Tell me why I should believe in God"
+      - "What happens after death?"
+    bot_responses:
+      - "I prefer not to discuss religious beliefs. Is there another topic I can help with?"
+    keywords:
+      - "god"
+      - "allah"
+      - "jesus"
+      - "buddha"
+      - "church"
+      - "mosque"
+      - "temple"
+      - "prayer"
+      - "faith"
+
+  - name: "medical_advice"
+    category: "sensitive"
+    description: "Medical diagnoses, treatment recommendations, and health advice"
+    user_examples:
+      - "What medicine should I take for my headache?"
+      - "Do I have cancer?"
+      - "Should I stop taking my medication?"
+      - "Diagnose my symptoms"
+      - "What's the best treatment for depression?"
+    bot_responses:
+      - "I can't provide medical advice. Please consult a healthcare professional."
+    keywords:
+      - "diagnosis"
+      - "treatment"
+      - "medication"
+      - "symptoms"
+      - "prescription"
+      - "doctor"
+      - "disease"
+
+  - name: "legal_advice"
+    category: "sensitive"
+    description: "Legal counsel, court procedures, and legal strategy"
+    user_examples:
+      - "Can I sue my employer?"
+      - "What should I do if I get arrested?"
+      - "Is this legal?"
+      - "How do I file a lawsuit?"
+      - "What are my legal rights?"
+    bot_responses:
+      - "I can't provide legal advice. Please consult a licensed attorney."
+    keywords:
+      - "lawsuit"
+      - "sue"
+      - "court"
+      - "attorney"
+      - "legal rights"
+      - "verdict"
+      - "settlement"
+
+  - name: "financial_advice"
+    category: "sensitive"
+    description: "Investment recommendations, financial planning, and trading advice"
+    user_examples:
+      - "Should I buy this stock?"
+      - "Where should I invest my money?"
+      - "Is Bitcoin a good investment?"
+      - "How should I manage my retirement fund?"
+      - "Which mutual fund is best?"
+    bot_responses:
+      - "I can't provide financial advice. Please consult a financial advisor."
+    keywords:
+      - "invest"
+      - "stock"
+      - "trading"
+      - "portfolio"
+      - "401k"
+      - "retirement"
+      - "bitcoin"
+      - "crypto"
+
+  # =============================================================================
+  # Harmful Topics - Typically Disallowed
+  # =============================================================================
+
+  - name: "violence"
+    category: "harmful"
+    description: "Violent acts, weapons, and harmful instructions"
+    user_examples:
+      - "How do I make a weapon?"
+      - "Tell me how to hurt someone"
+      - "What's the best way to attack someone?"
+      - "How do I build explosives?"
+      - "Teach me to fight"
+    bot_responses:
+      - "I can't provide information about violence or harm."
+    keywords:
+      - "weapon"
+      - "gun"
+      - "bomb"
+      - "attack"
+      - "kill"
+      - "hurt"
+      - "violence"
+      - "fight"
+
+  - name: "illegal_activities"
+    category: "harmful"
+    description: "Drug dealing, hacking, fraud, and other illegal activities"
+    user_examples:
+      - "How do I hack into a computer?"
+      - "Where can I buy drugs?"
+      - "How do I commit fraud?"
+      - "Tell me how to steal money"
+      - "How do I break into a house?"
+    bot_responses:
+      - "I can't help with illegal activities."
+    keywords:
+      - "hack"
+      - "steal"
+      - "fraud"
+      - "drugs"
+      - "illegal"
+      - "break in"
+      - "counterfeit"
+
+  - name: "self_harm"
+    category: "harmful"
+    description: "Self-harm, suicide, and dangerous personal behaviors"
+    user_examples:
+      - "How do I hurt myself?"
+      - "What's the best way to end it all?"
+      - "I want to die"
+      - "Help me harm myself"
+    bot_responses:
+      - "I'm concerned about you. Please reach out to a crisis helpline for support."
+    keywords:
+      - "suicide"
+      - "self-harm"
+      - "kill myself"
+      - "end my life"
+      - "want to die"
+
+  # =============================================================================
+  # Common Business Topics - Typically Allowed
+  # =============================================================================
+
+  - name: "customer_support"
+    category: "business"
+    description: "Product support, troubleshooting, and customer service"
+    user_examples:
+      - "I have a problem with my order"
+      - "How do I return a product?"
+      - "My account isn't working"
+      - "I need help with billing"
+      - "Where is my package?"
+    bot_responses:
+      - "I'd be happy to help you with that. Let me look into it."
+    keywords:
+      - "order"
+      - "return"
+      - "refund"
+      - "shipping"
+      - "account"
+      - "billing"
+      - "support"
+
+  - name: "product_information"
+    category: "business"
+    description: "Product features, specifications, and comparisons"
+    user_examples:
+      - "What are the features of this product?"
+      - "How does this compare to the other model?"
+      - "What's included in the package?"
+      - "Is this compatible with my device?"
+      - "Tell me about the warranty"
+    bot_responses:
+      - "Here's what you need to know about that product."
+    keywords:
+      - "features"
+      - "specifications"
+      - "compare"
+      - "compatible"
+      - "warranty"
+      - "price"
+
+  - name: "company_information"
+    category: "business"
+    description: "Company history, mission, and general information"
+    user_examples:
+      - "Tell me about your company"
+      - "When was your company founded?"
+      - "What does your company do?"
+      - "Who is the CEO?"
+      - "Where are you located?"
+    bot_responses:
+      - "Here's some information about our company."
+    keywords:
+      - "company"
+      - "founded"
+      - "mission"
+      - "values"
+      - "history"
+      - "team"
+
+  # =============================================================================
+  # Technical Topics - Context Dependent
+  # =============================================================================
+
+  - name: "programming"
+    category: "technical"
+    description: "Software development, coding, and programming languages"
+    user_examples:
+      - "How do I write a Python function?"
+      - "Explain object-oriented programming"
+      - "What's the difference between Java and JavaScript?"
+      - "Help me debug this code"
+      - "How do I use Git?"
+    bot_responses:
+      - "I can help you with programming questions."
+    keywords:
+      - "code"
+      - "programming"
+      - "function"
+      - "class"
+      - "variable"
+      - "debug"
+      - "git"
+
+  - name: "data_science"
+    category: "technical"
+    description: "Machine learning, data analysis, and statistics"
+    user_examples:
+      - "How do I train a machine learning model?"
+      - "Explain neural networks"
+      - "What is regression analysis?"
+      - "How do I clean my dataset?"
+      - "What's the difference between supervised and unsupervised learning?"
+    bot_responses:
+      - "I can help you understand data science concepts."
+    keywords:
+      - "machine learning"
+      - "neural network"
+      - "model"
+      - "training"
+      - "dataset"
+      - "regression"
+      - "classification"
+
+  - name: "general_knowledge"
+    category: "general"
+    description: "Facts, educational content, and general information"
+    user_examples:
+      - "What's the capital of France?"
+      - "How does photosynthesis work?"
+      - "Who wrote Romeo and Juliet?"
+      - "What year did World War II end?"
+      - "Explain gravity"
+    bot_responses:
+      - "Here's what I know about that."
+    keywords:
+      - "what is"
+      - "who is"
+      - "how does"
+      - "explain"
+      - "define"
+      - "history"
+      - "science"

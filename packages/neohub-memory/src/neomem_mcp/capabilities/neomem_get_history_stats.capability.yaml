@@ -1,0 +1,23 @@
+name: memory.get_history_stats
+mcp_tool_name: neomem_get_history_stats
+required_package: neo_memory_hub
+connector: high_level
+method: get_history_stats
+description: |
+  Get summary statistics for the memory history audit trail.
+  Returns counts of each event type (ADD, UPDATE, DELETE, SEARCH),
+  total events, and whether history tracking is enabled.
+  Useful for monitoring dashboards and health checks.
+  Returns: dict with event counts and totals.
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties: {}
+  required: []
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

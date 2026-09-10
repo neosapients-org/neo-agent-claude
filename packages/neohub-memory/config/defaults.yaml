@@ -1,0 +1,268 @@
+# Neo Memory Hub - Default Configuration
+# This file defines all available settings with their defaults
+
+# =============================================================================
+# SYSTEM
+# =============================================================================
+system:
+  name: "neo-memory-hub"
+  version: "0.1.0"
+  environment: "development"
+  log_level: "INFO"
+
+# =============================================================================
+# MEM0 (Open Source - Core Memory Engine)
+# =============================================================================
+mem0:
+  enabled: true
+  features:
+    fact_extraction: true
+    conflict_detection: true
+    entity_linking: true
+    history_tracking: true
+
+# =============================================================================
+# VECTOR STORE (Provider Selection)
+# =============================================================================
+vector_store:
+  provider: "milvus"  # milvus | qdrant
+
+# =============================================================================
+# MILVUS (Vector Database)
+# =============================================================================
+milvus:
+  host: "${MILVUS_HOST:-localhost}"
+  port: ${MILVUS_PORT:-19530}
+  collection_name: "neo_memories"
+  
+  # Index configuration
+  index_type: "HNSW"  # IVF_FLAT | HNSW | IVF_SQ8
+  metric_type: "COSINE"  # COSINE | L2 | IP
+  dimension: 1536
+  
+  index_params:
+    M: 16
+    efConstruction: 256
+  
+  search_params:
+    ef: 64
+  
+  # Connection settings
+  pool_size: 10
+  timeout: 30
+
+# =============================================================================
+# QDRANT (Vector Database)
+# =============================================================================
+qdrant:
+  url: "${QDRANT_URL:-}"
+  api_key: "${QDRANT_API_KEY:-}"
+  collection_name: "neo_memories"
+
+# =============================================================================
+# LLM PROVIDER
+# =============================================================================
+llm:
+  provider: "openai"
+  model: "gpt-4o-mini"
+  api_key: "${OPENAI_API_KEY}"
+  temperature: 0.7
+  max_tokens: 1000
+  max_retries: 3
+  retry_delay: 1.0
+  timeout: 30
+
+# =============================================================================
+# EMBEDDING PROVIDER
+# =============================================================================
+embedding:
+  provider: "openai"
+  model: "text-embedding-3-small"
+  api_key: "${OPENAI_API_KEY}"
+  dimensions: 1536
+  batch_size: 100
+  cache_enabled: true
+  cache_ttl: 3600
+
+# =============================================================================
+# REDIS (Cache)
+# =============================================================================
+redis:
+  url: "${REDIS_URL:-redis://localhost:6379}"
+  password: "${REDIS_PASSWORD:-}"
+  db: 0
+  default_ttl: 3600
+  working_memory_ttl: 86400
+  query_cache_ttl: 300
+
+# =============================================================================
+# POSTGRESQL (Metadata)
+# =============================================================================
+postgres:
+  enabled: true
+  url: "${DATABASE_URL:-postgresql+asyncpg://neo:neo_secret@localhost:5432/neo_memory}"
+  pool_size: 20
+  max_overflow: 10
+
+# =============================================================================
+# MEMORY TYPES
+# =============================================================================
+memory_types:
+  episodic:
+    enabled: true
+    storage_backend: "milvus"
+    retention_days: 365
+    editable: false
+    auto_importance: true
+    ranking_boost: 1.0
+  
+  persona:
+    enabled: true
+    storage_backend: "milvus"
+    retention_days: null  # Permanent
+    editable: true
+    conflict_strategy: "update"
+    ranking_boost: 1.2
+  
+  security:
+    enabled: true
+    storage_backend: "milvus"
+    retention_days: null
+    editable: false
+    ranking_boost: 1.5
+  
+  semantic:
+    enabled: true
+    storage_backend: "milvus"
+    retention_days: null
+    editable: true
+    ranking_boost: 1.0
+  
+  procedural:
+    enabled: true
+    storage_backend: "milvus"
+    retention_days: null
+    editable: true
+    ranking_boost: 1.0
+  
+  working:
+    enabled: true
+    storage_backend: "redis"
+    retention_days: 1
+    editable: true
+    ranking_boost: 1.3
+
+# =============================================================================
+# RETRIEVAL
+# =============================================================================
+retrieval:
+  default_limit: 10
+  max_limit: 100
+  
+  ranking:
+    strategy: "multi_factor"
+    relevance_weight: 0.5
+    recency_weight: 0.3
+    importance_weight: 0.2
+    recency_decay_lambda: 0.01
+  
+  filters:
+    min_relevance_score: 0.3
+
+# =============================================================================
+# ISOLATION
+# =============================================================================
+isolation:
+  strict_mode: true
+  
+  layers:
+    tenant:
+      enabled: true
+      required: true
+      partition_by: true
+    user:
+      enabled: true
+      required: true
+    agent:
+      enabled: true
+      required: false
+    session:
+      enabled: true
+      required: false
+  
+  audit:
+    enabled: true
+    log_access: true
+    log_modifications: true
+    log_deletions: true
+    retention_days: 90
+
+# =============================================================================
+# TOKEN BUDGET
+# =============================================================================
+token_budget:
+  total_tokens: 8000
+  allocations:
+    system_prompt: 800
+    core_memory: 400
+    retrieved_memories: 1500
+    conversation_history: 2000
+    tools: 800
+    query: 500
+    output_buffer: 2000
+  overflow_strategy: "prioritize"
+
+# =============================================================================
+# CONVERSATION
+# =============================================================================
+conversation:
+  summarization:
+    enabled: true
+    buffer_size: 10
+    max_buffer_tokens: 1200
+    summary_max_tokens: 400
+    model: "gpt-4o-mini"
+
+# =============================================================================
+# RETENTION
+# =============================================================================
+retention:
+  enabled: true
+  cleanup_interval_hours: 24
+  batch_size: 1000
+
+# =============================================================================
+# API
+# =============================================================================
+api:
+  enabled: true
+  host: "0.0.0.0"
+  port: 8000
+  
+  auth:
+    enabled: false
+    method: "api_key"
+    api_key_header: "X-API-Key"
+  
+  cors:
+    enabled: true
+    origins: ["*"]
+    allow_credentials: true
+    allow_methods: ["GET", "POST", "PUT", "DELETE"]
+  
+  rate_limiting:
+    enabled: false
+    requests_per_minute: 100
+
+# =============================================================================
+# OBSERVABILITY
+# =============================================================================
+observability:
+  metrics:
+    enabled: false
+    export_prometheus: false
+    port: 9090
+  
+  logging:
+    format: "json"
+    include_request_id: true

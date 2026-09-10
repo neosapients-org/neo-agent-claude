@@ -1,0 +1,257 @@
+[
+  {
+    "id": "Q01",
+    "query": "What is the risk tolerance and time horizon of investor INV-001",
+    "platform_response": ""
+  },
+  {
+    "id": "Q02",
+    "query": "Show all investors with High risk tolerance and Long-term time horizon.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q03",
+    "query": "List all holdings for investor INV-001 along with current value and returns.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q04",
+    "query": "Show all SIP transactions for investor INV-001.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q05",
+    "query": "What is the sector allocation breakdown for investor INV-001?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q06",
+    "query": "How many investors have a liquidity score low ?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q07",
+    "query": "Which investors have a sector concentration above 80% in any single sector?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q08",
+    "query": "List all investors who prefer the Technology sector.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q09",
+    "query": "Which investors have a Retirement Planning goal?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q10",
+    "query": "What is the risk tolerance and investment goal for investor INV001?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q11",
+    "query": "Show me all the holdings for investor INV-001 with their current values and returns",
+    "platform_response": ""
+  },
+  {
+    "id": "Q12",
+    "query": "What is the maximum equity allocation allowed for investor INV001?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q13",
+    "query": "Is investor INV-001 over-allocated in the Technology sector?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q14",
+    "query": "Calculate the risk score for investor INV-001's portfolio and show the breakdown by dimension",
+    "platform_response": ""
+  },
+  {
+    "id": "Q15",
+    "query": "How is Neha Sharma's investments in the Technology sector looking like ?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q16",
+    "query": "How is investor INV-001 progressing toward their retirement goal? Are they on track?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q17",
+    "query": "Are there any recent policy changes or compliance updates that affect investment goal allocation rules?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q18",
+    "query": "What is the maximum equity allocation allowed for investor INV-001?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q19",
+    "query": "Which investment products are suitable for investor INV-001 given their risk tolerance and investment horizon?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q20",
+    "query": "Run a comprehensive compliance check for investor INV-001's portfolio. Flag any sector allocation violations and check against the latest compliance policies.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q21",
+    "query": "What is the lock-in period for ELSS investments and what tax benefits does it offer under Section 80C?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q22",
+    "query": "Show investor name, their registered goal type, and actual goal progress.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q23",
+    "query": "Which investors have a Wealth Creation registered?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q24",
+    "query": "Which investors have a Wealth Creation or Child Education goal registered?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q25",
+    "query": "Show all Target amount and progress percentage for investors whose investment goal is Income Generation",
+    "platform_response": ""
+  },
+  {
+    "id": "Q26",
+    "query": "Top 5 investors by total portfolio value with their risk tolerance, investment goal, and health status.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q27",
+    "query": "Show all scenario rebalancing records triggered by a Market Crash.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q28",
+    "query": "What is the overall health score and health status for investor INV-002?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q29",
+    "query": "List all investment goals for investor INV-002 with target amount and progress.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q30",
+    "query": "How many investors have a goal match percentage below 50% (poorly aligned portfolios)?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q31",
+    "query": "Count of investors whose holdings where returns are negative (loss-making positions).",
+    "platform_response": ""
+  },
+  {
+    "id": "Q32",
+    "query": "List all large transactions (amount above 200,000) across all investors and investment in the year 2024 or after that",
+    "platform_response": ""
+  },
+  {
+    "id": "Q33",
+    "query": "For each investor, show their risk tolerance alongside their overall health score, whose risk tolerance is high and time horizon of investment is long term",
+    "platform_response": ""
+  },
+  {
+    "id": "Q34",
+    "query": "List investors with a Market Crash scenario trigger and show their current goal match percentage.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q35",
+    "query": "For investor INV-001, show all holdings with their corresponding sector allocation percentage.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q36",
+    "query": "Which investment products are suitable for investor INV-001 given their risk tolerance and investment horizon?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q37",
+    "query": "Are there any recent policy changes or compliance updates that affect investment goal allocation rules?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q38",
+    "query": "Show investor name, sector, and allocation percentage for all High risk tolerance investors.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q39",
+    "query": "List all investment goals that are behind target (progress below 20%).",
+    "platform_response": ""
+  },
+  {
+    "id": "Q40",
+    "query": "For each investor, show total portfolio value, total SIP contributed, and overall health score.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q41",
+    "query": "Show total cash inflows vs SWP withdrawals per investor, alongside their investment goal.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q42",
+    "query": "Which investors have a sector overweight (>90% in any sector) ?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q43",
+    "query": "List all investors with an Emergency Fund goal.",
+    "platform_response": ""
+  },
+  {
+    "id": "Q44",
+    "query": "How many investors are in each risk tolerance group?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q45",
+    "query": "What is the total current portfolio value for investor INV-001?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q46",
+    "query": "What is the total SIP contribution amount for investor INV-001?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q47",
+    "query": "What is the total transaction amount per transaction type for investor INV-002?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q48",
+    "query": "Which sector has the highest total investment across all investors?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q49",
+    "query": "What is the average goal match percentage across all investors?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q50",
+    "query": "How many rebalancing events were triggered per scenario type?",
+    "platform_response": ""
+  },
+  {
+    "id": "Q51",
+    "query": "What is the average annual return and volatility across all goals, grouped by goal type?",
+    "platform_response": ""
+  }
+]

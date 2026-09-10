@@ -1,0 +1,42 @@
+# agent Agent - Memory Configuration
+vector_store:
+  provider: qdrant
+  config:
+    collection_name: agent_memories
+    embedding_model_dims: 1536
+
+llm:
+  provider: openai
+  config:
+    model: gpt-4o-mini
+    temperature: 0.1
+
+embedder:
+  provider: openai
+  config:
+    model: text-embedding-3-small
+
+extraction:
+  enabled: true
+  valid_categories:
+    - persona
+    - preference
+    - episodic
+    - procedural
+
+salience:
+  enabled: true
+  min_threshold: 0.3
+
+dedup:
+  enabled: true
+  similarity_threshold: 0.55
+
+retrieval:
+  limit: 10
+  min_relevance_score: 0.1
+
+isolation:
+  default_agent_id: wealth_agent
+  require_user_id: true
+  default_pool: private

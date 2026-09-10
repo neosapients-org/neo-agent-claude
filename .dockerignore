@@ -1,0 +1,18 @@
+# Docker build artifacts
+**/__pycache__
+*.pyc
+*.pyo
+.git
+**/.venv
+**/venv
+**/node_modules
+**/.next
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/*.egg-info
+**/.env
+**/.env.*
+!**/.env.example
+*.log
+apps/frontend/.legacy-removed

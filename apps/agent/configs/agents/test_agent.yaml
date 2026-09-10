@@ -1,0 +1,156 @@
+# Test Agent Configuration
+# A simple test agent for unit testing and integration testing.
+# Enables all guardrail types with moderate settings.
+
+agent_id: test_agent
+inherits: default
+
+# Simple test instructions
+instructions: |
+  You are a helpful test assistant.
+  You answer questions and help with tasks.
+
+# NeMo configuration (separate from LLM Guard)
+# NeMo checks are now configured in guardrails.*.checks with provider: nemo
+nemo:
+  enabled: true
+  preset: general
+  llm:
+    engine: openai
+    model: gpt-3.5-turbo
+    temperature: 0.0
+  # Generation settings
+  generation:
+    generate_colang: true
+    generate_prompts: true
+
+# Guardrails configuration (unified for all providers)
+guardrails:
+  # Input guardrails - enable key checks
+  input:
+    enabled: true
+    checks:
+      # NeMo self_check_input - LLM-based validation
+      - type: nemo_self_check_input
+        enabled: true
+        provider: nemo
+        priority: 1
+        on_fail: block
+
+      - type: prompt_injection
+        enabled: true
+        provider: llm_guard
+        priority: 2
+        threshold: 0.5
+        on_fail: block
+
+      - type: pii_detection
+        enabled: true
+        provider: llm_guard
+        priority: 3
+        threshold: 0.5
+        on_fail: warn
+
+      - type: input_length
+        enabled: true
+        provider: llm_guard
+        priority: 4
+        min_length: 1
+        max_length: 10000
+        count_mode: chars
+        on_fail: block
+
+      - type: toxicity_input
+        enabled: true
+        provider: llm_guard
+        priority: 5
+        threshold: 0.5
+        match_type: SENTENCE
+        on_fail: block
+
+      - type: ban_substrings_input
+        enabled: true
+        provider: llm_guard
+        priority: 6
+        substrings:
+          - "BLOCKED_WORD"
+          - "TEST_BAN"
+        match_type: STR
+        case_sensitive: false
+        redact: false
+        on_fail: block
+
+  # Output guardrails - enable key checks
+  output:
+    enabled: true
+    checks:
+      # NeMo self_check_output - LLM-based validation
+      - type: nemo_self_check_output
+        enabled: true
+        provider: nemo
+        priority: 1
+        on_fail: block
+
+      - type: pii_redaction
+        enabled: true
+        provider: llm_guard
+        priority: 2
+        on_fail: sanitize
+
+      - type: toxicity_output
+        enabled: true
+        provider: llm_guard
+        priority: 3
+        threshold: 0.5
+        match_type: SENTENCE
+        on_fail: block
+
+      - type: factual_consistency
+        enabled: true
+        provider: llm_guard
+        priority: 4
+        minimum_score: 0.5
+        on_fail: warn
+
+      - type: ban_topics
+        enabled: true
+        provider: llm_guard
+        priority: 5
+        threshold: 0.5
+        topics:
+          - violence
+          - illegal_activities
+        on_fail: block
+
+      - type: ban_substrings_output
+        enabled: true
+        provider: llm_guard
+        priority: 6
+        substrings:
+          - "BLOCKED_OUTPUT"
+          - "SENSITIVE_DATA"
+        match_type: STR
+        case_sensitive: false
+        redact: false
+        on_fail: block
+
+  # Context/Topical rails for conversation flow control
+  context:
+    enabled: true
+    checks:
+      # NeMo topical rail - conversation flow control
+      - type: nemo_topical_rail
+        enabled: true
+        provider: nemo
+        priority: 1
+        on_fail: block
+        config:
+          allowed_topics:
+            - general_knowledge
+            - customer_support
+            - technical_help
+          disallowed_topics:
+            - violence
+            - illegal_activities
+            - self_harm
+          off_topic_response: "I'm not able to discuss that topic. Is there something else I can help with?"

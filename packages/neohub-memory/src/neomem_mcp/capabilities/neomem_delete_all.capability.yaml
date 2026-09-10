@@ -1,0 +1,32 @@
+name: memory.delete_all
+mcp_tool_name: neomem_delete_all
+required_package: neo_memory_hub
+connector: high_level
+method: delete_all
+description: |
+  Delete ALL memories for a user. This is a destructive bulk operation
+  intended for admin/maintenance use. Optionally filter by agent_id
+  or tenant_id to scope the deletion.
+  Returns: confirmation with count of deleted memories.
+execution_mode: mandatory
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    user_id:
+      type: string
+      description: "User identifier whose memories to delete"
+    agent_id:
+      type: string
+      description: "Delete only memories from this agent (optional)"
+    tenant_id:
+      type: string
+      description: "Delete only memories from this tenant (optional)"
+  required:
+    - user_id
+annotations:
+  readOnlyHint: false
+  destructiveHint: true
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

@@ -1,0 +1,30 @@
+name: memory.update_memory
+mcp_tool_name: neomem_update_memory
+required_package: neo_memory_hub
+connector: high_level
+method: update
+description: |
+  Update the content of an existing memory entry by its ID.
+  Replaces the memory text while preserving metadata and history.
+  The change is recorded in the audit trail.
+  Returns: updated memory object with new content.
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    memory_id:
+      type: string
+      description: "Unique identifier of the memory to update"
+    data:
+      type: string
+      description: "New content/text for the memory"
+  required:
+    - memory_id
+    - data
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: false
+version: "0.3.0"

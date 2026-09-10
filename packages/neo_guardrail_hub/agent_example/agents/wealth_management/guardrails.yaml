@@ -1,0 +1,166 @@
+# Wealth Management Agent Configuration
+# This config enables both NeMo (LLM-based) and LLM Guard (local model) guardrails
+# 
+# Guardrails Enabled:
+# INPUT:
+#   - NeMo: self_check_input, jailbreak_detection_heuristics
+#   - LLM Guard: prompt_injection, pii_detection
+# OUTPUT:
+#   - NeMo: self_check_output, self_check_facts
+#   - LLM Guard: pii_redaction, toxicity_output, relevance
+# CONTEXT:
+#   - NeMo: wealth_management_domain_check
+#
+# Usage:
+#   async with GuardSession(
+#       agent_id="default",
+#       config_path="./agent_example/configs",
+#       models_dir="./models/llm_guard"
+#   ) as session:
+#       result = await session.guard_input(text)
+
+version: "1.0"
+enabled: true
+
+# Execution settings per layer
+execution:
+  input:
+    mode: parallel
+    timeout_ms: 120000  # 2 minutes - first run needs time to download models
+  context:
+    mode: sequential
+    timeout_ms: 120000
+  output:
+    mode: parallel
+    timeout_ms: 120000
+
+# Default behavior settings
+defaults:
+  on_fail: block
+  log_level: INFO
+
+# Guardrails configuration
+guardrails:
+  # =========================================================================
+  # INPUT LAYER GUARDRAILS
+  # =========================================================================
+  input:
+    enabled: true
+    checks:
+      # NeMo self_check_input - LLM-based validation
+      # Detects harmful, manipulative, or policy-violating inputs
+      - type: nemo_self_check_input
+        enabled: true
+        provider: nemo
+        priority: 1
+        on_fail: block
+        config:
+          prompt_style: simple  # simple or complex
+
+      # NeMo Jailbreak Detection Heuristics (perplexity-based, no LLM calls)
+      # Fast detection of GCG-style adversarial attacks using GPT-2 perplexity
+      - type: nemo_jailbreak_detection_heuristics
+        enabled: false
+        provider: nemo
+        priority: 0  # Run before LLM-based checks for efficiency
+        on_fail: block
+        config:
+          length_per_perplexity_threshold: 89.79
+          prefix_suffix_perplexity_threshold: 1845.65
+
+      # LLM Guard prompt injection detection (local model)
+      - type: prompt_injection
+        enabled: true
+        provider: llm_guard
+        priority: 2
+        threshold: 0.5
+        on_fail: block
+
+      # LLM Guard PII detection (local model)
+      - type: pii_detection
+        enabled: false
+        provider: llm_guard
+        priority: 3
+        threshold: 0.5
+        on_fail: warn
+
+  # =========================================================================
+  # OUTPUT LAYER GUARDRAILS
+  # =========================================================================
+  output:
+    enabled: true
+    checks:
+      # NeMo self_check_output - LLM-based validation
+      # Ensures output doesn't contain harmful or inappropriate content
+      - type: nemo_self_check_output
+        enabled: true
+        provider: nemo
+        priority: 1
+        on_fail: block
+
+      # NeMo self_check_facts - LLM-based fact checking
+      # Validates factual consistency between input context and output
+      - type: nemo_self_check_facts
+        enabled: false
+        provider: nemo
+        priority: 2
+        on_fail: warn
+
+      # LLM Guard PII redaction (local model)
+      # Automatically redacts sensitive information in outputs
+      - type: pii_redaction
+        enabled: false
+        provider: llm_guard
+        priority: 3
+        on_fail: sanitize
+
+      # LLM Guard toxicity detection (local model)
+      - type: toxicity_output
+        enabled: false
+        provider: llm_guard
+        priority: 4
+        threshold: 0.5
+        config:
+          match_type: SENTENCE
+        on_fail: block
+
+      # LLM Guard relevance check (local model)
+      # Ensures output is relevant to the input prompt
+      - type: relevance
+        enabled: false
+        provider: llm_guard
+        priority: 5
+        threshold: 0.5
+        on_fail: warn
+
+  # =========================================================================
+  # CONTEXT LAYER GUARDRAILS
+  # =========================================================================
+  context:
+    enabled: true
+    checks:
+      # NeMo wealth management domain check
+      # Validates queries are within wealth management domain
+      # Blocks specific stock recommendations, investment tips
+      - type: wealth_management_domain_check
+        enabled: true
+        provider: nemo
+        priority: 1
+        on_fail: block
+
+# =========================================================================
+# NEMO GUARDRAILS CONFIGURATION
+# =========================================================================
+nemo:
+  enabled: true
+  # LLM configuration for NeMo rails
+  llm:
+    engine: openai
+    model: gpt-4o-mini
+    temperature: 0.0
+  # Output directory for generated NeMo files
+  output_path: null
+  # Industry preset (general, financial, healthcare, customer_service)
+  preset: financial
+  # Streaming mode
+  streaming: false

@@ -1,0 +1,32 @@
+# Example: Minimal configuration for development/testing
+# Use this for fast iteration during development
+
+version: "1.0"
+
+default_timeout_ms: 10000
+default_action_on_fail: warn
+execution_mode: parallel
+
+logging:
+  level: DEBUG
+  json_format: false
+
+input:
+  enabled: true
+  guardrails:
+    - name: prompt_injection
+      enabled: true
+      provider: llm_guard
+      priority: 1
+      config:
+        threshold: 0.8  # Higher threshold = more permissive
+        use_fallback: true
+      action_on_fail: warn
+
+context:
+  enabled: false
+  guardrails: []
+
+output:
+  enabled: false
+  guardrails: []

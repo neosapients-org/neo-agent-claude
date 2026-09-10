@@ -1,0 +1,181 @@
+# Wealth Advisor Agent Configuration
+# This agent-specific config inherits from default.yaml and overrides
+# settings for a financial wealth management assistant.
+#
+# Usage:
+#   orchestrator = NeoGuardrailOrchestrator(config_path="./configs")
+#   result = await orchestrator.guard_input(text, agent_id="wealth_advisor")
+
+agent_id: wealth_advisor
+inherits: default
+
+# Agent-specific instructions (used for NeMo Guardrails)
+instructions: |
+  You are a helpful wealth management assistant.
+  You help users understand their portfolio, account balances, and investment options.
+  You do NOT provide specific investment recommendations or stock tips.
+  Always remind users to consult with a licensed financial advisor for personalized advice.
+
+# NeMo Guardrails configuration
+# NOTE: NeMo is a SEPARATE provider from LLM Guard.
+# NeMo uses LLM-based self-checks, while LLM Guard uses scanner-based checks.
+# NeMo checks are now configured in guardrails.*.checks with provider: nemo
+nemo:
+  enabled: true
+  preset: financial
+  llm:
+    engine: openai
+    model: gpt-4  # Better model for financial compliance
+    temperature: 0.0
+  # Agent-specific output path
+  output_path: null  # Will use ./nemo_generated/wealth_advisor/
+  # Generation settings for Colang and prompts
+  generation:
+    generate_colang: true
+    generate_prompts: true
+
+# Guardrails configuration (unified for all providers)
+guardrails:
+  # Stricter input validation for financial domain
+  input:
+    enabled: true
+    checks:
+      # NeMo self_check_input - LLM-based validation
+      - type: nemo_self_check_input
+        enabled: true
+        provider: nemo
+        priority: 1
+        on_fail: block
+        config:
+          prompt_style: complex  # Better for financial compliance
+
+      # Stricter prompt injection threshold for finance (LLM Guard)
+      - type: prompt_injection
+        enabled: true
+        provider: llm_guard
+        priority: 2
+        threshold: 0.7  # Stricter than default 0.5
+        on_fail: block
+
+      # PII detection with finance-specific entities (LLM Guard)
+      - type: pii_detection
+        enabled: true
+        provider: llm_guard
+        priority: 3
+        threshold: 0.5
+        on_fail: block  # Block instead of warn for finance
+
+      # Enable input length for financial queries (LLM Guard)
+      - type: input_length
+        enabled: true
+        provider: llm_guard
+        priority: 4
+        min_length: 5
+        max_length: 5000
+        count_mode: chars
+        on_fail: block
+
+      # Enable toxicity check (LLM Guard)
+      - type: toxicity_input
+        enabled: true
+        provider: llm_guard
+        priority: 5
+        threshold: 0.5
+        match_type: SENTENCE
+        on_fail: block
+
+  # Stricter output validation for compliance
+  output:
+    enabled: true
+    checks:
+      # NeMo self_check_output - LLM-based validation
+      - type: nemo_self_check_output
+        enabled: true
+        provider: nemo
+        priority: 1
+        on_fail: block
+
+      # NeMo fact checking for financial accuracy
+      - type: nemo_self_check_facts
+        enabled: true
+        provider: nemo
+        priority: 2
+        on_fail: warn
+        config:
+          prompt_style: complex  # Better for financial facts
+
+      # PII redaction is critical for finance (LLM Guard)
+      - type: pii_redaction
+        enabled: true
+        provider: llm_guard
+        priority: 3
+        on_fail: sanitize
+
+      # Enable factual consistency for financial info (LLM Guard)
+      - type: factual_consistency
+        enabled: true
+        provider: llm_guard
+        priority: 4
+        minimum_score: 0.7  # Higher threshold for finance
+        on_fail: warn
+
+      # Enable relevance check (LLM Guard)
+      - type: relevance
+        enabled: true
+        provider: llm_guard
+        priority: 5
+        threshold: 0.6
+        on_fail: warn
+
+      # Enable toxicity check on output (LLM Guard)
+      - type: toxicity_output
+        enabled: true
+        provider: llm_guard
+        priority: 6
+        threshold: 0.5
+        match_type: SENTENCE
+        on_fail: block
+
+      # Ban sensitive topics in output (LLM Guard)
+      - type: ban_topics
+        enabled: true
+        provider: llm_guard
+        priority: 7
+        threshold: 0.5
+        topics:
+          - politics
+          - religion
+          - violence
+          - illegal_activities
+        on_fail: block
+
+  # Context/Topical rails for conversation flow control
+  context:
+    enabled: true
+    checks:
+      # NeMo topical rail - conversation flow control
+      - type: nemo_topical_rail
+        enabled: false
+        provider: nemo
+        priority: 1
+        on_fail: block
+        config:
+          # Topics the wealth advisor CAN discuss
+          allowed_topics:
+            - portfolio_overview
+            - account_balance
+            - transaction_history
+            - fee_structure
+            - general_financial_education
+            - market_overview
+          # Topics the wealth advisor should NOT discuss
+          disallowed_topics:
+            - stock_tips
+            - specific_investment_recommendations
+            - insider_trading
+            - competitor_bashing
+            - politics
+            - religion
+            - medical_advice
+            - legal_advice
+          off_topic_response: "I'm a wealth management assistant and can only help with portfolio, accounts, and general financial education. I cannot provide specific investment recommendations or discuss non-financial topics."

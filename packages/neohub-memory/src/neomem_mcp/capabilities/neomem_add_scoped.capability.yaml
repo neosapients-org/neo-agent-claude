@@ -1,0 +1,48 @@
+name: memory.add_scoped
+mcp_tool_name: neomem_add_scoped
+required_package: memory_utils
+connector: scoped
+method: add_scoped
+description: |
+  Add a memory with enterprise scope isolation. Stores messages with full
+  IsolationScope including tenant, department, and access tier controls.
+  Supports LLM extraction (infer=True by default). Requires memory_utils package.
+  Returns: results (list of stored memory entries).
+execution_mode: optional
+hook_position: post
+input_schema:
+  type: object
+  properties:
+    messages:
+      type: string
+      description: "Content to store (text or JSON-encoded message list)"
+    tenant_id:
+      type: string
+      description: "Tenant identifier (default: 'default')"
+    user_id:
+      type: string
+      description: "User identifier for scope isolation"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+    dept_id:
+      type: string
+      description: "Department identifier (optional)"
+    pool:
+      type: string
+      description: "Access tier: 'private', 'shared', or 'global' (default: 'private')"
+    categories:
+      type: array
+      description: "Memory categories to apply (optional)"
+    infer:
+      type: boolean
+      description: "Whether to use LLM extraction (default: true)"
+  required:
+    - messages
+    - user_id
+annotations:
+  readOnlyHint: false
+  destructiveHint: false
+  idempotentHint: false
+  openWorldHint: true
+version: "0.3.0"

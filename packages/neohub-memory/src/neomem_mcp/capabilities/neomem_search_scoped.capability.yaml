@@ -1,0 +1,57 @@
+name: memory.search_scoped
+mcp_tool_name: neomem_search_scoped
+required_package: memory_utils
+connector: scoped
+method: search_scoped
+description: |
+  Search memories with enterprise scope isolation. Applies IsolationScope
+  to restrict search results based on tenant, user, agent, department,
+  and access tier. Requires the memory_utils package.
+  Returns: results (list of matching memories with scores).
+execution_mode: optional
+hook_position: null
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+      description: "Search query for vector similarity matching"
+    tenant_id:
+      type: string
+      description: "Tenant identifier (default: 'default')"
+    user_id:
+      type: string
+      description: "User identifier for scope filtering"
+    agent_id:
+      type: string
+      description: "Agent identifier (optional)"
+    dept_id:
+      type: string
+      description: "Department identifier (optional)"
+    pool:
+      type: string
+      description: "Access tier: 'private', 'shared', or 'global' (default: 'private')"
+    strategy:
+      type: string
+      description: "Sharing strategy override (optional)"
+    limit:
+      type: integer
+      description: "Maximum number of results to return"
+    categories:
+      type: array
+      description: "Filter by memory categories (optional)"
+    threshold:
+      type: number
+      description: "Minimum relevance score threshold (optional)"
+    rerank:
+      type: boolean
+      description: "Whether to apply LLM reranking (default: false)"
+  required:
+    - query
+    - user_id
+annotations:
+  readOnlyHint: true
+  destructiveHint: false
+  idempotentHint: true
+  openWorldHint: true
+version: "0.3.0"
