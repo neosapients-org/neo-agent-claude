@@ -15,6 +15,12 @@ import logging
 import asyncio
 from contextlib import asynccontextmanager, nullcontext
 
+# basicConfig here because nothing else in this process configures the root logger —
+# uvicorn's default log config only sets up its own "uvicorn.*" loggers, so without this
+# logger.info() calls below would silently go nowhere (no handler, no visible output).
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+logger = logging.getLogger("agent.chat_stream")
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
@@ -609,7 +615,16 @@ async def run_agent_stream(message: str, user_id: str, investor_name: str | None
                 OUTCOME_BLOCKED_INPUT if blocked_by_guardrail else OUTCOME_OK,
             )
 
+            logger.info(
+                "request completed user_id=%s session_id=%s total_ms=%s ttft_ms=%s blocked=%s",
+                user_id, session_id, total_ms, first_token_ms, as_bool(blocked_by_guardrail),
+            )
+
         except Exception as e:
+            logger.exception(
+                "request failed user_id=%s session_id=%s message=%r",
+                user_id, session_id, message[:200],
+            )
             if span is not None:
                 span.record_exception(e)
                 span.set_status(StatusCode.ERROR, str(e))
@@ -643,6 +658,10 @@ async def run_agent_stream(message: str, user_id: str, investor_name: str | None
 @app.post("/chat/stream")
 async def chat_stream(req: ChatRequest):
     """SSE streaming endpoint."""
+    logger.info(
+        "request received user_id=%s session_id=%s message=%r",
+        req.user_id, req.session_id, req.message[:200],
+    )
     return StreamingResponse(
         run_agent_stream(req.message, req.user_id, req.investor_name, req.chat_history, req.session_id, req.session_preferences, req.mode, req.refresh, req.client, req.user_name),
         media_type="text/event-stream",
