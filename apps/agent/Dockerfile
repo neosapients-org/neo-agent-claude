@@ -24,8 +24,22 @@ RUN pip install --no-cache-dir \
     torch --index-url https://download.pytorch.org/whl/cpu
 
 # Install remaining dependencies (split for easier debugging)
+# anthropic is NOT optional despite LLM_PROVIDER defaulting to openai: app/llm.py
+# imports AsyncAnthropic at module scope, so leaving it out makes main.py die at
+# boot with ModuleNotFoundError. It is listed in requirements.txt, but this
+# Dockerfile installs an explicit list rather than that file (requirements.txt
+# ends in `-e ./packages/ns_probe`, a repo-root-relative path that does not exist
+# at this layout), so the two lists have to be kept in step by hand.
 RUN pip install --no-cache-dir fastapi uvicorn langchain-openai langchain-core langgraph \
-    pydantic python-dotenv mcp openai qdrant-client
+    pydantic python-dotenv mcp openai qdrant-client anthropic
+# The direct resolver's two hard dependencies, and the reason this variant could not
+# read the database at all: asyncpg opens the read-only Neon connection, sqlglot parses
+# the model's SQL before it is executed (app/resolver/sql_guard.py). Both are declared in
+# requirements.txt, which this Dockerfile does not install — so in the image the import
+# in app/resolver/direct.py raised ModuleNotFoundError, the resolve_context interception
+# in app/mcp/client.py failed, and every data question came back as "no rows found"
+# rather than as an error naming a missing package.
+RUN pip install --no-cache-dir "sqlglot>=25.0.0" "asyncpg>=0.29.0"
 # ns_probe is now an in-tree editable package (packages/ns_probe). Its
 # instrumentors already emit traceloop.entity.input/output and human-readable
 # span names + full per-node input/output — no post-install patching needed.
