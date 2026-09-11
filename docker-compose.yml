@@ -43,7 +43,7 @@ services:
       # Skills are front-loaded from the Cortex platform (MCP list_skills) into the agent's
       # RAM registry at startup and refreshed on a TTL. Set false to disable platform sync
       # (the registry then stays empty — no skill applies).
-      - SKILLS_MCP_SYNC=true
+      - SKILLS_MCP_SYNC=false
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
